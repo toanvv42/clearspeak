@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import AccessGate from "@/components/access-gate";
 import AnalyzingState from "@/components/analyzing-state";
+import PassageLibrary from "@/components/passage-library";
 import PracticeEditor from "@/components/practice-editor";
 import RecordingSession from "@/components/recording-session";
 import ResultsView from "@/components/results-view";
@@ -53,6 +54,7 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   const [failure, setFailure] = useState<AssessmentFailure | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [assessing, setAssessing] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
   /** Synchronous guard so a double-click on Finish submits analysis exactly once. */
   const submitGuardRef = useRef(false);
@@ -77,6 +79,17 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
         /* ignore */
       }
     };
+  }, []);
+
+  // Desktop sidebar: single library instance per viewport avoids duplicate
+  // accessible names in tests (jsdom has no matchMedia, so it stays mobile).
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
   }, []);
 
   const unlock = useCallback(
@@ -281,12 +294,30 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   const analyzingStep = phase === "requesting-token" ? 1 : phase === "assessing" ? 2 : 0;
   const stepIndex =
     phase === "success" ? 3 : phase === "recording" || phase === "preparing-audio" || phase === "requesting-token" || phase === "assessing" ? 2 : 1;
+  const isEditing = phase === "editing" || phase === "recoverable-error";
+  const showSidebar = isEditing && isDesktop;
+
+  const editorPanel = (
+    <div className="rise-in rise-in-1">
+      <PracticeEditor
+        draft={draft}
+        onDraftChange={changeDraft}
+        onStart={beginRecording}
+        disabled={assessing}
+        selectedPassage={selectedPassage}
+        onSelectPassage={selectPassage}
+        libraryFilters={libraryFilters}
+        onLibraryFiltersChange={setLibraryFilters}
+        hideLibraryBrowser={showSidebar}
+      />
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-[#f8f7f4] text-stone-900 dark:bg-stone-950 dark:text-stone-100">
       <Header />
-      <main className="mx-auto w-full max-w-3xl px-4 pb-20 sm:px-6">
-        <div className="rise-in pt-8 text-center sm:pt-12">
+      <main className="mx-auto w-full max-w-6xl px-4 pb-20 sm:px-6">
+        <div className="rise-in mx-auto max-w-3xl pt-8 text-center sm:pt-12">
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#2563eb]">
             Private pronunciation practice
           </p>
@@ -304,29 +335,44 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
         </div>
 
         {notice && (
-          <div role="status" className="rise-in mt-6 flex items-start gap-3 rounded-2xl border border-[#2563eb]/25 bg-blue-50/80 px-4 py-3 text-sm leading-6 shadow-[var(--shadow-card)] dark:bg-blue-950/50">
+          <div role="status" className="rise-in mx-auto mt-6 flex max-w-3xl items-start gap-3 rounded-2xl border border-[#2563eb]/25 bg-blue-50/80 px-4 py-3 text-sm leading-6 shadow-[var(--shadow-card)] dark:bg-blue-950/50">
             <span aria-hidden="true" className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#2563eb] text-[11px] font-bold text-white">i</span>
             <span>{notice}</span>
           </div>
         )}
 
-        <div className="mt-6 space-y-5">
-          {(phase === "editing" || phase === "recoverable-error") && (
-            <div className="rise-in rise-in-1">
-            <PracticeEditor
-              draft={draft}
-              onDraftChange={changeDraft}
-              onStart={beginRecording}
-              disabled={assessing}
-              selectedPassage={selectedPassage}
-              onSelectPassage={selectPassage}
-              libraryFilters={libraryFilters}
-              onLibraryFiltersChange={setLibraryFilters}
-            />
+        <div className={showSidebar ? "mt-6 space-y-5" : "mx-auto mt-6 max-w-3xl space-y-5"}>
+          {showSidebar ? (
+            <div className="grid grid-cols-[370px_minmax(0,1fr)] items-start gap-6">
+              <aside aria-label="Sample library sidebar" className="sticky top-[68px] self-start">
+                <PassageLibrary
+                  selectedId={selectedPassage?.id}
+                  filters={libraryFilters}
+                  onFiltersChange={setLibraryFilters}
+                  onSelect={selectPassage}
+                  className="mt-0"
+                />
+                <p className="mt-2 px-1 text-xs leading-5 text-stone-500 dark:text-stone-400">Choosing a sample fills the editor instantly.</p>
+              </aside>
+              <div className="min-w-0 space-y-5">
+                {editorPanel}
+                {recorder.finished?.url && (
+                  <div className="rise-in rise-in-2">
+                    <LastRecordingPlayer audioUrl={recorder.finished.url} />
+                  </div>
+                )}
+                {phase === "recoverable-error" && failure && (
+                  <div className="rise-in">
+                    <ErrorCard failure={failure} onRetry={backToEditing} onCancel={cancelRecording} />
+                  </div>
+                )}
+              </div>
             </div>
-          )}
+          ) : (
+          <>
+          {isEditing && editorPanel}
 
-          {(phase === "editing" || phase === "recoverable-error") && recorder.finished?.url && (
+          {isEditing && recorder.finished?.url && (
             <div className="rise-in rise-in-2">
               <LastRecordingPlayer audioUrl={recorder.finished.url} />
             </div>
@@ -384,13 +430,15 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
           )}
 
           {phase === "success" && result && recorder.autoStopped && (
-            <p className="text-center text-xs text-stone-500 dark:text-stone-400">
+            <p className="mx-auto max-w-3xl text-center text-xs text-stone-500 dark:text-stone-400">
               This attempt used the full 30 seconds.
             </p>
           )}
+          </>
+          )}
         </div>
 
-        <footer className="mt-12 border-t border-stone-200 pt-5 text-center text-xs leading-5 text-stone-500 dark:border-white/10 dark:text-stone-400">
+        <footer className="mx-auto mt-12 max-w-3xl border-t border-stone-200 pt-5 text-center text-xs leading-5 text-stone-500 dark:border-white/10 dark:text-stone-400">
           <p className="font-semibold text-stone-600 dark:text-stone-300">Private by design</p>
           <p className="mt-1">Your recording stays in this browser until you analyze it.</p>
           <p>When you analyze, the audio is sent directly to Azure Speech and is not stored by ClearSpeak.</p>
@@ -403,7 +451,7 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
 function Header() {
   return (
     <header className="sticky top-0 z-20 border-b border-stone-200/80 bg-[#f8f7f4]/85 backdrop-blur-md dark:border-white/10 dark:bg-stone-950/80">
-      <div className="mx-auto flex w-full max-w-3xl items-center gap-3 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex w-full max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">
         <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-xl bg-stone-900 text-white dark:bg-white dark:text-stone-900">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <rect x="6" y="1.5" width="4" height="8" rx="2" fill="currentColor" />

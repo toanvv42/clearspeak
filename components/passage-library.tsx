@@ -31,11 +31,13 @@ export default function PassageLibrary({
   onSelect,
   filters,
   onFiltersChange,
+  className = "",
 }: {
   selectedId?: string;
   onSelect: (passage: PracticePassage) => void;
   filters: PassageFilterState;
   onFiltersChange: (filters: PassageFilterState) => void;
+  className?: string;
 }) {
   const passages = useMemo(
     () => filterPassages(filters),
@@ -45,7 +47,7 @@ export default function PassageLibrary({
     filters.query.trim() !== "" || filters.band !== "all" || filters.topic !== "all" || filters.focus !== "all";
 
   return (
-    <section aria-label="Practice text library" className="rounded-2xl border border-stone-200 bg-[#faf9f6] p-4 sm:p-5 dark:border-white/10 dark:bg-black/20">
+    <section aria-label="Practice text library" className={`rounded-2xl border border-stone-200 bg-[#faf9f6] p-4 shadow-[var(--shadow-card)] sm:p-5 dark:border-white/10 dark:bg-black/20 ${className || "mt-4"}`}>
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <h2 className="text-[15px] font-bold tracking-tight">Browse practice texts</h2>

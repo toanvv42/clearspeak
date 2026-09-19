@@ -22,6 +22,7 @@ export default function PracticeEditor({
   onSelectPassage,
   libraryFilters,
   onLibraryFiltersChange,
+  hideLibraryBrowser = false,
 }: {
   draft: string;
   onDraftChange: (v: string) => void;
@@ -31,6 +32,7 @@ export default function PracticeEditor({
   onSelectPassage: (passage: PracticePassage) => void;
   libraryFilters: PassageFilterState;
   onLibraryFiltersChange: (filters: PassageFilterState) => void;
+  hideLibraryBrowser?: boolean;
 }) {
   const [showLibrary, setShowLibrary] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -89,9 +91,10 @@ export default function PracticeEditor({
           <span aria-hidden="true" className="flex h-7 w-7 items-center justify-center rounded-full bg-stone-900 text-xs font-bold text-white dark:bg-white dark:text-stone-900">1</span>
           <div>
             <p className="text-[15px] font-bold tracking-tight">Choose what to practice</p>
-            <p className="text-xs text-stone-500 dark:text-stone-400">Pick a graded text or paste your own below.</p>
+            <p className="text-xs text-stone-500 dark:text-stone-400">{hideLibraryBrowser ? "Paste your own or pick a sample from the library." : "Pick a graded text or paste your own below."}</p>
           </div>
         </div>
+        {!hideLibraryBrowser && (
         <button
           type="button"
           disabled={disabled}
@@ -101,10 +104,11 @@ export default function PracticeEditor({
         >
           {showLibrary ? "Close library" : "Browse practice texts"}
         </button>
+        )}
       </div>
 
       <div className="px-5 py-5 sm:px-6 sm:py-6">
-        {showLibrary && (
+        {!hideLibraryBrowser && showLibrary && (
           <div className="rise-in mb-5">
             <PassageLibrary
               selectedId={selectedPassage?.id}
