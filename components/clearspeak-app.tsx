@@ -54,6 +54,41 @@ function newAttemptId(): string {
   }
 }
 
+/**
+ * Reactive wrapper around `window.location.search`.
+ * Next.js client-side navigation between "/" and "/?repeat=…" reuses the
+ * same route component, so an effect that reads `window.location.search`
+ * once never re-runs. This hook re-renders on pushState/replaceState/popstate
+ * so deep-link effects subscribe to query changes.
+ */
+function useLocationSearch(): string {
+  const getSearch = useCallback(
+    () => (typeof window === "undefined" ? "" : window.location.search),
+    [],
+  );
+  const [search, setSearch] = useState(getSearch);
+  useEffect(() => {
+    const update = () => setSearch(window.location.search);
+    const origPush = window.history.pushState.bind(window.history);
+    const origReplace = window.history.replaceState.bind(window.history);
+    window.history.pushState = (...args: Parameters<typeof origPush>) => {
+      origPush(...args);
+      update();
+    };
+    window.history.replaceState = (...args: Parameters<typeof origReplace>) => {
+      origReplace(...args);
+      update();
+    };
+    window.addEventListener("popstate", update);
+    return () => {
+      window.history.pushState = origPush;
+      window.history.replaceState = origReplace;
+      window.removeEventListener("popstate", update);
+    };
+  }, [getSearch]);
+  return search;
+}
+
 export default function ClearSpeakApp({ accessRequired }: Props) {
   const router = useRouter();
   const accessCode = useStoredAccessCode();
@@ -91,6 +126,8 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   const evalIdRef = useRef<string | null>(null);
   const attemptMetaRef = useRef<Record<string, unknown> | null>(null);
   const attemptBlobRef = useRef<Blob | null>(null);
+  /** Owns the comparison player's object URL so the recorder may revoke its own URL safely. */
+  const previousUrlRef = useRef<string | null>(null);
 
   const saver = useAttemptSave();
 
@@ -106,12 +143,21 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   // Route change / unmount: abort in-flight assessment and stop sample playback.
   useEffect(() => {
     const controller = abortRef;
+    const previousUrl = previousUrlRef;
     return () => {
       controller.current?.abort();
       try {
         if ("speechSynthesis" in window) window.speechSynthesis.cancel();
       } catch {
         /* ignore */
+      }
+      if (previousUrl.current) {
+        try {
+          URL.revokeObjectURL(previousUrl.current);
+        } catch {
+          /* ignore */
+        }
+        previousUrl.current = null;
       }
     };
   }, []);
@@ -152,9 +198,12 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   }, [unlocked, phase]);
 
   // Deep links: ?repeat=<id> preloads exact saved text; ?retry-eval=<id> re-evaluates saved WAV.
+  // Subscribes to search-parameter changes so client-side navigation from
+  // "/" to "/?repeat=…" (same route, new query) reloads the saved passage.
+  const locationSearch = useLocationSearch();
   useEffect(() => {
     if (!unlocked) return;
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(locationSearch);
     const repeatId = params.get("repeat");
     const retryId = params.get("retry-eval");
     if (repeatId) {
@@ -227,7 +276,7 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
       })();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [unlocked]);
+  }, [unlocked, locationSearch]);
 
   const unlock = useCallback(
     () => {
@@ -371,10 +420,11 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
       setAssessing(true);
       const controller = new AbortController();
       abortRef.current = controller;
-      let token: Awaited<ReturnType<typeof fetchSpeechToken>>;
       try {
-        token = await fetchSpeechToken(accessCode);
-      } catch (err) {
+        let token: Awaited<ReturnType<typeof fetchSpeechToken>>;
+        try {
+          token = await fetchSpeechToken(accessCode);
+        } catch (err) {
         await savePromise.catch(() => {});
         if ((err as { status?: number }).status === 401) {
           clearAccessCode();
@@ -511,6 +561,9 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
       } finally {
         setAssessing(false);
       }
+      } finally {
+        setAssessing(false);
+      }
     };
     void run();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -518,9 +571,30 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
 
   const recordAgain = useCallback(() => {
     if (result) {
+      // Clone the audio into an independently-owned object URL: the
+      // recorder revokes its own URL on the next start().
+      let previousUrl: string | null = null;
+      const finishedBlob = recorder.finished?.blob;
+      if (finishedBlob) {
+        try {
+          previousUrl = URL.createObjectURL(finishedBlob);
+        } catch {
+          previousUrl = recorder.finished?.url ?? null;
+        }
+      } else {
+        previousUrl = recorder.finished?.url ?? null;
+      }
+      if (previousUrlRef.current && previousUrlRef.current !== previousUrl) {
+        try {
+          URL.revokeObjectURL(previousUrlRef.current);
+        } catch {
+          /* ignore */
+        }
+      }
+      previousUrlRef.current = previousUrl;
       setPreviousInSession({
         result,
-        audioUrl: recorder.finished?.url ?? null,
+        audioUrl: previousUrl,
         passage,
       });
     }
@@ -541,6 +615,14 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
 
   const newText = useCallback(() => {
     setResult(null);
+    if (previousUrlRef.current) {
+      try {
+        URL.revokeObjectURL(previousUrlRef.current);
+      } catch {
+        /* ignore */
+      }
+      previousUrlRef.current = null;
+    }
     setPreviousInSession(null);
     setFailure(null);
     setNotice(null);

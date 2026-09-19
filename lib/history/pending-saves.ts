@@ -77,7 +77,25 @@ export async function pendingPut(entry: PendingEntry): Promise<"ok" | "unavailab
     const all = await pendingList();
     const bytes = all.reduce((n, e) => n + (e.wav?.size ?? 0), 0) + (entry.wav?.size ?? 0);
     const exists = all.some((e) => e.id === entry.id);
-    if (!exists && (all.length >= PENDING_MAX_COUNT || bytes > PENDING_MAX_BYTES)) return "full";
+    if (!exists && (all.length >= PENDING_MAX_COUNT || bytes > PENDING_MAX_BYTES)) {
+      // Only audio-only entries are safe to evict. Uploaded audio does not
+      // mean its queued feedback has reached the server.
+      const evictable = all
+        .filter((e) => e.audioSaved && e.evaluation === null)
+        .sort((a, b) => a.updatedAt - b.updatedAt);
+      for (const victim of evictable) {
+        await pendingRemove(victim.id);
+        const rest = await pendingList();
+        const restBytes =
+          rest.reduce((n, e) => n + (e.wav?.size ?? 0), 0) + (entry.wav?.size ?? 0);
+        if (rest.length < PENDING_MAX_COUNT && restBytes <= PENDING_MAX_BYTES) break;
+      }
+      const after = await pendingList();
+      const afterBytes =
+        after.reduce((n, e) => n + (e.wav?.size ?? 0), 0) + (entry.wav?.size ?? 0);
+      if (!after.some((e) => e.id === entry.id) && (after.length >= PENDING_MAX_COUNT || afterBytes > PENDING_MAX_BYTES))
+        return "full";
+    }
     await tx("readwrite", (s) => s.put(entry as StoredEntry));
     return "ok";
   } catch {

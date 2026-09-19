@@ -210,6 +210,7 @@ export function usePcmRecorder(options?: PcmRecorderOptions) {
 
   const start = useCallback(async (): Promise<RecorderStartResult> => {
     sessionIdRef.current++;
+    const sessionId = sessionIdRef.current;
     // A previous recording URL is revoked before it is cleared.
     clearFinished();
     finishingRef.current = false;
@@ -243,6 +244,16 @@ export function usePcmRecorder(options?: PcmRecorderOptions) {
           autoGainControl: true,
         },
       });
+      if (sessionId !== sessionIdRef.current) {
+        for (const track of stream.getTracks()) {
+          try {
+            track.stop();
+          } catch {
+            /* ignore */
+          }
+        }
+        return { ok: false, unsupported: false, message: "Recording was cancelled." };
+      }
       streamRef.current = stream;
       let ctx: AudioContext;
       try {
@@ -258,6 +269,10 @@ export function usePcmRecorder(options?: PcmRecorderOptions) {
       ctxRef.current = ctx;
       if (ctx.state === "suspended") {
         await ctx.resume().catch(() => {});
+        if (sessionId !== sessionIdRef.current) {
+          releaseAudioResources();
+          return { ok: false, unsupported: false, message: "Recording was cancelled." };
+        }
       }
       // Verify Worklet support on the real instance before use; the static
       // check above cannot prove `addModule` exists here.
@@ -277,6 +292,10 @@ export function usePcmRecorder(options?: PcmRecorderOptions) {
         setError(message);
         setStatus("error");
         return { ok: false, unsupported: false, message };
+      }
+      if (sessionId !== sessionIdRef.current) {
+        releaseAudioResources();
+        return { ok: false, unsupported: false, message: "Recording was cancelled." };
       }
       const source = ctx.createMediaStreamSource(stream);
       sourceRef.current = source;
@@ -305,6 +324,10 @@ export function usePcmRecorder(options?: PcmRecorderOptions) {
       sink.connect(ctx.destination);
 
       startRef.current = Date.now();
+      if (sessionId !== sessionIdRef.current) {
+        releaseAudioResources();
+        return { ok: false, unsupported: false, message: "Recording was cancelled." };
+      }
       setStatus("recording");
       timerRef.current = setInterval(() => {
         setElapsedMs(Date.now() - startRef.current);
@@ -319,6 +342,10 @@ export function usePcmRecorder(options?: PcmRecorderOptions) {
       }, 200);
       return { ok: true };
     } catch (err) {
+      releaseAudioResources();
+      if (sessionId !== sessionIdRef.current) {
+        return { ok: false, unsupported: false, message: "Recording was cancelled." };
+      }
       let message = "Could not start recording. Please try again.";
       if (err instanceof DOMException && err.name === "NotAllowedError") {
         message = "Microphone access was denied. Allow microphone access and try again.";
@@ -327,7 +354,6 @@ export function usePcmRecorder(options?: PcmRecorderOptions) {
       }
       setError(message);
       setStatus("error");
-      releaseAudioResources();
       return { ok: false, unsupported: false, message };
     }
   }, [clearFinished, releaseAudioResources]);

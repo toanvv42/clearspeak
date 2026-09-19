@@ -68,7 +68,7 @@ export default function HistoryApp({ accessRequired }: { accessRequired: boolean
   const accessCode = useStoredAccessCode();
   const unlocked = !accessRequired || accessCode !== undefined;
   const [items, setItems] = useState<AttemptSummary[]>([]);
-  const [pending, setPending] = useState<AttemptSummary[]>([]);
+  const [pending, setPending] = useState<Array<AttemptSummary & { audioSaved: boolean }>>([]);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<Filter>("all");
   const [nextCursor, setNextCursor] = useState<string | null>(null);
@@ -173,7 +173,8 @@ export default function HistoryApp({ accessRequired }: { accessRequired: boolean
           fluencyScore: null,
           completenessScore: null,
           prosodyScore: null,
-          hasAudio: false,
+          hasAudio: e.audioSaved,
+          audioSaved: e.audioSaved,
         })),
       );
       void load();
@@ -279,7 +280,37 @@ export default function HistoryApp({ accessRequired }: { accessRequired: boolean
             const group = groupKey(item.recordedAt);
             const showGroup = group !== lastGroup;
             lastGroup = group;
-            const isPending = pending.some((p) => p.id === item.id);
+            const pendingEntry = pending.find((p) => p.id === item.id);
+            const isPending = Boolean(pendingEntry);
+            // Audio uploaded but evaluation pending: the recording exists on
+            // the server, so keep the detail link for evaluation instead of
+            // hiding it behind a "Waiting to sync" row.
+            if (pendingEntry?.audioSaved) {
+              return (
+                <li key={item.id}>
+                  {showGroup && <p className="px-1 pb-1 pt-3 text-xs font-bold uppercase tracking-widest text-stone-400">{group}</p>}
+                  <Link
+                    href={`/history/${item.id}`}
+                    className="block rounded-2xl border border-dashed border-stone-300 bg-white px-4 py-3 dark:border-white/15 dark:bg-white/[0.04]"
+                  >
+                    <span className="flex items-center justify-between gap-2">
+                      <span className="truncate text-[15px] font-bold">
+                        {item.title ?? item.referenceText.slice(0, 60)}
+                      </span>
+                      <span className="shrink-0 rounded-full bg-stone-100 px-2 py-0.5 text-xs font-bold tabular-nums dark:bg-white/10">
+                        —
+                      </span>
+                    </span>
+                    <span className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-[13px] text-stone-500">
+                      <span>{formatDate(item.recordedAt)}</span>
+                      {item.level && <span>{item.level}</span>}
+                      {item.durationMs > 0 && <span>{Math.round(item.durationMs / 1000)}s</span>}
+                      <span className="font-semibold">{statusLabel(item)}</span>
+                    </span>
+                  </Link>
+                </li>
+              );
+            }
             // Pending takes exist only in this browser so far: no detail page
             // yet. Render them without a link plus an explicit sync action.
             if (isPending) {

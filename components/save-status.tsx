@@ -28,7 +28,7 @@ export default function SaveStatus({
     >
       <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current" />
       {copy}
-      {state.kind === "unsaved" && onRetry && (
+      {((state.kind === "unsaved" && state.canRetry) || state.kind === "feedback-waiting") && onRetry && (
         <button type="button" onClick={onRetry} className="underline underline-offset-2">
           Retry save
         </button>

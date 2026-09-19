@@ -17,6 +17,8 @@
 
   --shadow-card: 0 1px 2px rgb(28 25 23 / 0.05), 0 8px 24px -12px rgb(28 25 23 / 0.12);
   --shadow-lift: 0 2px 4px rgb(28 25 23 / 0.06), 0 16px 32px -16px rgb(28 25 23 / 0.18);
+
+  --animate-spin: spin 1.8s linear infinite;
 }
 
 :root {
@@ -58,9 +60,15 @@ body {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
+    /* Stop decorative motion instead of accelerating animation loops. */
+    animation: none !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Keep loading feedback visible, with a gentler rotation in this mode. */
+  .animate-spin {
+    animation: spin 3.6s linear infinite !important;
   }
 }
 

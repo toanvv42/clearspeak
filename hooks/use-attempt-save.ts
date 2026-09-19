@@ -47,12 +47,49 @@ export function useAttemptSave() {
   const [queueFull, setQueueFull] = useState(false);
   const currentRef = useRef<{ id: string; metadata: Record<string, unknown>; wav: Blob } | null>(null);
   const accessRef = useRef<string | undefined>(undefined);
+  const displayedIdRef = useRef<string | null>(null);
+  /**
+   * Memory fallback for evaluation payloads when IndexedDB is unavailable,
+   * plus queued entries for re-evaluations of server-saved takes (beginTake
+   * was never called for them, so pendingUpdate alone would be a no-op).
+   * Entries stay here until the server acknowledges them.
+   */
+  const memoryEvalRef = useRef(new Map<string, { payload: Record<string, unknown>; isFailure: boolean }>());
+
+  const removePending = useCallback(async (id: string) => {
+    await pendingRemove(id);
+    memoryEvalRef.current.delete(id);
+  }, []);
+
+  const syncEvaluation = useCallback(async (id: string, payload: Record<string, unknown>) => {
+    try {
+      const res = await uploadEvaluation(id, payload, getAccessCode());
+      await removePending(id);
+      if (displayedIdRef.current === id) {
+        setRevision(res.item.revision);
+        setServerId(id);
+        setState(payload.failure ? { kind: "eval-failed" } : { kind: "saved" });
+      }
+      return true;
+    } catch (err) {
+      if ((err as { status?: number }).status === 410) {
+        await removePending(id);
+        if (displayedIdRef.current === id) {
+          setServerId(null);
+          setState({ kind: "unsaved", canRetry: false });
+        }
+        return true;
+      }
+      if (displayedIdRef.current === id) setState({ kind: "feedback-waiting" });
+      return false;
+    }
+  }, [removePending]);
 
   const drainOne = useCallback(async (id: string) => {
     const entries = await pendingList();
     const entry = entries.find((e) => e.id === id);
     if (!entry) return true;
-    const code = accessRef.current ?? getAccessCode();
+    const code = getAccessCode();
     if (!entry.audioSaved) {
       try {
         await uploadAttempt(entry.id, entry.metadata, entry.wav, code);
@@ -61,7 +98,11 @@ export function useAttemptSave() {
         const status = (err as { status?: number }).status;
         if (status === 400 || status === 409 || status === 410 || status === 413) {
           if ((err as { code?: string }).code === "deleted" || status === 410) {
-            await pendingRemove(entry.id);
+            await removePending(entry.id);
+            if (displayedIdRef.current === entry.id) {
+              setServerId(null);
+              setState({ kind: "unsaved", canRetry: false });
+            }
             return true;
           }
           if (status === 400 || status === 413) return false;
@@ -71,37 +112,33 @@ export function useAttemptSave() {
       }
     }
     if (entry.evaluation) {
-      try {
-        await uploadEvaluation(entry.id, entry.evaluation, code);
-        await pendingRemove(entry.id);
-      } catch (err) {
-        const status = (err as { status?: number }).status;
-        if (status === 401) return false;
-        if (status === 409 || status === 410) {
-          if (status === 410) await pendingRemove(entry.id);
-          return status === 410;
-        }
-        return false;
-      }
-    } else {
-      // Audio-only entry stays until evaluation arrives; audio is durable.
-      return true;
+      return syncEvaluation(entry.id, entry.evaluation);
     }
+    // Audio-only entry stays until evaluation arrives; audio is durable.
     return true;
-  }, []);
+  }, [removePending, syncEvaluation]);
 
   const drainAll = useCallback(async () => {
     const entries = await pendingList();
     for (const e of entries) {
-      // Sequential with bounded backoff: stop on auth failure.
+      // Pace uploads and stop on a retryable failure.
       const ok = await drainOne(e.id);
-      if (!ok) break;
+      if (!ok) return;
       await new Promise((r) => setTimeout(r, 150));
     }
-  }, [drainOne]);
+    // Flush memory-only evaluation payloads (IndexedDB unavailable).
+    for (const [id, mem] of Array.from(memoryEvalRef.current)) {
+      const listed = await pendingList();
+      if (listed.some((e) => e.id === id && e.evaluation)) continue;
+      if (!(await syncEvaluation(id, mem.payload))) return;
+      await new Promise((r) => setTimeout(r, 150));
+    }
+  }, [drainOne, syncEvaluation]);
 
   useEffect(() => {
     accessRef.current = getAccessCode();
+    // Status updates happen after asynchronous storage/network operations.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void drainAll();
     const onOnline = () => void drainAll();
     window.addEventListener("online", onOnline);
@@ -111,6 +148,7 @@ export function useAttemptSave() {
   const beginTake = useCallback(
     async (id: string, metadata: Record<string, unknown>, wav: Blob) => {
       currentRef.current = { id, metadata, wav };
+      displayedIdRef.current = id;
       accessRef.current = getAccessCode();
       setServerId(null);
       setRevision(0);
@@ -153,24 +191,31 @@ export function useAttemptSave() {
 
   const saveEvaluationPayload = useCallback(
     async (id: string, payload: Record<string, unknown>, isFailure: boolean) => {
+      if (displayedIdRef.current === null) displayedIdRef.current = id;
+      memoryEvalRef.current.set(id, { payload, isFailure });
       await pendingUpdate(id, { evaluation: payload, updatedAt: Date.now() });
+      // Re-evaluating an existing history item has no queued entry to update
+      // (beginTake never ran for it). Ensure one exists so a failed upload
+      // stays retryable; audio is already on the server.
       try {
-        const res = await uploadEvaluation(id, payload, accessRef.current ?? getAccessCode());
-        await pendingRemove(id);
-        setRevision(res.item.revision);
-        setServerId(id);
-        setState(isFailure ? { kind: "eval-failed" } : { kind: "saved" });
-      } catch (err) {
-        const status = (err as { status?: number }).status;
-        if (status === 401) {
-          setState({ kind: "feedback-waiting" });
-          return;
+        const entries = await pendingList();
+        if (!entries.some((e) => e.id === id)) {
+          const take = currentRef.current?.id === id ? currentRef.current : null;
+          await pendingPut({
+            id,
+            metadata: take?.metadata ?? {},
+            wav: take?.wav ?? new Blob([]),
+            evaluation: payload,
+            audioSaved: take === null,
+            updatedAt: Date.now(),
+          });
         }
-        // Audio is saved; evaluation sync pending.
-        setState(isFailure ? { kind: "eval-failed" } : { kind: "feedback-waiting" });
+      } catch {
+        /* ignore: memory fallback covers this take */
       }
+      await syncEvaluation(id, payload);
     },
-    [],
+    [syncEvaluation],
   );
 
   const markEvalFailed = useCallback(() => {
@@ -179,29 +224,47 @@ export function useAttemptSave() {
 
   const retry = useCallback(async () => {
     const cur = currentRef.current;
-    if (!cur) return;
+    if (!cur) {
+      // Saved history items use the same drain and deletion handling as
+      // automatic reconnects, including uploading queued audio first.
+      setState({ kind: "saving" });
+      await drainAll();
+      setState((s) => s.kind === "saving" ? { kind: "feedback-waiting" } : s);
+      return;
+    }
     setState({ kind: "saving" });
     const entries = await pendingList();
     const entry = entries.find((e) => e.id === cur.id);
-    const wav = entry?.wav ?? cur.wav;
-    const metadata = entry?.metadata ?? cur.metadata;
+    const wav = entry?.wav && entry.wav.size > 0 ? entry.wav : cur.wav;
+    const metadata =
+      entry?.metadata && Object.keys(entry.metadata).length > 0 ? entry.metadata : cur.metadata;
     try {
       await uploadAttempt(cur.id, metadata, wav, getAccessCode());
       await pendingUpdate(cur.id, { audioSaved: true });
       setServerId(cur.id);
       const updated = (await pendingList()).find((e) => e.id === cur.id);
-      if (updated?.evaluation) {
-        await saveEvaluationPayload(cur.id, updated.evaluation, false);
+      const mem = memoryEvalRef.current.get(cur.id);
+      const evalPayload = (updated?.evaluation ?? mem?.payload) as Record<string, unknown> | undefined;
+      if (evalPayload) {
+        const isFailure = !((evalPayload as { result?: unknown }).result);
+        await saveEvaluationPayload(cur.id, evalPayload, isFailure);
       } else {
         setState({ kind: "saved-analyzing" });
       }
-    } catch {
+    } catch (err) {
+      if ((err as { status?: number }).status === 410) {
+        await removePending(cur.id);
+        setServerId(null);
+        setState({ kind: "unsaved", canRetry: false });
+        return;
+      }
       setState({ kind: "unsaved", canRetry: true });
     }
-  }, [saveEvaluationPayload]);
+  }, [drainAll, removePending, saveEvaluationPayload]);
 
   const reset = useCallback(() => {
     currentRef.current = null;
+    displayedIdRef.current = null;
     setState({ kind: "idle" });
     setServerId(null);
     setRevision(0);
