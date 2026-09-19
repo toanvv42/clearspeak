@@ -15,10 +15,10 @@ function statLine(label: string, entry: { score: number | null; at: string } | n
   return `${label}: ${score} (${new Date(entry.at).toLocaleDateString()})`;
 }
 
-function TargetCard({ stat, title }: { stat: TargetStats; title: string }) {
+function TargetCard({ stat }: { stat: TargetStats }) {
   return (
     <article className="rounded-2xl border border-stone-200 bg-white p-4 dark:border-white/10 dark:bg-white/[0.04]">
-      <h3 className="truncate text-[15px] font-bold tracking-tight">{title}</h3>
+      <h3 className="truncate text-[15px] font-bold tracking-tight">{stat.title}</h3>
       <p className="mt-0.5 text-[13px] text-stone-500 tabular-nums">
         {stat.attempts} {stat.attempts === 1 ? "attempt" : "attempts"} · comparable text only
       </p>
@@ -67,13 +67,6 @@ export default function ProgressApp({ accessRequired }: { accessRequired: boolea
       </div>
     );
   }
-
-  const titleFor = (targetKey: string): string => {
-    const due = data?.due.find((d) => d.targetKey === targetKey);
-    if (due) return due.title;
-    const fav = data?.favourites.find((f) => f.targetKey === targetKey);
-    return fav?.title ?? targetKey;
-  };
 
   return (
     <div className="min-h-screen bg-[#f8f7f4] text-stone-900 dark:bg-stone-950 dark:text-stone-100">
@@ -169,7 +162,7 @@ export default function ProgressApp({ accessRequired }: { accessRequired: boolea
               ) : (
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
                   {data.stats.map((stat) => (
-                    <TargetCard key={stat.targetKey} stat={stat} title={titleFor(stat.targetKey)} />
+                    <TargetCard key={stat.targetKey} stat={stat} />
                   ))}
                 </div>
               )}

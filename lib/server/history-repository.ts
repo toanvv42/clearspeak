@@ -9,6 +9,7 @@ import {
 import { scoresFromResult } from "@/lib/history/validation";
 import type { ValidatedWav } from "@/lib/server/wav-validate";
 import {
+  MAX_REVIEW_STEP,
   advanceReviewStep,
   isDue,
   nextDueAt,
@@ -17,6 +18,7 @@ import {
   reviewTargetKey,
   type DueReviewItem,
   type FavouritePassage,
+  type ReviewTarget,
   type TargetStats,
   type WeeklyPracticeCount,
 } from "@/lib/review-schedule";
@@ -412,10 +414,16 @@ export function getAttemptAudio(id: string): { bytes: Buffer; byteLength: number
 export function deleteAttempt(id: string): boolean {
   const db = getDb();
   const now = new Date().toISOString();
+  const row = db.prepare("SELECT * FROM attempts WHERE id = ?").get(id) as
+    | Record<string, unknown>
+    | undefined;
+  const reviewTarget =
+    row?.evaluation_state === "success" ? reviewTargetFromSource(attemptSourceOf(row)) : null;
   db.exec("BEGIN IMMEDIATE;");
   try {
     db.prepare("INSERT OR IGNORE INTO tombstones (id, deleted_at) VALUES (?, ?)").run(id, now);
     db.prepare("DELETE FROM attempts WHERE id = ?").run(id);
+    if (reviewTarget) rebuildReviewState(db, reviewTarget);
     db.exec("COMMIT;");
   } catch (err) {
     try {
@@ -507,34 +515,111 @@ function rowToDueItem(row: Record<string, unknown>): DueReviewItem {
 }
 
 /** Review targets whose due date has passed, most overdue first. */
-export function getDueReviews(now?: string, limit = 3): DueReviewItem[] {
+export function getDueReviews(now?: string): DueReviewItem[] {
   const db = getDb();
   const current = now ?? new Date().toISOString();
   const rows = db
-    .prepare(`SELECT * FROM review_state ORDER BY next_due_at ASC, last_practiced_at ASC LIMIT ?`)
-    .all(Math.max(1, Math.min(20, limit))) as Record<string, unknown>[];
+    .prepare(`SELECT * FROM review_state ORDER BY next_due_at ASC, last_practiced_at ASC`)
+    .all() as Record<string, unknown>[];
   return rows.map(rowToDueItem).filter((item) => isDue(item.nextDueAt, current));
+}
+
+function reviewRowsForTarget(db: DatabaseSync, target: ReviewTarget): Record<string, unknown>[] {
+  return (target.kind === "library"
+    ? db
+        .prepare(
+          `SELECT * FROM attempts WHERE evaluation_state = 'success' AND source_kind = 'library' AND source_id = ? AND source_version = ? ORDER BY COALESCE(evaluated_at, recorded_at) ASC, id ASC`,
+        )
+        .all(target.id, target.version)
+    : db
+        .prepare(
+          `SELECT * FROM attempts WHERE evaluation_state = 'success' AND source_kind = 'custom' AND source_hash = ? ORDER BY COALESCE(evaluated_at, recorded_at) ASC, id ASC`,
+        )
+        .all(target.hash)) as Record<string, unknown>[];
+}
+
+function rebuildReviewState(db: DatabaseSync, target: ReviewTarget): void {
+  const targetKey = reviewTargetKey(target);
+  const rows = reviewRowsForTarget(db, target);
+  if (rows.length === 0) {
+    db.prepare("DELETE FROM review_state WHERE target_key = ?").run(targetKey);
+    return;
+  }
+  const latest = rows[rows.length - 1];
+  const practicedAt = ((latest.evaluated_at as string | null) ?? latest.recorded_at) as string;
+  const title =
+    ((latest.title as string | null) ?? null) ||
+    (latest.reference_text as string).slice(0, 60);
+  const step = Math.min(MAX_REVIEW_STEP, rows.length - 1);
+  db.prepare(
+    `INSERT INTO review_state (target_key, kind, passage_id, passage_version, title, latest_attempt_id, last_practiced_at, next_due_at, interval_step, practice_count, last_score, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+     ON CONFLICT(target_key) DO UPDATE SET
+       kind = excluded.kind,
+       passage_id = excluded.passage_id,
+       passage_version = excluded.passage_version,
+       title = excluded.title,
+       latest_attempt_id = excluded.latest_attempt_id,
+       last_practiced_at = excluded.last_practiced_at,
+       next_due_at = excluded.next_due_at,
+       interval_step = excluded.interval_step,
+       practice_count = excluded.practice_count,
+       last_score = excluded.last_score,
+       updated_at = excluded.updated_at`,
+  ).run(
+    targetKey,
+    target.kind,
+    target.kind === "library" ? target.id : null,
+    target.kind === "library" ? target.version : null,
+    title,
+    latest.id,
+    practicedAt,
+    nextDueAt(practicedAt, step),
+    step,
+    rows.length,
+    (latest.pronunciation_score as number | null) ?? null,
+    new Date().toISOString(),
+  );
 }
 
 /** First/latest/best pronunciation scores across successful attempts for one target. */
 export function getTargetStats(targetKey: string): TargetStats {
   const db = getDb();
   const target = parseReviewTargetKey(targetKey);
-  if (!target) return { targetKey, attempts: 0, first: null, latest: null, best: null };
+  if (!target) return { targetKey, title: targetKey, attempts: 0, first: null, latest: null, best: null };
   const rows = (
     target.kind === "library"
       ? db
           .prepare(
-            `SELECT pronunciation_score, recorded_at FROM attempts WHERE evaluation_state = 'success' AND source_kind = 'library' AND source_id = ? AND source_version = ? ORDER BY recorded_at ASC, id ASC LIMIT 500`,
+            `SELECT pronunciation_score, recorded_at, title, reference_text FROM attempts WHERE evaluation_state = 'success' AND source_kind = 'library' AND source_id = ? AND source_version = ? ORDER BY recorded_at ASC, id ASC`,
           )
           .all(target.id, target.version)
       : db
           .prepare(
-            `SELECT pronunciation_score, recorded_at FROM attempts WHERE evaluation_state = 'success' AND source_kind = 'custom' AND source_hash = ? ORDER BY recorded_at ASC, id ASC LIMIT 500`,
+            `SELECT pronunciation_score, recorded_at, title, reference_text FROM attempts WHERE evaluation_state = 'success' AND source_kind = 'custom' AND source_hash = ? ORDER BY recorded_at ASC, id ASC`,
           )
           .all(target.hash)
-  ) as Array<{ pronunciation_score: number | null; recorded_at: string }>;
-  if (rows.length === 0) return { targetKey, attempts: 0, first: null, latest: null, best: null };
+  ) as Array<{
+    pronunciation_score: number | null;
+    recorded_at: string;
+    title: string | null;
+    reference_text: string;
+  }>;
+  return statsFromRows(targetKey, rows);
+}
+
+function statsFromRows(
+  targetKey: string,
+  rows: Array<{
+    pronunciation_score: number | null;
+    recorded_at: string;
+    title: string | null;
+    reference_text: string;
+  }>,
+): TargetStats {
+  if (rows.length === 0) {
+    return { targetKey, title: targetKey, attempts: 0, first: null, latest: null, best: null };
+  }
   const scored = rows.filter((r) => typeof r.pronunciation_score === "number");
   const best =
     scored.length > 0
@@ -544,6 +629,7 @@ export function getTargetStats(targetKey: string): TargetStats {
       : null;
   return {
     targetKey,
+    title: rows[rows.length - 1].title || rows[rows.length - 1].reference_text.slice(0, 60),
     attempts: rows.length,
     first: { score: rows[0].pronunciation_score, at: rows[0].recorded_at },
     latest: {
@@ -552,6 +638,41 @@ export function getTargetStats(targetKey: string): TargetStats {
     },
     best: best ? { score: best.pronunciation_score, at: best.recorded_at } : null,
   };
+}
+
+/** Comparable statistics for every successfully evaluated practice target. */
+export function getAllTargetStats(): TargetStats[] {
+  const db = getDb();
+  const rows = db
+    .prepare(
+      `SELECT source_kind, source_id, source_version, source_hash, pronunciation_score, recorded_at, title, reference_text
+       FROM attempts
+       WHERE evaluation_state = 'success'
+       ORDER BY recorded_at ASC, id ASC`,
+    )
+    .all() as Array<{
+      source_kind: string;
+      source_id: string | null;
+      source_version: number | null;
+      source_hash: string | null;
+      pronunciation_score: number | null;
+      recorded_at: string;
+      title: string | null;
+      reference_text: string;
+    }>;
+  const grouped = new Map<string, typeof rows>();
+  for (const row of rows) {
+    const targetKey = reviewTargetKey(
+      row.source_kind === "library"
+        ? { kind: "library", id: row.source_id ?? "", version: Number(row.source_version) }
+        : { kind: "custom", hash: row.source_hash ?? "" },
+    );
+    const group = grouped.get(targetKey);
+    if (group) group.push(row);
+    else grouped.set(targetKey, [row]);
+  }
+  return Array.from(grouped, ([targetKey, targetRows]) => statsFromRows(targetKey, targetRows))
+    .sort((a, b) => (b.latest?.at ?? "").localeCompare(a.latest?.at ?? ""));
 }
 
 /** Attempt counts per UTC day for the trailing `days` (default 7). */

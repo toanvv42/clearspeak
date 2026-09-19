@@ -32,6 +32,7 @@ const overview = {
   stats: [
     {
       targetKey: "custom:abc",
+      title: "She worked hard.",
       attempts: 2,
       first: { score: 68, at: "2026-09-09T10:00:00.000Z" },
       latest: { score: 72, at: "2026-09-10T10:00:00.000Z" },

@@ -130,6 +130,45 @@ describe("progress API", () => {
       },
     });
 
+    const recentId = "cccccccc-cccc-4ccc-8ccc-cccccccccccc";
+    createAttempt({
+      id: recentId,
+      schemaVersion: 1,
+      recordedAt: "2099-09-10T10:00:00.000Z",
+      durationMs: 1000,
+      stopReason: "manual",
+      referenceText: "She worked hard.",
+      title: "Future take",
+      level: "B1.2",
+      source: { kind: "custom", hash: "recent" },
+      scope: "passage",
+      locale: "en-US",
+      wav,
+    });
+    saveEvaluation(recentId, {
+      evaluationId: "dddddddd-dddd-4ddd-8ddd-dddddddddddd",
+      expectedRevision: 0,
+      evaluatedAt: "2099-09-10T10:05:00.000Z",
+      assessmentConfig: {
+        provider: "azure",
+        sdkVersion: "1.51.0",
+        locale: "en-US",
+        enableProsody: false,
+        phonemeAlphabet: "IPA",
+        granularity: "phoneme",
+        gradingSystem: "hundred-mark",
+        miscue: true,
+        parserVersion: 1,
+      },
+      result: {
+        referenceText: "She worked hard.",
+        recognizedText: "She worked hard.",
+        pronunciationScore: 82,
+        words: [],
+        insertedWords: [],
+      },
+    });
+
     const res = await getProgress(req("/api/progress"));
     expect(res.status).toBe(200);
     const body = (await res.json()) as {
@@ -139,18 +178,19 @@ describe("progress API", () => {
       favourites: unknown[];
       stats: Array<{ targetKey: string; attempts: number }>;
     };
-    expect(body.totals).toMatchObject({ attempts: 1, practiceDays: 1 });
+    expect(body.totals).toMatchObject({ attempts: 2, practiceDays: 2 });
     expect(body.due).toHaveLength(1);
     expect(body.due[0]).toMatchObject({ targetKey: "custom:oldie", lastScore: 72 });
     expect(body.weekly).toHaveLength(7);
-    expect(body.stats).toHaveLength(1);
+    expect(body.stats).toHaveLength(2);
+    expect(body.stats).toEqual(expect.arrayContaining([expect.objectContaining({ targetKey: "custom:recent" })]));
 
     const exported = await exportHistory(req("/api/attempts/export"));
     expect(exported.status).toBe(200);
     expect(exported.headers.get("Content-Disposition")).toContain("attachment");
     const payload = (await exported.json()) as { version: number; attempts: unknown[]; review: unknown[] };
     expect(payload.version).toBe(1);
-    expect(payload.attempts).toHaveLength(1);
-    expect(payload.review).toHaveLength(1);
+    expect(payload.attempts).toHaveLength(2);
+    expect(payload.review).toHaveLength(2);
   });
 });
