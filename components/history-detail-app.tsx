@@ -10,22 +10,12 @@ import ComparisonView from "@/components/comparison-view";
 import LastRecordingPlayer from "@/components/last-recording-player";
 import ResultsView from "@/components/results-view";
 import { deleteAttemptRequest, fetchAttemptAudioBlob, fetchAttemptDetail } from "@/lib/history/client";
+import { clearAccessCode, hasAccessCode } from "@/lib/access-code";
 import type { AttemptDetail } from "@/lib/history/types";
 
 export default function HistoryDetailApp({ id, accessRequired }: { id: string; accessRequired: boolean }) {
   const router = useRouter();
-  const [unlocked, setUnlocked] = useState(
-    () =>
-      !accessRequired ||
-      (typeof window !== "undefined" &&
-        (() => {
-          try {
-            return sessionStorage.getItem("clearspeak-access") != null;
-          } catch {
-            return false;
-          }
-        })()),
-  );
+  const [unlocked, setUnlocked] = useState(() => !accessRequired || hasAccessCode());
   const [detail, setDetail] = useState<AttemptDetail | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [audioError, setAudioError] = useState<string | null>(null);
@@ -43,11 +33,7 @@ export default function HistoryDetailApp({ id, accessRequired }: { id: string; a
     } catch (err) {
       const status = (err as { status?: number }).status;
       if (status === 401 && accessRequired) {
-        try {
-          sessionStorage.removeItem("clearspeak-access");
-        } catch {
-          /* ignore */
-        }
+        clearAccessCode();
         setUnlocked(false);
         return;
       }

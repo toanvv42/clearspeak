@@ -25,6 +25,7 @@ import {
   type PracticePassage,
 } from "@/lib/practice-content";
 import { fetchAttemptAudioBlob, fetchAttemptDetail, fetchAttemptList } from "@/lib/history/client";
+import { clearAccessCode, getAccessCode as readStoredCode, hasAccessCode } from "@/lib/access-code";
 import { HISTORY_SCHEMA_VERSION, type AttemptDetail, type AttemptSummary } from "@/lib/history/types";
 import { normalizeText } from "@/lib/text";
 import type { AssessmentFailure, AssessmentResult, PracticePhase } from "@/lib/types";
@@ -50,16 +51,12 @@ function newAttemptId(): string {
 }
 
 export default function ClearSpeakApp({ accessRequired }: Props) {
-  const [unlocked, setUnlocked] = useState(!accessRequired);
-  const [accessCode, setAccessCode] = useState<string | undefined>(() => {
-    if (typeof window === "undefined") return undefined;
-    try {
-      return sessionStorage.getItem("clearspeak-access") ?? undefined;
-    } catch {
-      return undefined;
-    }
+  const [unlocked, setUnlocked] = useState(() => !accessRequired || hasAccessCode());
+  const [accessCode, setAccessCode] = useState<string | undefined>(() => readStoredCode());
+  const [phase, setPhase] = useState<PracticePhase>(() => {
+    if (!accessRequired) return "editing";
+    return hasAccessCode() ? "editing" : "locked";
   });
-  const [phase, setPhase] = useState<PracticePhase>(accessRequired ? "locked" : "editing");
   const [draft, setDraft] = useState("");
   const [passage, setPassage] = useState("");
   const [selectedPassage, setSelectedPassage] = useState<PracticePassage | null>(null);
@@ -358,11 +355,7 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
       } catch (err) {
         await savePromise.catch(() => {});
         if ((err as { status?: number }).status === 401) {
-          try {
-            sessionStorage.removeItem("clearspeak-access");
-          } catch {
-            /* ignore */
-          }
+          clearAccessCode();
           setAccessCode(undefined);
           // The finished take is already queued on this device; unlocking
           // again syncs it automatically. Never lose the user's work here.

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { getAccessCode } from "@/lib/access-code";
 import { formatScore } from "@/lib/assessment-guidance";
 
 export default function AttemptAudio({
@@ -27,12 +28,7 @@ export default function AttemptAudio({
     setLoading(true);
     setError(null);
     try {
-      let code: string | undefined;
-      try {
-        code = sessionStorage.getItem("clearspeak-access") ?? undefined;
-      } catch {
-        code = undefined;
-      }
+      const code = getAccessCode();
       const res = await fetch(`/api/attempts/${attemptId}/audio`, {
         headers: code ? { "x-app-access-code": code } : {},
       });

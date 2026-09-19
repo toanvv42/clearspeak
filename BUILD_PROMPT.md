@@ -37,8 +37,8 @@ This is a personal app. Protect the token-minting endpoint with a simple applica
 
 - If `APP_ACCESS_CODE` is configured, show a small, tasteful unlock screen before the practice UI.
 - Determine whether the gate is required on the server (for example, in the server-rendered page) and pass only an `accessRequired` boolean to the client. Never pass the configured access code.
-- Keep the entered access code in memory or `sessionStorage` only, never `localStorage`.
-- Send it as `x-app-access-code` only when requesting a Speech token.
+- Keep the entered access code in `localStorage` (supersedes the original session-only rule per owner decision: one unlock lasts across tabs and restarts), never in URLs or logs.
+- Send it as `x-app-access-code` with token, history, and audio requests.
 - Compare it on the server without leaking which part was wrong. Use a timing-safe comparison where practical.
 - In production, fail closed if `APP_ACCESS_CODE` is missing. In development, allow it to be omitted and bypass the gate.
 - A 401 response should return a generic message and take the user back to the unlock state.

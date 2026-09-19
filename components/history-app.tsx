@@ -5,6 +5,7 @@ import Link from "next/link";
 import AccessGate from "@/components/access-gate";
 import AppHeader from "@/components/app-header";
 import { fetchAttemptList, getAccessCode, uploadAttempt, uploadEvaluation } from "@/lib/history/client";
+import { clearAccessCode, hasAccessCode } from "@/lib/access-code";
 import { pendingList, pendingRemove, pendingUpdate } from "@/lib/history/pending-saves";
 import type { AttemptSummary } from "@/lib/history/types";
 
@@ -63,18 +64,7 @@ function matchesFilter(item: AttemptSummary, filter: Filter): boolean {
 }
 
 export default function HistoryApp({ accessRequired }: { accessRequired: boolean }) {
-  const [unlocked, setUnlocked] = useState(
-    () =>
-      !accessRequired ||
-      (typeof window !== "undefined" &&
-        (() => {
-          try {
-            return sessionStorage.getItem("clearspeak-access") != null;
-          } catch {
-            return false;
-          }
-        })()),
-  );
+  const [unlocked, setUnlocked] = useState(() => !accessRequired || hasAccessCode());
   const [items, setItems] = useState<AttemptSummary[]>([]);
   const [pending, setPending] = useState<AttemptSummary[]>([]);
   const [search, setSearch] = useState("");
@@ -100,11 +90,7 @@ export default function HistoryApp({ accessRequired }: { accessRequired: boolean
       } catch (err) {
         // A rejected code drops back to the gate instead of a dead list.
         if ((err as { status?: number }).status === 401 && accessRequired) {
-          try {
-            sessionStorage.removeItem("clearspeak-access");
-          } catch {
-            /* ignore */
-          }
+          clearAccessCode();
           setUnlocked(false);
           return;
         }

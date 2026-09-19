@@ -44,7 +44,7 @@ and [privacy guidance](https://learn.microsoft.com/en-us/azure/ai-services/speec
 
 ## Prerequisites
 
-- Node.js 20+ and npm.
+- Node.js 24.20+ (pinned in `mise.toml`; `node:sqlite` is required — Node 20/22 cannot build this repo).
 - An Azure Speech resource (Free **F0** is enough for personal practice).
 - A modern desktop or mobile browser with microphone + AudioWorklet support
   (recent Chrome, Edge, Safari, or Firefox). `speechSynthesis` sample playback uses the

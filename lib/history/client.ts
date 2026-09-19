@@ -1,13 +1,10 @@
 "use client";
 
 import type { AttemptDetail, AttemptSummary } from "@/lib/history/types";
+import { getAccessCode as readStoredCode } from "@/lib/access-code";
 
 export function getAccessCode(): string | undefined {
-  try {
-    return sessionStorage.getItem("clearspeak-access") ?? undefined;
-  } catch {
-    return undefined;
-  }
+  return readStoredCode();
 }
 
 function headers(accessCode?: string): HeadersInit {

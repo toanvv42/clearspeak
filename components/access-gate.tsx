@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { setAccessCode } from "@/lib/access-code";
 
 export default function AccessGate({ onUnlock }: { onUnlock: (code: string) => void }) {
   const [code, setCode] = useState("");
@@ -21,11 +22,7 @@ export default function AccessGate({ onUnlock }: { onUnlock: (code: string) => v
         headers: { "x-app-access-code": trimmed },
       });
       if (res.ok) {
-        try {
-          sessionStorage.setItem("clearspeak-access", trimmed);
-        } catch {
-          /* ignore */
-        }
+        setAccessCode(trimmed);
         onUnlock(trimmed);
         return;
       }
