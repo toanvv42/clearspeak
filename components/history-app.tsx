@@ -5,7 +5,7 @@ import Link from "next/link";
 import AccessGate from "@/components/access-gate";
 import AppHeader from "@/components/app-header";
 import { useStoredAccessCode } from "@/hooks/use-access-code";
-import { fetchAttemptList, getAccessCode, uploadAttempt, uploadEvaluation } from "@/lib/history/client";
+import { downloadHistoryExport, fetchAttemptList, getAccessCode, uploadAttempt, uploadEvaluation } from "@/lib/history/client";
 import { clearAccessCode } from "@/lib/access-code";
 import { pendingList, pendingRemove, pendingUpdate } from "@/lib/history/pending-saves";
 import type { AttemptSummary } from "@/lib/history/types";
@@ -75,6 +75,20 @@ export default function HistoryApp({ accessRequired }: { accessRequired: boolean
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [syncing, setSyncing] = useState(false);
+  const [exporting, setExporting] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
+
+  const exportHistory = useCallback(async () => {
+    setExporting(true);
+    setExportError(null);
+    try {
+      await downloadHistoryExport();
+    } catch {
+      setExportError("Could not export history. Check your connection and try again.");
+    } finally {
+      setExporting(false);
+    }
+  }, []);
 
   const load = useCallback(
     async (opts?: { append?: boolean; cursorOverride?: string | null }) => {
@@ -200,6 +214,21 @@ export default function HistoryApp({ accessRequired }: { accessRequired: boolean
       <AppHeader />
       <main className="mx-auto w-full max-w-3xl px-4 pb-20 sm:px-6">
         <h1 className="mt-6 text-2xl font-extrabold tracking-tight">History</h1>
+        <div className="mt-2 flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => void exportHistory()}
+            disabled={exporting}
+            className="rounded-full border border-stone-300 bg-white px-3 py-1.5 text-[13px] font-semibold disabled:opacity-50 dark:border-white/15 dark:bg-transparent"
+          >
+            {exporting ? "Exporting…" : "Export history (.json)"}
+          </button>
+          {exportError && (
+            <p role="alert" className="text-[13px] font-medium text-red-700 dark:text-red-300">
+              {exportError}
+            </p>
+          )}
+        </div>
         <div className="mt-4 flex flex-col gap-2 sm:flex-row">
           <label className="flex-1">
             <span className="sr-only">Search history</span>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   filterPassages,
   FOCUS_TAGS,
@@ -12,6 +12,12 @@ import {
   type PracticeBand,
   type PracticePassage,
 } from "@/lib/practice-content";
+import {
+  addFavouriteRequest,
+  fetchFavourites,
+  removeFavouriteRequest,
+} from "@/lib/history/client";
+import { reviewTargetKey } from "@/lib/review-schedule";
 
 const TOPIC_LABELS: Record<PassageTopic, string> = {
   "daily-life": "Daily life",
@@ -43,6 +49,40 @@ export default function PassageLibrary({
     () => filterPassages(filters),
     [filters],
   );
+  const [favourites, setFavourites] = useState<Set<string>>(new Set());
+  const [favouritesOnly, setFavouritesOnly] = useState(false);
+  const [favouriteError, setFavouriteError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    void fetchFavourites()
+      .then((res) => {
+        if (!cancelled) setFavourites(new Set(res.items.map((f) => f.targetKey)));
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const visiblePassages = favouritesOnly
+    ? passages.filter((p) => favourites.has(reviewTargetKey({ kind: "library", id: p.id, version: p.version })))
+    : passages;
+
+  const toggleFavourite = (passage: PracticePassage) => {
+    const key = reviewTargetKey({ kind: "library", id: passage.id, version: passage.version });
+    const active = favourites.has(key);
+    setFavouriteError(null);
+    const next = new Set(favourites);
+    if (active) next.delete(key);
+    else next.add(key);
+    setFavourites(next);
+    void (active ? removeFavouriteRequest(key) : addFavouriteRequest(passage.id, passage.version))
+      .catch(() => {
+        setFavourites(favourites);
+        setFavouriteError("Could not save favourites. Check your connection and try again.");
+      });
+  };
   const hasActiveFilters =
     filters.query.trim() !== "" || filters.band !== "all" || filters.topic !== "all" || filters.focus !== "all";
 
@@ -64,10 +104,25 @@ export default function PassageLibrary({
             </button>
           )}
           <span className="rounded-full bg-stone-900 px-2.5 py-1 text-xs font-bold tabular-nums text-white dark:bg-white dark:text-stone-900">
-            {passages.length} {passages.length === 1 ? "text" : "texts"}
+            {visiblePassages.length} {visiblePassages.length === 1 ? "text" : "texts"}
           </span>
         </div>
       </div>
+
+      <label className="mt-3 flex cursor-pointer items-center gap-2 text-[13px] font-semibold text-stone-600 dark:text-stone-300">
+        <input
+          type="checkbox"
+          checked={favouritesOnly}
+          onChange={(event) => setFavouritesOnly(event.target.checked)}
+          className="h-4 w-4 accent-stone-900 dark:accent-white"
+        />
+        Favourites only{favourites.size > 0 ? ` (${favourites.size})` : ""}
+      </label>
+      {favouriteError && (
+        <p role="alert" className="mt-2 text-[13px] font-medium text-red-700 dark:text-red-300">
+          {favouriteError}
+        </p>
+      )}
 
       <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
         <label className="text-xs font-bold">
@@ -121,9 +176,11 @@ export default function PassageLibrary({
         </label>
       </div>
 
-      {passages.length === 0 ? (
+      {visiblePassages.length === 0 ? (
         <div className="mt-4 rounded-xl border border-dashed border-stone-300 p-6 text-center dark:border-white/20">
-          <p className="text-sm font-semibold">No texts match these filters.</p>
+          <p className="text-sm font-semibold">
+            {favouritesOnly ? "No favourite texts match these filters." : "No texts match these filters."}
+          </p>
           <button
             type="button"
             onClick={() => onFiltersChange({ query: "", band: "all", topic: "all", focus: "all" })}
@@ -134,8 +191,10 @@ export default function PassageLibrary({
         </div>
       ) : (
         <ul className="nice-scroll mt-4 max-h-[28rem] space-y-2.5 overflow-y-auto pr-1">
-          {passages.map((passage) => {
+          {visiblePassages.map((passage) => {
             const selected = selectedId === passage.id;
+            const favouriteKey = reviewTargetKey({ kind: "library", id: passage.id, version: passage.version });
+            const isFavourite = favourites.has(favouriteKey);
             return (
               <li key={passage.id}>
                 <article className={`group rounded-2xl border bg-white p-4 transition hover:shadow-[var(--shadow-lift)] dark:bg-white/[0.04] ${selected ? "border-[#2563eb] ring-4 ring-[#2563eb]/15" : "border-stone-200 hover:border-stone-300 dark:border-white/10"}`}>
@@ -143,8 +202,18 @@ export default function PassageLibrary({
                     <h3 className="text-[15px] font-bold tracking-tight">{passage.title}</h3>
                     <span className="rounded-full bg-stone-100 px-2 py-0.5 text-[11px] font-bold tabular-nums text-stone-700 dark:bg-white/10 dark:text-stone-200">{passage.band}</span>
                     <span className="text-xs text-stone-500 dark:text-stone-400">{TOPIC_LABELS[passage.topic]}</span>
+                    <button
+                      type="button"
+                      onClick={() => toggleFavourite(passage)}
+                      aria-pressed={isFavourite}
+                      aria-label={isFavourite ? `Remove ${passage.title} from favourites` : `Add ${passage.title} to favourites`}
+                      title={isFavourite ? "Remove from favourites" : "Add to favourites"}
+                      className={`ml-auto rounded-full px-2 py-0.5 text-[13px] font-bold transition active:scale-95 ${isFavourite ? "text-amber-500" : "text-stone-300 hover:text-amber-400 dark:text-stone-600"}`}
+                    >
+                      <span aria-hidden="true">★</span>
+                    </button>
                     {selected && (
-                      <span className="ml-auto rounded-full bg-[#2563eb] px-2 py-0.5 text-[11px] font-bold text-white">✓ Selected</span>
+                      <span className="rounded-full bg-[#2563eb] px-2 py-0.5 text-[11px] font-bold text-white">✓ Selected</span>
                     )}
                   </div>
                   <p className="mt-2 text-sm leading-6 text-stone-700 dark:text-stone-200">{passage.text}</p>

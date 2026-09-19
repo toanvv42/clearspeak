@@ -52,6 +52,28 @@ const MIGRATIONS = [
     deleted_at TEXT NOT NULL
   );
   CREATE INDEX IF NOT EXISTS idx_attempts_recorded ON attempts(recorded_at DESC, id DESC);`,
+  `CREATE TABLE IF NOT EXISTS favourites (
+    target_key TEXT PRIMARY KEY,
+    passage_id TEXT NOT NULL,
+    passage_version INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    created_at TEXT NOT NULL
+  );
+  CREATE TABLE IF NOT EXISTS review_state (
+    target_key TEXT PRIMARY KEY,
+    kind TEXT NOT NULL,
+    passage_id TEXT,
+    passage_version INTEGER,
+    title TEXT NOT NULL,
+    latest_attempt_id TEXT NOT NULL,
+    last_practiced_at TEXT NOT NULL,
+    next_due_at TEXT NOT NULL,
+    interval_step INTEGER NOT NULL DEFAULT 0,
+    practice_count INTEGER NOT NULL DEFAULT 1,
+    last_score REAL,
+    updated_at TEXT NOT NULL
+  );
+  CREATE INDEX IF NOT EXISTS idx_review_state_due ON review_state(next_due_at);`,
 ];
 
 export function resolveDataDir(): string {

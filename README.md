@@ -158,8 +158,11 @@ mise run build
 
 - Fixed `en-US` locale; no language selector.
 - One-shot assessment of a single ≤ 30 s recording (no continuous long-form mode).
-- No accounts, sharing, or AI-generated coaching — the focus suggestion is
-  deterministic guidance derived from the weakest returned metric.
+- No accounts, sharing, or model-generated coaching. The standard focus
+  suggestion and optional Track B pilot note are deterministic guidance derived
+  from returned phoneme scores and reviewed static exercises. Enable the pilot
+  at build time with `NEXT_PUBLIC_ENABLE_EXTRA_COACHING=1`; unset it or set it to
+  `0`, then rebuild/restart, to disable the pilot without affecting results.
 
 ## History backups
 
