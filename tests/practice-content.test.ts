@@ -4,19 +4,19 @@ import {
   filterPassages,
   getPassageById,
   passageIdentity,
-  PILOT_BAND_COUNTS,
+  LIBRARY_BAND_COUNTS,
   PRACTICE_BANDS,
   PRACTICE_PASSAGES,
   validatePracticePassages,
 } from "@/lib/practice-content";
 
 describe("practice content", () => {
-  it("contains the complete, valid 30-passage pilot distribution", () => {
-    expect(PRACTICE_PASSAGES).toHaveLength(30);
+  it("contains the complete, valid 44-passage library distribution", () => {
+    expect(PRACTICE_PASSAGES).toHaveLength(44);
     expect(validatePracticePassages([...PRACTICE_PASSAGES])).toEqual([]);
     for (const band of PRACTICE_BANDS) {
       expect(PRACTICE_PASSAGES.filter((passage) => passage.band === band)).toHaveLength(
-        PILOT_BAND_COUNTS[band],
+        LIBRARY_BAND_COUNTS[band],
       );
     }
   });
@@ -33,7 +33,7 @@ describe("practice content", () => {
 
   it("filters by band, topic, focus, and search query", () => {
     const b12 = filterPassages({ band: "B1.2" });
-    expect(b12).toHaveLength(10);
+    expect(b12).toHaveLength(12);
     expect(b12.every((passage) => passage.band === "B1.2")).toBe(true);
 
     const workRequests = filterPassages({

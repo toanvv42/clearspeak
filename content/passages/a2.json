@@ -40,6 +40,26 @@
       "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
       "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
       "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "a2-weekend-picnic", "version": 1, "title": "A Weekend Picnic",
+      "text": "We packed fruit and sandwiches for the picnic. The sun was warm, and the children played beside the lake.",
+      "cefrLevel": "A2", "levelRationale": "A familiar outing is described with frequent past-tense verbs and concrete details.",
+      "topic": "relationships", "focusTags": ["past-endings", "word-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "We packed fruit and sandwiches for the picnic."}, {"id": "sentence-2", "text": "The sun was warm, and the children played beside the lake."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
+      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
+      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "a2-rainy-commute", "version": 1, "title": "A Rainy Commute",
+      "text": "It started raining before I left home. I wore my blue coat and carried an umbrella to the office.",
+      "cefrLevel": "A2", "levelRationale": "A simple past event combines familiar weather, clothing, and travel vocabulary.",
+      "topic": "travel", "focusTags": ["past-endings", "linking"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "It started raining before I left home."}, {"id": "sentence-2", "text": "I wore my blue coat and carried an umbrella to the office."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
+      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
+      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
     }
   ]
 }

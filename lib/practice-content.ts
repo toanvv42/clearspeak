@@ -91,14 +91,14 @@ export const DEFAULT_PASSAGE_FILTERS: PassageFilterState = {
   query: "",
 };
 
-export const PILOT_BAND_COUNTS: Record<PracticeBand, number> = {
-  A1: 3,
-  A2: 4,
-  "B1.1": 5,
-  "B1.2": 10,
-  B2: 4,
-  C1: 2,
-  C2: 2,
+export const LIBRARY_BAND_COUNTS: Record<PracticeBand, number> = {
+  A1: 5,
+  A2: 6,
+  "B1.1": 7,
+  "B1.2": 12,
+  B2: 6,
+  C1: 4,
+  C2: 4,
 };
 
 const TARGET_WORD_RANGES: Record<PracticeBand, readonly [number, number]> = {
@@ -183,8 +183,8 @@ export function validatePracticePassages(passages: PracticePassage[]): string[] 
   }
   for (const band of PRACTICE_BANDS) {
     const count = passages.filter((passage) => passage.band === band).length;
-    if (count !== PILOT_BAND_COUNTS[band]) {
-      errors.push(`${band}: expected ${PILOT_BAND_COUNTS[band]} passages, found ${count}`);
+    if (count !== LIBRARY_BAND_COUNTS[band]) {
+      errors.push(`${band}: expected ${LIBRARY_BAND_COUNTS[band]} passages, found ${count}`);
     }
   }
   return errors;

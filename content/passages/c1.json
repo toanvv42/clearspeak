@@ -12,6 +12,18 @@
       "cefrLevel": "C1", "levelRationale": "The passage develops a qualified abstract claim about interpretation and hidden limitations.", "topic": "science-environment", "focusTags": ["thought-groups", "contrastive-stress"], "locale": "en-US",
       "chunks": [{"id": "sentence-1", "text": "Public data can reveal meaningful patterns, provided we remember that measurement choices shape the picture we see."}, {"id": "sentence-2", "text": "A persuasive chart may clarify a trend, yet still conceal uncertainty or exclude relevant experience."}],
       "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "c1-efficient-meetings", "version": 1, "title": "The Appearance of Efficiency", "text": "A shorter meeting may appear more efficient, but speed alone is a poor measure of progress. If unresolved concerns merely resurface later, the saved time is largely an illusion.",
+      "cefrLevel": "C1", "levelRationale": "The passage challenges a superficial measure and develops its qualification through a hypothetical consequence.", "topic": "work-technology", "focusTags": ["contrastive-stress", "intonation"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "A shorter meeting may appear more efficient, but speed alone is a poor measure of progress."}, {"id": "sentence-2", "text": "If unresolved concerns merely resurface later, the saved time is largely an illusion."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "c1-restorative-travel", "version": 1, "title": "Travel and Restoration", "text": "Travel is often presented as an escape from routine, though unfamiliar places can be demanding in their own way. Its restorative value may lie less in comfort than in renewed attention.",
+      "cefrLevel": "C1", "levelRationale": "An abstract reflection reframes a familiar idea through concession and precise comparison.", "topic": "travel", "focusTags": ["thought-groups", "sentence-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Travel is often presented as an escape from routine, though unfamiliar places can be demanding in their own way."}, {"id": "sentence-2", "text": "Its restorative value may lie less in comfort than in renewed attention."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
     }
   ]
 }

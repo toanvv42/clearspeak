@@ -24,6 +24,18 @@
       "cefrLevel": "B2", "levelRationale": "A policy recommendation follows from balanced environmental benefits and practical constraints.", "topic": "science-environment", "focusTags": ["thought-groups", "contrastive-stress"], "locale": "en-US",
       "chunks": [{"id": "sentence-1", "text": "Planting trees can cool crowded neighborhoods and improve air quality, but young trees require years of care."}, {"id": "sentence-2", "text": "Cities should therefore fund maintenance as seriously as they fund the initial planting."}],
       "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b2-digital-tickets", "version": 1, "title": "Keeping Paper Tickets", "text": "Digital tickets are convenient for most travelers, but a phone can fail at the worst moment. Transport companies should retain a simple paper option for passengers who need it.",
+      "cefrLevel": "B2", "levelRationale": "The passage balances convenience against reliability and makes a qualified service recommendation.", "topic": "travel", "focusTags": ["contrastive-stress", "thought-groups"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Digital tickets are convenient for most travelers, but a phone can fail at the worst moment."}, {"id": "sentence-2", "text": "Transport companies should retain a simple paper option for passengers who need it."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b2-shared-meals", "version": 1, "title": "The Value of Shared Meals", "text": "Shared meals do not automatically create close relationships, yet they offer people regular time to listen. Even one unhurried dinner each week can strengthen a family's sense of connection.",
+      "cefrLevel": "B2", "levelRationale": "A measured claim acknowledges a limitation before supporting a broader social benefit.", "topic": "relationships", "focusTags": ["sentence-stress", "linking"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Shared meals do not automatically create close relationships, yet they offer people regular time to listen."}, {"id": "sentence-2", "text": "Even one unhurried dinner each week can strengthen a family's sense of connection."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
     }
   ]
 }

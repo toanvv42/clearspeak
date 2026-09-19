@@ -90,6 +90,30 @@
       "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "The speaker compares two options and gives a reasoned preference.", "topic": "relationships", "focusTags": ["contrastive-stress", "thought-groups"], "locale": "en-US",
       "chunks": [{"id": "sentence-1", "text": "The cafe near our office is convenient, although it becomes noisy at noon."}, {"id": "sentence-2", "text": "I prefer the smaller restaurant because we can talk without raising our voices."}],
       "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b11-lost-wallet", "version": 1, "title": "Finding a Lost Wallet", "text": "I noticed a wallet under my table at the cafe. The server checked inside, found a phone number, and contacted the owner.",
+      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "A resolved past event uses a clear sequence of actions in a familiar setting.", "topic": "daily-life", "focusTags": ["past-endings", "consonant-clusters"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "I noticed a wallet under my table at the cafe."}, {"id": "sentence-2", "text": "The server checked inside, found a phone number, and contacted the owner."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b11-balcony-garden", "version": 1, "title": "A Balcony Garden", "text": "This spring, we planted tomatoes and herbs on our small balcony. The plants need regular water, but they already make the space feel brighter.",
+      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "A practical project connects a past action with present results and a simple contrast.", "topic": "science-environment", "focusTags": ["consonant-clusters", "sentence-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "This spring, we planted tomatoes and herbs on our small balcony."}, {"id": "sentence-2", "text": "The plants need regular water, but they already make the space feel brighter."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b12-battery-update", "version": 1, "title": "A Battery Update", "text": "Since the latest update, my phone battery runs out by late afternoon. Could you help me check which applications are using the most power?",
+      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "The speaker identifies a recent technical problem and makes a focused request for help.", "topic": "work-technology", "focusTags": ["thought-groups", "request-intonation"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Since the latest update, my phone battery runs out by late afternoon."}, {"id": "sentence-2", "text": "Could you help me check which applications are using the most power?"}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b12-dinner-invitation", "version": 1, "title": "A Dinner Invitation", "text": "We are having dinner at our apartment on Friday, and I hope you can join us. Please tell me if you have any food allergies.",
+      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "A social invitation includes a polite hope and a practical request for information.", "topic": "relationships", "focusTags": ["linking", "sentence-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "We are having dinner at our apartment on Friday, and I hope you can join us."}, {"id": "sentence-2", "text": "Please tell me if you have any food allergies."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
     }
   ]
 }

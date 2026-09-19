@@ -12,6 +12,18 @@
       "cefrLevel": "C2", "levelRationale": "Dense rhetorical comparison, implication, and controlled ambiguity demand nuanced delivery.", "topic": "relationships", "focusTags": ["intonation", "sentence-stress"], "locale": "en-US",
       "chunks": [{"id": "sentence-1", "text": "His account was compelling less because it was complete than because its omissions were convenient."}, {"id": "sentence-2", "text": "By presenting uncertainty as restraint, he transformed a fragile recollection into something that sounded remarkably like settled fact."}],
       "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "c2-measured-apology", "version": 1, "title": "A Carefully Measured Apology", "text": "The apology was impeccably phrased, which was precisely the problem. Every admission had been measured so carefully that remorse seemed less an emotion than a strategy for ending the conversation.",
+      "cefrLevel": "C2", "levelRationale": "Irony and an implicit contrast between sincerity and strategy require nuanced rhetorical delivery.", "topic": "relationships", "focusTags": ["intonation", "contrastive-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "The apology was impeccably phrased, which was precisely the problem."}, {"id": "sentence-2", "text": "Every admission had been measured so carefully that remorse seemed less an emotion than a strategy for ending the conversation."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "c2-neutral-algorithm", "version": 1, "title": "The Neutral Algorithm", "text": "Calling the algorithm neutral does not make its judgments impartial; it merely relocates discretion. The values once debated openly may persist, disguised as technical choices too specialized to question.",
+      "cefrLevel": "C2", "levelRationale": "Compressed argument, semantic distinction, and implied institutional critique demand precise emphasis.", "topic": "work-technology", "focusTags": ["sentence-stress", "intonation"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Calling the algorithm neutral does not make its judgments impartial; it merely relocates discretion."}, {"id": "sentence-2", "text": "The values once debated openly may persist, disguised as technical choices too specialized to question."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
     }
   ]
 }

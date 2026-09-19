@@ -30,6 +30,26 @@
       "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
       "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
       "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "a1-library-book", "version": 1, "title": "A Library Book",
+      "text": "I have a new library book. It has bright pictures and a funny story.",
+      "cefrLevel": "A1", "levelRationale": "Basic possession and description use familiar nouns and short present-tense sentences.",
+      "topic": "daily-life", "focusTags": ["word-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "I have a new library book."}, {"id": "sentence-2", "text": "It has bright pictures and a funny story."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
+      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
+      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "a1-bus-stop", "version": 1, "title": "The Bus Stop",
+      "text": "The bus stop is near my home. I wait there with my sister.",
+      "cefrLevel": "A1", "levelRationale": "A familiar travel routine uses common place words and simple present tense.",
+      "topic": "travel", "focusTags": ["final-consonants"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "The bus stop is near my home."}, {"id": "sentence-2", "text": "I wait there with my sister."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
+      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
+      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
     }
   ]
 }
