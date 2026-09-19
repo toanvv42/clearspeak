@@ -1,6 +1,12 @@
 "use client";
 
 import type { AttemptDetail, AttemptSummary } from "@/lib/history/types";
+import type {
+  DueReviewItem,
+  FavouritePassage,
+  TargetStats,
+  WeeklyPracticeCount,
+} from "@/lib/review-schedule";
 import { getAccessCode as readStoredCode } from "@/lib/access-code";
 
 export function getAccessCode(): string | undefined {
@@ -105,4 +111,79 @@ export async function deleteAttemptRequest(id: string, accessCode?: string): Pro
       status: res.status,
     });
   }
+}
+
+export type ProgressOverview = {
+  totals: { attempts: number; practiceDays: number };
+  due: DueReviewItem[];
+  weekly: WeeklyPracticeCount[];
+  favourites: FavouritePassage[];
+  stats: TargetStats[];
+};
+
+export async function fetchProgress(accessCode?: string): Promise<ProgressOverview> {
+  const res = await fetch("/api/progress", { headers: headers(accessCode ?? getAccessCode()) });
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw Object.assign(new Error((body as { error?: string })?.error ?? "Could not load progress."), {
+      status: res.status,
+    });
+  }
+  return (await res.json()) as ProgressOverview;
+}
+
+export async function fetchFavourites(accessCode?: string): Promise<{ items: FavouritePassage[] }> {
+  const res = await fetch("/api/favourites", { headers: headers(accessCode ?? getAccessCode()) });
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw Object.assign(new Error((body as { error?: string })?.error ?? "Could not load favourites."), {
+      status: res.status,
+    });
+  }
+  return (await res.json()) as { items: FavouritePassage[] };
+}
+
+export async function addFavouriteRequest(
+  passageId: string,
+  passageVersion: number,
+  accessCode?: string,
+): Promise<{ item: FavouritePassage }> {
+  const res = await fetch("/api/favourites", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", ...headers(accessCode ?? getAccessCode()) },
+    body: JSON.stringify({ passageId, passageVersion }),
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw Object.assign(new Error((body as { error?: string })?.error ?? "Could not save favourite."), {
+      status: res.status,
+    });
+  }
+  return (await res.json()) as { item: FavouritePassage };
+}
+
+export async function removeFavouriteRequest(targetKey: string, accessCode?: string): Promise<void> {
+  const res = await fetch(`/api/favourites?target=${encodeURIComponent(targetKey)}`, {
+    method: "DELETE",
+    headers: headers(accessCode ?? getAccessCode()),
+  });
+  if (!res.ok && res.status !== 404) {
+    const body = await res.json().catch(() => null);
+    throw Object.assign(new Error((body as { error?: string })?.error ?? "Could not delete favourite."), {
+      status: res.status,
+    });
+  }
+}
+
+export async function downloadHistoryExport(accessCode?: string): Promise<void> {
+  const code = accessCode ?? getAccessCode();
+  const res = await fetch("/api/attempts/export", { headers: headers(code) });
+  if (!res.ok) throw Object.assign(new Error("Could not export history."), { status: res.status });
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `clearspeak-history-${new Date().toISOString().slice(0, 10)}.json`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
 }

@@ -8,6 +8,18 @@ import {
 } from "@/lib/history/types";
 import { scoresFromResult } from "@/lib/history/validation";
 import type { ValidatedWav } from "@/lib/server/wav-validate";
+import {
+  advanceReviewStep,
+  isDue,
+  nextDueAt,
+  parseReviewTargetKey,
+  reviewTargetFromSource,
+  reviewTargetKey,
+  type DueReviewItem,
+  type FavouritePassage,
+  type TargetStats,
+  type WeeklyPracticeCount,
+} from "@/lib/review-schedule";
 
 export type CreateAttemptInput = {
   id: string;
@@ -269,6 +281,7 @@ export function saveEvaluation(
       (row.failure_kind ?? null) === (payload.failure?.kind ?? null) &&
       (row.failure_message ?? null) === (payload.failure?.message ?? null);
     if (sameResult && sameFailure) {
+      if (payload.result) recordReviewPracticeForAttempt(db, attemptId, row, payload);
       return rowToDetail(row, findPreviousSummary(db, row));
     }
     throw Object.assign(new Error("conflict"), { code: "conflict" });
@@ -327,6 +340,7 @@ export function saveEvaluation(
   if (Number(updated.revision) !== payload.expectedRevision + 1) {
     throw Object.assign(new Error("conflict"), { code: "conflict" });
   }
+  if (payload.result) recordReviewPracticeForAttempt(db, attemptId, updated, payload);
   return rowToDetail(updated, findPreviousSummary(db, updated));
 }
 
@@ -412,4 +426,213 @@ export function deleteAttempt(id: string): boolean {
     throw err;
   }
   return true;
+}
+
+// --- Progress and review (Milestone 3) ---
+
+function attemptSourceOf(row: Record<string, unknown>):
+  | { kind: "library"; id: string; version: number }
+  | { kind: "custom"; hash: string } {
+  return (row.source_kind as string) === "library"
+    ? { kind: "library", id: row.source_id as string, version: Number(row.source_version) }
+    : { kind: "custom", hash: (row.source_hash as string) ?? "" };
+}
+
+/**
+ * Record a successful practice for spaced review. Idempotent: a replay of the
+ * same evaluation never advances the schedule twice — only a strictly newer
+ * practice timestamp moves the interval forward.
+ */
+export function recordReviewPracticeForAttempt(
+  db: DatabaseSync,
+  attemptId: string,
+  attemptRow: Record<string, unknown>,
+  payload: EvaluationPayload,
+): void {
+  const source = attemptSourceOf(attemptRow);
+  const target = reviewTargetFromSource(source);
+  const targetKey = reviewTargetKey(target);
+  const practicedAt = payload.evaluatedAt;
+  const score = scoresFromResult(payload.result ?? null).pronunciationScore;
+  const title =
+    ((attemptRow.title as string | null) ?? null) ||
+    (attemptRow.reference_text as string).slice(0, 60);
+  const existing = db.prepare("SELECT * FROM review_state WHERE target_key = ?").get(targetKey) as
+    | Record<string, unknown>
+    | undefined;
+  const now = new Date().toISOString();
+  if (!existing) {
+    db.prepare(
+      `INSERT INTO review_state (target_key, kind, passage_id, passage_version, title, latest_attempt_id, last_practiced_at, next_due_at, interval_step, practice_count, last_score, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, 1, ?, ?)`,
+    ).run(
+      targetKey,
+      target.kind,
+      target.kind === "library" ? target.id : null,
+      target.kind === "library" ? target.version : null,
+      title,
+      attemptId,
+      practicedAt,
+      nextDueAt(practicedAt, 0),
+      score,
+      now,
+    );
+    return;
+  }
+  // Stale or duplicate evaluation (offline replay, retry): never move backwards.
+  if ((existing.last_practiced_at as string) >= practicedAt) return;
+  const step = advanceReviewStep(Number(existing.interval_step ?? 0));
+  db.prepare(
+    `UPDATE review_state SET title = ?, latest_attempt_id = ?, last_practiced_at = ?, next_due_at = ?, interval_step = ?, practice_count = practice_count + 1, last_score = ?, updated_at = ? WHERE target_key = ?`,
+  ).run(title, attemptId, practicedAt, nextDueAt(practicedAt, step), step, score, now, targetKey);
+}
+
+function rowToDueItem(row: Record<string, unknown>): DueReviewItem {
+  return {
+    targetKey: row.target_key as string,
+    kind: (row.kind as string) === "library" ? "library" : "custom",
+    title: row.title as string,
+    passageId: (row.passage_id as string | null) ?? null,
+    passageVersion:
+      row.passage_version === null || row.passage_version === undefined
+        ? null
+        : Number(row.passage_version),
+    latestAttemptId: row.latest_attempt_id as string,
+    lastPracticedAt: row.last_practiced_at as string,
+    nextDueAt: row.next_due_at as string,
+    intervalStep: Number(row.interval_step ?? 0),
+    practiceCount: Number(row.practice_count ?? 1),
+    lastScore: (row.last_score as number | null) ?? null,
+  };
+}
+
+/** Review targets whose due date has passed, most overdue first. */
+export function getDueReviews(now?: string, limit = 3): DueReviewItem[] {
+  const db = getDb();
+  const current = now ?? new Date().toISOString();
+  const rows = db
+    .prepare(`SELECT * FROM review_state ORDER BY next_due_at ASC, last_practiced_at ASC LIMIT ?`)
+    .all(Math.max(1, Math.min(20, limit))) as Record<string, unknown>[];
+  return rows.map(rowToDueItem).filter((item) => isDue(item.nextDueAt, current));
+}
+
+/** First/latest/best pronunciation scores across successful attempts for one target. */
+export function getTargetStats(targetKey: string): TargetStats {
+  const db = getDb();
+  const target = parseReviewTargetKey(targetKey);
+  if (!target) return { targetKey, attempts: 0, first: null, latest: null, best: null };
+  const rows = (
+    target.kind === "library"
+      ? db
+          .prepare(
+            `SELECT pronunciation_score, recorded_at FROM attempts WHERE evaluation_state = 'success' AND source_kind = 'library' AND source_id = ? AND source_version = ? ORDER BY recorded_at ASC, id ASC LIMIT 500`,
+          )
+          .all(target.id, target.version)
+      : db
+          .prepare(
+            `SELECT pronunciation_score, recorded_at FROM attempts WHERE evaluation_state = 'success' AND source_kind = 'custom' AND source_hash = ? ORDER BY recorded_at ASC, id ASC LIMIT 500`,
+          )
+          .all(target.hash)
+  ) as Array<{ pronunciation_score: number | null; recorded_at: string }>;
+  if (rows.length === 0) return { targetKey, attempts: 0, first: null, latest: null, best: null };
+  const scored = rows.filter((r) => typeof r.pronunciation_score === "number");
+  const best =
+    scored.length > 0
+      ? scored.reduce((a, b) =>
+          (b.pronunciation_score as number) > (a.pronunciation_score as number) ? b : a,
+        )
+      : null;
+  return {
+    targetKey,
+    attempts: rows.length,
+    first: { score: rows[0].pronunciation_score, at: rows[0].recorded_at },
+    latest: {
+      score: rows[rows.length - 1].pronunciation_score,
+      at: rows[rows.length - 1].recorded_at,
+    },
+    best: best ? { score: best.pronunciation_score, at: best.recorded_at } : null,
+  };
+}
+
+/** Attempt counts per UTC day for the trailing `days` (default 7). */
+export function getWeeklyCounts(days = 7): WeeklyPracticeCount[] {
+  const db = getDb();
+  const span = Math.max(1, Math.min(30, days));
+  const today = new Date().toISOString().slice(0, 10);
+  const counts = new Map<string, number>();
+  const rows = db
+    .prepare(
+      `SELECT substr(recorded_at, 1, 10) AS day, COUNT(*) AS n FROM attempts WHERE recorded_at >= date(?, ?) GROUP BY day`,
+    )
+    .all(today, `-${span - 1} days`) as Array<{ day: string; n: number }>;
+  for (const r of rows) counts.set(r.day, Number(r.n));
+  const out: WeeklyPracticeCount[] = [];
+  for (let i = span - 1; i >= 0; i -= 1) {
+    const date = new Date(Date.parse(`${today}T00:00:00.000Z`) - i * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, 10);
+    out.push({ date, attempts: counts.get(date) ?? 0 });
+  }
+  return out;
+}
+
+export function listFavourites(): FavouritePassage[] {
+  const db = getDb();
+  const rows = db
+    .prepare(`SELECT * FROM favourites ORDER BY created_at DESC LIMIT 200`)
+    .all() as Record<string, unknown>[];
+  return rows.map((row) => ({
+    targetKey: row.target_key as string,
+    passageId: row.passage_id as string,
+    passageVersion: Number(row.passage_version),
+    title: row.title as string,
+    createdAt: row.created_at as string,
+  }));
+}
+
+export function addFavourite(passageId: string, passageVersion: number, title: string): FavouritePassage {
+  const db = getDb();
+  const targetKey = reviewTargetKey({ kind: "library", id: passageId, version: passageVersion });
+  const now = new Date().toISOString();
+  db.prepare(
+    `INSERT INTO favourites (target_key, passage_id, passage_version, title, created_at) VALUES (?, ?, ?, ?, ?)
+     ON CONFLICT(target_key) DO UPDATE SET title = excluded.title`,
+  ).run(targetKey, passageId, passageVersion, title.slice(0, 200), now);
+  return { targetKey, passageId, passageVersion, title: title.slice(0, 200), createdAt: now };
+}
+
+export function removeFavourite(targetKey: string): boolean {
+  const db = getDb();
+  const res = db.prepare(`DELETE FROM favourites WHERE target_key = ?`).run(targetKey);
+  return Number(res.changes ?? 0) > 0;
+}
+
+/** Compact export: summaries plus review/favourite state. Never includes audio. */
+export function exportHistory(limit = 500): {
+  version: 1;
+  exportedAt: string;
+  attempts: AttemptSummary[];
+  review: DueReviewItem[];
+  favourites: FavouritePassage[];
+} {
+  const db = getDb();
+  const bounded = Math.max(1, Math.min(2000, limit));
+  const rows = db
+    .prepare(
+      `SELECT id, schema_version, recorded_at, duration_ms, stop_reason, reference_text, title, level, source_kind, source_id, source_version, source_hash, scope, locale, evaluation_state, revision, pronunciation_score, accuracy_score, fluency_score, completeness_score, prosody_score FROM attempts ORDER BY recorded_at DESC, id DESC LIMIT ?`,
+    )
+    .all(bounded) as Record<string, unknown>[];
+  const review = (
+    db.prepare(`SELECT * FROM review_state ORDER BY last_practiced_at DESC LIMIT 500`).all() as Record<
+      string,
+      unknown
+    >[]
+  ).map(rowToDueItem);
+  return {
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    attempts: rows.map(rowToSummary),
+    review,
+    favourites: listFavourites(),
+  };
 }

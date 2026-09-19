@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 export default function AppHeader() {
   const pathname = usePathname();
   const onHistory = pathname === "/history" || pathname?.startsWith("/history/");
+  const onProgress = pathname === "/progress" || pathname?.startsWith("/progress");
   return (
     <header className="sticky top-0 z-20 border-b border-stone-200/80 bg-[#f8f7f4]/85 backdrop-blur-md dark:border-white/10 dark:bg-stone-950/80">
       <div className="mx-auto flex w-full max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">
@@ -23,14 +24,25 @@ export default function AppHeader() {
         <nav aria-label="Primary" className="ml-2 flex items-center gap-1">
           <Link
             href="/"
-            aria-current={onHistory ? undefined : "page"}
+            aria-current={onHistory || onProgress ? undefined : "page"}
             className={`rounded-full px-3 py-1.5 text-sm font-semibold transition ${
-              onHistory
+              onHistory || onProgress
                 ? "text-stone-600 hover:bg-stone-200/60 dark:text-stone-300"
                 : "bg-stone-900 text-white dark:bg-white dark:text-stone-900"
             }`}
           >
             Practice
+          </Link>
+          <Link
+            href="/progress"
+            aria-current={onProgress ? "page" : undefined}
+            className={`rounded-full px-3 py-1.5 text-sm font-semibold transition ${
+              onProgress
+                ? "bg-stone-900 text-white dark:bg-white dark:text-stone-900"
+                : "text-stone-600 hover:bg-stone-200/60 dark:text-stone-300"
+            }`}
+          >
+            Progress
           </Link>
           <Link
             href="/history"

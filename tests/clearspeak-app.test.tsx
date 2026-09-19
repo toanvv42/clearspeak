@@ -41,6 +41,11 @@ vi.mock("@/hooks/use-pcm-recorder", () => ({
   },
 }));
 
+vi.mock("next/navigation", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("next/navigation")>();
+  return { ...actual, useRouter: () => ({ push: vi.fn() }), usePathname: () => "/" };
+});
+
 const SYNTHETIC_RESULT: AssessmentResult = {
   referenceText: "She worked hard.",
   recognizedText: "She worked hard.",
@@ -324,6 +329,59 @@ describe("ClearSpeakApp", () => {
     expect(await screen.findByText(/sounds to fix/i)).toBeInTheDocument();
     expect(fetchSpeechTokenMock).toHaveBeenCalledTimes(1);
     expect(assessWavFileMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("shows the due-practice queue and practices a due passage inline", async () => {
+    const user = userEvent.setup();
+    const { PRACTICE_PASSAGES } = await import("@/lib/practice-content");
+    const passage = PRACTICE_PASSAGES[0];
+    const weekly = Array.from({ length: 7 }, (_, i) => ({
+      date: `2026-09-${String(13 + i).padStart(2, "0")}`,
+      attempts: i === 6 ? 1 : 0,
+    }));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: unknown) => {
+        const u = String(url);
+        if (u.includes("/api/progress")) {
+          return Response.json({
+            totals: { attempts: 1, practiceDays: 1 },
+            due: [
+              {
+                targetKey: `library:${passage.id}:${passage.version}`,
+                kind: "library",
+                title: passage.title,
+                passageId: passage.id,
+                passageVersion: passage.version,
+                latestAttemptId: "11111111-1111-4111-8111-111111111111",
+                lastPracticedAt: "2026-09-10T10:00:00.000Z",
+                nextDueAt: "2026-09-11T10:00:00.000Z",
+                intervalStep: 0,
+                practiceCount: 1,
+                lastScore: 70,
+              },
+            ],
+            weekly,
+            favourites: [],
+            stats: [],
+          });
+        }
+        if (u.includes("/api/attempts")) return Response.json({ items: [], nextCursor: null });
+        throw new Error(`unexpected fetch ${u}`);
+      }),
+    );
+    let box: HTMLTextAreaElement;
+    try {
+      const { rerender } = render(<ClearSpeakApp accessRequired={false} />);
+      expect(await screen.findByText(/due for review/i)).toBeInTheDocument();
+      expect(screen.getByText(passage.title)).toBeInTheDocument();
+      await user.click(screen.getByRole("button", { name: /^practice$/i }));
+      rerender(<ClearSpeakApp accessRequired={false} />);
+      box = screen.getByLabelText(/your practice text/i) as HTMLTextAreaElement;
+      expect(box.value).toBe(passage.text);
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 
   it("keeps the previous try for comparison after Try again", async () => {

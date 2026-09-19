@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import AccessGate from "@/components/access-gate";
 import AnalyzingState from "@/components/analyzing-state";
 import AppHeader from "@/components/app-header";
@@ -25,7 +26,8 @@ import {
   type PassageFilterState,
   type PracticePassage,
 } from "@/lib/practice-content";
-import { fetchAttemptAudioBlob, fetchAttemptDetail, fetchAttemptList } from "@/lib/history/client";
+import { fetchAttemptAudioBlob, fetchAttemptDetail, fetchAttemptList, fetchProgress } from "@/lib/history/client";
+import type { DueReviewItem } from "@/lib/review-schedule";
 import { clearAccessCode, getAccessCode as readStoredCode, hasAccessCode } from "@/lib/access-code";
 import { HISTORY_SCHEMA_VERSION, type AttemptDetail, type AttemptSummary } from "@/lib/history/types";
 import { normalizeText } from "@/lib/text";
@@ -52,6 +54,7 @@ function newAttemptId(): string {
 }
 
 export default function ClearSpeakApp({ accessRequired }: Props) {
+  const router = useRouter();
   const [unlocked, setUnlocked] = useState(() => !accessRequired || hasAccessCode());
   const [accessCode, setAccessCode] = useState<string | undefined>(() => readStoredCode());
   const [phase, setPhase] = useState<PracticePhase>(() => {
@@ -79,6 +82,8 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   const [assessing, setAssessing] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [latest, setLatest] = useState<AttemptSummary | null>(null);
+  const [dueQueue, setDueQueue] = useState<DueReviewItem[]>([]);
+  const [weeklyLine, setWeeklyLine] = useState<string | null>(null);
   const [savedDetail, setSavedDetail] = useState<AttemptDetail | null>(null);
   const [retryingEval, setRetryingEval] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
@@ -131,6 +136,16 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
     void fetchAttemptList({ limit: 1 })
       .then((res) => {
         if (!cancelled) setLatest(res.items[0] ?? null);
+      })
+      .catch(() => {});
+    void fetchProgress()
+      .then((res) => {
+        if (!cancelled) {
+          setDueQueue(res.due.slice(0, 3));
+          const weekTotal = res.weekly.reduce((sum, day) => sum + day.attempts, 0);
+          const activeDays = res.weekly.filter((day) => day.attempts > 0).length;
+          setWeeklyLine(`${weekTotal} ${weekTotal === 1 ? "take" : "takes"} · ${activeDays} of the last 7 days`);
+        }
       })
       .catch(() => {});
     return () => {
@@ -563,6 +578,23 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
     setTimeout(() => URL.revokeObjectURL(url), 5000);
   }, []);
 
+  const practiceDue = useCallback((item: DueReviewItem) => {
+    setResult(null);
+    setFailure(null);
+    setNotice(null);
+    if (item.kind === "library" && item.passageId && item.passageVersion !== null) {
+      const lib = getPassageById(item.passageId, item.passageVersion);
+      if (lib) {
+        selectPassage(lib);
+        requestAnimationFrame(() => {
+          document.getElementById("practice-text")?.focus();
+        });
+        return;
+      }
+    }
+    router.push(`/?repeat=${item.latestAttemptId}`);
+  }, [selectPassage, router]);
+
   if (accessRequired && !unlocked) {
     return (
       <div className="min-h-screen bg-[#f8f7f4] dark:bg-stone-950">
@@ -582,31 +614,66 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   const showSidebar = isEditing && isDesktop;
 
   const continueCard =
-    isEditing && latest && !result ? (
-      <div className="rise-in mx-auto max-w-3xl rounded-2xl border border-stone-200 bg-white px-4 py-3 shadow-[var(--shadow-card)] dark:border-white/10 dark:bg-white/[0.04]">
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="min-w-0 flex-1">
-            <p className="text-xs font-bold uppercase tracking-widest text-stone-400">Continue practicing</p>
-            <p className="truncate text-sm font-bold">
-              {latest.title ?? latest.referenceText.slice(0, 60)} ·{" "}
-              {new Date(latest.recordedAt).toLocaleDateString()}
-              {typeof latest.pronunciationScore === "number" ? ` · score ${latest.pronunciationScore}` : ""}
-            </p>
+    isEditing && !result ? (
+      dueQueue.length > 0 ? (
+        <div className="rise-in mx-auto max-w-3xl rounded-2xl border border-stone-200 bg-white px-4 py-3 shadow-[var(--shadow-card)] dark:border-white/10 dark:bg-white/[0.04]">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <p className="text-xs font-bold uppercase tracking-widest text-stone-400">Due for review</p>
+            <div className="flex items-center gap-3 text-[13px] text-stone-500">
+              {weeklyLine && <span className="tabular-nums">{weeklyLine}</span>}
+              <Link href="/progress" className="font-semibold text-[#2563eb]">
+                Progress
+              </Link>
+            </div>
           </div>
-          <Link
-            href={`/history/${latest.id}`}
-            className="rounded-full border border-stone-300 px-3 py-1.5 text-[13px] font-semibold"
-          >
-            View result
-          </Link>
-          <Link
-            href={`/?repeat=${latest.id}`}
-            className="rounded-full bg-stone-900 px-3 py-1.5 text-[13px] font-bold text-white dark:bg-white dark:text-stone-900"
-          >
-            Record again
-          </Link>
+          <ul className="mt-2 space-y-2">
+            {dueQueue.map((item) => (
+              <li key={item.targetKey} className="flex flex-wrap items-center gap-3 rounded-xl bg-stone-50 px-3 py-2 dark:bg-black/20">
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-bold">{item.title}</p>
+                  <p className="text-[13px] text-stone-500">
+                    Practiced {item.practiceCount} {item.practiceCount === 1 ? "time" : "times"}
+                    {typeof item.lastScore === "number" ? ` · last score ${item.lastScore}` : ""}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => practiceDue(item)}
+                  className="rounded-full bg-stone-900 px-3 py-1.5 text-[13px] font-bold text-white dark:bg-white dark:text-stone-900"
+                >
+                  Practice
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
+      ) : latest ? (
+        <div className="rise-in mx-auto max-w-3xl rounded-2xl border border-stone-200 bg-white px-4 py-3 shadow-[var(--shadow-card)] dark:border-white/10 dark:bg-white/[0.04]">
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-bold uppercase tracking-widest text-stone-400">Continue practicing</p>
+              <p className="truncate text-sm font-bold">
+                {latest.title ?? latest.referenceText.slice(0, 60)} ·{" "}
+                {new Date(latest.recordedAt).toLocaleDateString()}
+                {typeof latest.pronunciationScore === "number" ? ` · score ${latest.pronunciationScore}` : ""}
+              </p>
+              {weeklyLine && <p className="text-[13px] text-stone-500 tabular-nums">{weeklyLine}</p>}
+            </div>
+            <Link
+              href={`/history/${latest.id}`}
+              className="rounded-full border border-stone-300 px-3 py-1.5 text-[13px] font-semibold"
+            >
+              View result
+            </Link>
+            <Link
+              href={`/?repeat=${latest.id}`}
+              className="rounded-full bg-stone-900 px-3 py-1.5 text-[13px] font-bold text-white dark:bg-white dark:text-stone-900"
+            >
+              Record again
+            </Link>
+          </div>
+        </div>
+      ) : null
     ) : null;
 
   const resultsHeader =
