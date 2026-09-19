@@ -6,7 +6,7 @@ Pronunciation Assessment.
 
 ## What it does
 
-1. Browse 44 original practice passages across A1–C2 (with B1.1/B1.2 practice bands), or
+1. Browse 120 original practice passages across A1–C2 (with B1.1/B1.2 practice bands), or
    paste your own short English passage (1–60 words, ≤ 600 characters).
 2. Read it aloud while recording in the browser (AudioWorklet, 30-second cap).
 3. Press **Finish & analyze** (or let the 30-second limit stop automatically).

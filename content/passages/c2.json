@@ -2,28 +2,308 @@
   "schemaVersion": 1,
   "passages": [
     {
-      "id": "c2-elegant-proposal", "version": 1, "title": "Elegance and Feasibility", "text": "The proposal is elegant, admittedly, but elegance is hardly evidence of feasibility. What appears to be a minor concession may, in practice, undermine the very principle the policy was intended to protect.",
-      "cefrLevel": "C2", "levelRationale": "Rhetorical qualification and precise contrast carry a subtle critique across complex clauses.", "topic": "work-technology", "focusTags": ["intonation", "contrastive-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "The proposal is elegant, admittedly, but elegance is hardly evidence of feasibility."}, {"id": "sentence-2", "text": "What appears to be a minor concession may, in practice, undermine the very principle the policy was intended to protect."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "c2-elegant-proposal",
+      "version": 1,
+      "title": "Elegance and Feasibility",
+      "text": "The proposal is elegant, admittedly, but elegance is hardly evidence of feasibility. What appears to be a minor concession may, in practice, undermine the very principle the policy was intended to protect.",
+      "cefrLevel": "C2",
+      "levelRationale": "Rhetorical qualification and precise contrast carry a subtle critique across complex clauses.",
+      "topic": "work-technology",
+      "focusTags": [
+        "intonation",
+        "contrastive-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "The proposal is elegant, admittedly, but elegance is hardly evidence of feasibility."
+        },
+        {
+          "id": "sentence-2",
+          "text": "What appears to be a minor concession may, in practice, undermine the very principle the policy was intended to protect."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "c2-convenient-memory", "version": 1, "title": "A Convenient Memory", "text": "His account was compelling less because it was complete than because its omissions were convenient. By presenting uncertainty as restraint, he transformed a fragile recollection into something that sounded remarkably like settled fact.",
-      "cefrLevel": "C2", "levelRationale": "Dense rhetorical comparison, implication, and controlled ambiguity demand nuanced delivery.", "topic": "relationships", "focusTags": ["intonation", "sentence-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "His account was compelling less because it was complete than because its omissions were convenient."}, {"id": "sentence-2", "text": "By presenting uncertainty as restraint, he transformed a fragile recollection into something that sounded remarkably like settled fact."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "c2-convenient-memory",
+      "version": 1,
+      "title": "A Convenient Memory",
+      "text": "His account was compelling less because it was complete than because its omissions were convenient. By presenting uncertainty as restraint, he transformed a fragile recollection into something that sounded remarkably like settled fact.",
+      "cefrLevel": "C2",
+      "levelRationale": "Dense rhetorical comparison, implication, and controlled ambiguity demand nuanced delivery.",
+      "topic": "relationships",
+      "focusTags": [
+        "intonation",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "His account was compelling less because it was complete than because its omissions were convenient."
+        },
+        {
+          "id": "sentence-2",
+          "text": "By presenting uncertainty as restraint, he transformed a fragile recollection into something that sounded remarkably like settled fact."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "c2-measured-apology", "version": 1, "title": "A Carefully Measured Apology", "text": "The apology was impeccably phrased, which was precisely the problem. Every admission had been measured so carefully that remorse seemed less an emotion than a strategy for ending the conversation.",
-      "cefrLevel": "C2", "levelRationale": "Irony and an implicit contrast between sincerity and strategy require nuanced rhetorical delivery.", "topic": "relationships", "focusTags": ["intonation", "contrastive-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "The apology was impeccably phrased, which was precisely the problem."}, {"id": "sentence-2", "text": "Every admission had been measured so carefully that remorse seemed less an emotion than a strategy for ending the conversation."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "c2-measured-apology",
+      "version": 1,
+      "title": "A Carefully Measured Apology",
+      "text": "The apology was impeccably phrased, which was precisely the problem. Every admission had been measured so carefully that remorse seemed less an emotion than a strategy for ending the conversation.",
+      "cefrLevel": "C2",
+      "levelRationale": "Irony and an implicit contrast between sincerity and strategy require nuanced rhetorical delivery.",
+      "topic": "relationships",
+      "focusTags": [
+        "intonation",
+        "contrastive-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "The apology was impeccably phrased, which was precisely the problem."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Every admission had been measured so carefully that remorse seemed less an emotion than a strategy for ending the conversation."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "c2-neutral-algorithm", "version": 1, "title": "The Neutral Algorithm", "text": "Calling the algorithm neutral does not make its judgments impartial; it merely relocates discretion. The values once debated openly may persist, disguised as technical choices too specialized to question.",
-      "cefrLevel": "C2", "levelRationale": "Compressed argument, semantic distinction, and implied institutional critique demand precise emphasis.", "topic": "work-technology", "focusTags": ["sentence-stress", "intonation"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Calling the algorithm neutral does not make its judgments impartial; it merely relocates discretion."}, {"id": "sentence-2", "text": "The values once debated openly may persist, disguised as technical choices too specialized to question."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "c2-neutral-algorithm",
+      "version": 1,
+      "title": "The Neutral Algorithm",
+      "text": "Calling the algorithm neutral does not make its judgments impartial; it merely relocates discretion. The values once debated openly may persist, disguised as technical choices too specialized to question.",
+      "cefrLevel": "C2",
+      "levelRationale": "Compressed argument, semantic distinction, and implied institutional critique demand precise emphasis.",
+      "topic": "work-technology",
+      "focusTags": [
+        "sentence-stress",
+        "intonation"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Calling the algorithm neutral does not make its judgments impartial; it merely relocates discretion."
+        },
+        {
+          "id": "sentence-2",
+          "text": "The values once debated openly may persist, disguised as technical choices too specialized to question."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Her refusal was so courteous that it took a moment to recognize it as refusal at all."
+        },
+        {
+          "id": "sentence-2",
+          "text": "By praising the request at length, she left its substance unaddressed while appearing to have considered it deeply."
+        }
+      ],
+      "id": "c2-polite-evasion",
+      "levelRationale": "Irony with layered implication; provisional estimate for C2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "C2",
+      "focusTags": [
+        "intonation",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Her refusal was so courteous that it took a moment to recognize it as refusal at all. By praising the request at length, she left its substance unaddressed while appearing to have considered it deeply.",
+      "title": "Polite Evasion",
+      "topic": "relationships",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "His optimism was not naive, exactly; it was carefully rationed."
+        },
+        {
+          "id": "sentence-2",
+          "text": "He acknowledged each obstacle just enough to seem realistic, then proceeded as though acknowledgment alone had removed it."
+        }
+      ],
+      "id": "c2-careful-optimism",
+      "levelRationale": "Rhetorical qualification with subtle critique; estimated C2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "C2",
+      "focusTags": [
+        "contrastive-stress",
+        "intonation"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "His optimism was not naive, exactly; it was carefully rationed. He acknowledged each obstacle just enough to seem realistic, then proceeded as though acknowledgment alone had removed it.",
+      "title": "Careful Optimism",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "To cite precedent is not necessarily to reason, though it often passes for it."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Authority borrowed in this way can lend weight to conclusions that would falter if stated plainly on their own."
+        }
+      ],
+      "id": "c2-borrowed-authority",
+      "levelRationale": "Compressed argument with semantic distinction; provisional estimate for C2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "C2",
+      "focusTags": [
+        "sentence-stress",
+        "intonation"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "To cite precedent is not necessarily to reason, though it often passes for it. Authority borrowed in this way can lend weight to conclusions that would falter if stated plainly on their own.",
+      "title": "Borrowed Authority",
+      "topic": "science-environment",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "The meeting ended in agreement, if silence can be called agreement."
+        },
+        {
+          "id": "sentence-2",
+          "text": "No one had been persuaded, precisely; they had simply grown too tired to articulate the reservations that still lingered."
+        }
+      ],
+      "id": "c2-quiet-consensus",
+      "levelRationale": "Understated irony with implied fatigue; estimated C2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "C2",
+      "focusTags": [
+        "intonation",
+        "contrastive-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "The meeting ended in agreement, if silence can be called agreement. No one had been persuaded, precisely; they had simply grown too tired to articulate the reservations that still lingered.",
+      "title": "Quiet Consensus",
+      "topic": "work-technology",
+      "version": 1
     }
   ]
 }

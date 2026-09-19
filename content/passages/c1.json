@@ -2,28 +2,460 @@
   "schemaVersion": 1,
   "passages": [
     {
-      "id": "c1-early-evidence", "version": 1, "title": "Promising Early Results", "text": "Although the proposal appears practical, its success depends on assumptions that have not yet been tested. We should therefore distinguish between promising early results and evidence of lasting improvement.",
-      "cefrLevel": "C1", "levelRationale": "The argument qualifies an initial judgment and distinguishes between related kinds of evidence.", "topic": "work-technology", "focusTags": ["word-stress", "thought-groups"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Although the proposal appears practical, its success depends on assumptions that have not yet been tested."}, {"id": "sentence-2", "text": "We should therefore distinguish between promising early results and evidence of lasting improvement."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "c1-early-evidence",
+      "version": 1,
+      "title": "Promising Early Results",
+      "text": "Although the proposal appears practical, its success depends on assumptions that have not yet been tested. We should therefore distinguish between promising early results and evidence of lasting improvement.",
+      "cefrLevel": "C1",
+      "levelRationale": "The argument qualifies an initial judgment and distinguishes between related kinds of evidence.",
+      "topic": "work-technology",
+      "focusTags": [
+        "word-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Although the proposal appears practical, its success depends on assumptions that have not yet been tested."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We should therefore distinguish between promising early results and evidence of lasting improvement."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "c1-public-data", "version": 1, "title": "Interpreting Public Data", "text": "Public data can reveal meaningful patterns, provided we remember that measurement choices shape the picture we see. A persuasive chart may clarify a trend, yet still conceal uncertainty or exclude relevant experience.",
-      "cefrLevel": "C1", "levelRationale": "The passage develops a qualified abstract claim about interpretation and hidden limitations.", "topic": "science-environment", "focusTags": ["thought-groups", "contrastive-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Public data can reveal meaningful patterns, provided we remember that measurement choices shape the picture we see."}, {"id": "sentence-2", "text": "A persuasive chart may clarify a trend, yet still conceal uncertainty or exclude relevant experience."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "c1-public-data",
+      "version": 1,
+      "title": "Interpreting Public Data",
+      "text": "Public data can reveal meaningful patterns, provided we remember that measurement choices shape the picture we see. A persuasive chart may clarify a trend, yet still conceal uncertainty or exclude relevant experience.",
+      "cefrLevel": "C1",
+      "levelRationale": "The passage develops a qualified abstract claim about interpretation and hidden limitations.",
+      "topic": "science-environment",
+      "focusTags": [
+        "thought-groups",
+        "contrastive-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Public data can reveal meaningful patterns, provided we remember that measurement choices shape the picture we see."
+        },
+        {
+          "id": "sentence-2",
+          "text": "A persuasive chart may clarify a trend, yet still conceal uncertainty or exclude relevant experience."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "c1-efficient-meetings", "version": 1, "title": "The Appearance of Efficiency", "text": "A shorter meeting may appear more efficient, but speed alone is a poor measure of progress. If unresolved concerns merely resurface later, the saved time is largely an illusion.",
-      "cefrLevel": "C1", "levelRationale": "The passage challenges a superficial measure and develops its qualification through a hypothetical consequence.", "topic": "work-technology", "focusTags": ["contrastive-stress", "intonation"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "A shorter meeting may appear more efficient, but speed alone is a poor measure of progress."}, {"id": "sentence-2", "text": "If unresolved concerns merely resurface later, the saved time is largely an illusion."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "c1-efficient-meetings",
+      "version": 1,
+      "title": "The Appearance of Efficiency",
+      "text": "A shorter meeting may appear more efficient, but speed alone is a poor measure of progress. If unresolved concerns merely resurface later, the saved time is largely an illusion.",
+      "cefrLevel": "C1",
+      "levelRationale": "The passage challenges a superficial measure and develops its qualification through a hypothetical consequence.",
+      "topic": "work-technology",
+      "focusTags": [
+        "contrastive-stress",
+        "intonation"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "A shorter meeting may appear more efficient, but speed alone is a poor measure of progress."
+        },
+        {
+          "id": "sentence-2",
+          "text": "If unresolved concerns merely resurface later, the saved time is largely an illusion."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "c1-restorative-travel", "version": 1, "title": "Travel and Restoration", "text": "Travel is often presented as an escape from routine, though unfamiliar places can be demanding in their own way. Its restorative value may lie less in comfort than in renewed attention.",
-      "cefrLevel": "C1", "levelRationale": "An abstract reflection reframes a familiar idea through concession and precise comparison.", "topic": "travel", "focusTags": ["thought-groups", "sentence-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Travel is often presented as an escape from routine, though unfamiliar places can be demanding in their own way."}, {"id": "sentence-2", "text": "Its restorative value may lie less in comfort than in renewed attention."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "c1-restorative-travel",
+      "version": 1,
+      "title": "Travel and Restoration",
+      "text": "Travel is often presented as an escape from routine, though unfamiliar places can be demanding in their own way. Its restorative value may lie less in comfort than in renewed attention.",
+      "cefrLevel": "C1",
+      "levelRationale": "An abstract reflection reframes a familiar idea through concession and precise comparison.",
+      "topic": "travel",
+      "focusTags": [
+        "thought-groups",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Travel is often presented as an escape from routine, though unfamiliar places can be demanding in their own way."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Its restorative value may lie less in comfort than in renewed attention."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Effective leadership is often associated with confident speech, though listening may shape outcomes just as powerfully."
+        },
+        {
+          "id": "sentence-2",
+          "text": "The capacity to tolerate dissent, rather than merely invite it, can determine whether a team thinks independently."
+        }
+      ],
+      "id": "c1-quiet-leadership",
+      "levelRationale": "Abstract qualified claim about leadership; provisional estimate for C1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "C1",
+      "focusTags": [
+        "thought-groups",
+        "intonation"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Effective leadership is often associated with confident speech, though listening may shape outcomes just as powerfully. The capacity to tolerate dissent, rather than merely invite it, can determine whether a team thinks independently.",
+      "title": "Quiet Leadership",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Photographs promise to preserve experience, yet constant documentation can subtly alter what we remember."
+        },
+        {
+          "id": "sentence-2",
+          "text": "When attention shifts toward future viewing, the present moment may be observed less fully than it is recorded."
+        }
+      ],
+      "id": "c1-digital-memory",
+      "levelRationale": "Nuanced reflection on attention and memory; estimated C1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "C1",
+      "focusTags": [
+        "contrastive-stress",
+        "intonation"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Photographs promise to preserve experience, yet constant documentation can subtly alter what we remember. When attention shifts toward future viewing, the present moment may be observed less fully than it is recorded.",
+      "title": "Digital Memory",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Trust in workplaces is rarely built through stated values alone, however prominently they are displayed."
+        },
+        {
+          "id": "sentence-2",
+          "text": "It emerges more reliably from predictable responses, especially when deadlines slip or disagreements become uncomfortable."
+        }
+      ],
+      "id": "c1-workplace-trust",
+      "levelRationale": "Qualified abstract argument about trust; provisional estimate for C1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "C1",
+      "focusTags": [
+        "thought-groups",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Trust in workplaces is rarely built through stated values alone, however prominently they are displayed. It emerges more reliably from predictable responses, especially when deadlines slip or disagreements become uncomfortable.",
+      "title": "Building Workplace Trust",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Living by the seasons is sometimes dismissed as nostalgia, although it can be a practical response to excess."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Accepting limits on availability may restore a sense of proportion that constant access quietly erodes."
+        }
+      ],
+      "id": "c1-seasonal-living",
+      "levelRationale": "Reframing a familiar idea through concession; estimated C1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "C1",
+      "focusTags": [
+        "intonation",
+        "word-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Living by the seasons is sometimes dismissed as nostalgia, although it can be a practical response to excess. Accepting limits on availability may restore a sense of proportion that constant access quietly erodes.",
+      "title": "Living Seasonally",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Language change is often lamented as decline, yet such judgments usually reflect familiarity rather than logic."
+        },
+        {
+          "id": "sentence-2",
+          "text": "What sounds imprecise today may, with sustained use, acquire distinctions that current rules cannot easily express."
+        }
+      ],
+      "id": "c1-language-change",
+      "levelRationale": "Abstract qualified claim about linguistic judgment; provisional estimate for C1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "C1",
+      "focusTags": [
+        "contrastive-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Language change is often lamented as decline, yet such judgments usually reflect familiarity rather than logic. What sounds imprecise today may, with sustained use, acquire distinctions that current rules cannot easily express.",
+      "title": "Language Change",
+      "topic": "science-environment",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "The pursuit of comfort can masquerade as prudence, even when it narrows the range of possible growth."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Taking modest, reversible risks may therefore preserve security better than avoiding uncertainty altogether."
+        }
+      ],
+      "id": "c1-risk-comfort",
+      "levelRationale": "Nuanced distinction between comfort and prudence; estimated C1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "C1",
+      "focusTags": [
+        "sentence-stress",
+        "intonation"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "The pursuit of comfort can masquerade as prudence, even when it narrows the range of possible growth. Taking modest, reversible risks may therefore preserve security better than avoiding uncertainty altogether.",
+      "title": "Risk and Comfort",
+      "topic": "health-habits",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Cities are seldom valued for silence, though brief quiet can change how streets are perceived."
+        },
+        {
+          "id": "sentence-2",
+          "text": "A sheltered courtyard or early morning hour may reveal patterns of life that daytime noise otherwise obscures."
+        }
+      ],
+      "id": "c1-urban-silence",
+      "levelRationale": "Subtle perceptual contrast with qualified observation; provisional estimate for C1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "C1",
+      "focusTags": [
+        "thought-groups",
+        "linking"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Cities are seldom valued for silence, though brief quiet can change how streets are perceived. A sheltered courtyard or early morning hour may reveal patterns of life that daytime noise otherwise obscures.",
+      "title": "Urban Silence",
+      "topic": "travel",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Shared attention has become scarce, not because people care less but because demands multiply around them."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Protecting one uninterrupted hour together may matter more than planning an elaborate occasion."
+        }
+      ],
+      "id": "c1-shared-attention",
+      "levelRationale": "Qualified social claim with careful causal framing; estimated C1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "C1",
+      "focusTags": [
+        "contrastive-stress",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Shared attention has become scarce, not because people care less but because demands multiply around them. Protecting one uninterrupted hour together may matter more than planning an elaborate occasion.",
+      "title": "Shared Attention",
+      "topic": "relationships",
+      "version": 1
     }
   ]
 }

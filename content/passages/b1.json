@@ -2,118 +2,1954 @@
   "schemaVersion": 1,
   "passages": [
     {
-      "id": "b11-rainy-evening", "version": 1, "title": "A Rainy Evening", "text": "We planned to meet after work, but the rain was heavy. Instead, we cooked dinner at home and talked about our weekend plans.",
-      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "A familiar past event includes contrast and a change of plan.", "topic": "relationships", "focusTags": ["consonant-clusters", "sentence-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "We planned to meet after work, but the rain was heavy."}, {"id": "sentence-2", "text": "Instead, we cooked dinner at home and talked about our weekend plans."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b11-rainy-evening",
+      "version": 1,
+      "title": "A Rainy Evening",
+      "text": "We planned to meet after work, but the rain was heavy. Instead, we cooked dinner at home and talked about our weekend plans.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.1",
+      "levelRationale": "A familiar past event includes contrast and a change of plan.",
+      "topic": "relationships",
+      "focusTags": [
+        "consonant-clusters",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We planned to meet after work, but the rain was heavy."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Instead, we cooked dinner at home and talked about our weekend plans."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b11-train-platform", "version": 1, "title": "The Right Platform", "text": "I arrived early, but my train was not on the main board. A station worker checked my ticket and showed me the correct platform.",
-      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "The passage narrates and resolves a common travel problem.", "topic": "travel", "focusTags": ["past-endings", "consonant-clusters"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "I arrived early, but my train was not on the main board."}, {"id": "sentence-2", "text": "A station worker checked my ticket and showed me the correct platform."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b11-train-platform",
+      "version": 1,
+      "title": "The Right Platform",
+      "text": "I arrived early, but my train was not on the main board. A station worker checked my ticket and showed me the correct platform.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.1",
+      "levelRationale": "The passage narrates and resolves a common travel problem.",
+      "topic": "travel",
+      "focusTags": [
+        "past-endings",
+        "consonant-clusters"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I arrived early, but my train was not on the main board."
+        },
+        {
+          "id": "sentence-2",
+          "text": "A station worker checked my ticket and showed me the correct platform."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b11-new-recipe", "version": 1, "title": "Trying a New Recipe", "text": "Last night, I tried a soup recipe from a friend. It took longer than expected, but the fresh vegetables and herbs tasted wonderful.",
-      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "A personal experience uses comparison and connected past-tense details.", "topic": "health-habits", "focusTags": ["past-endings", "word-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Last night, I tried a soup recipe from a friend."}, {"id": "sentence-2", "text": "It took longer than expected, but the fresh vegetables and herbs tasted wonderful."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b11-new-recipe",
+      "version": 1,
+      "title": "Trying a New Recipe",
+      "text": "Last night, I tried a soup recipe from a friend. It took longer than expected, but the fresh vegetables and herbs tasted wonderful.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.1",
+      "levelRationale": "A personal experience uses comparison and connected past-tense details.",
+      "topic": "health-habits",
+      "focusTags": [
+        "past-endings",
+        "word-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Last night, I tried a soup recipe from a friend."
+        },
+        {
+          "id": "sentence-2",
+          "text": "It took longer than expected, but the fresh vegetables and herbs tasted wonderful."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b11-team-calendar", "version": 1, "title": "Sharing the Calendar", "text": "Our team started using a shared calendar this month. Now everyone can see important deadlines, and we spend less time asking about meeting dates.",
-      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "A workplace change is explained with a clear cause and result.", "topic": "work-technology", "focusTags": ["consonant-clusters", "linking"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Our team started using a shared calendar this month."}, {"id": "sentence-2", "text": "Now everyone can see important deadlines, and we spend less time asking about meeting dates."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b11-team-calendar",
+      "version": 1,
+      "title": "Sharing the Calendar",
+      "text": "Our team started using a shared calendar this month. Now everyone can see important deadlines, and we spend less time asking about meeting dates.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.1",
+      "levelRationale": "A workplace change is explained with a clear cause and result.",
+      "topic": "work-technology",
+      "focusTags": [
+        "consonant-clusters",
+        "linking"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Our team started using a shared calendar this month."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Now everyone can see important deadlines, and we spend less time asking about meeting dates."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b11-clean-river", "version": 1, "title": "Cleaning the Riverbank", "text": "On Sunday, our neighborhood group collected trash beside the river. We filled twelve bags and learned why plastic waste is dangerous for local birds.",
-      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "A concrete community event adds a simple environmental explanation.", "topic": "science-environment", "focusTags": ["final-consonants", "word-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "On Sunday, our neighborhood group collected trash beside the river."}, {"id": "sentence-2", "text": "We filled twelve bags and learned why plastic waste is dangerous for local birds."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b11-clean-river",
+      "version": 1,
+      "title": "Cleaning the Riverbank",
+      "text": "On Sunday, our neighborhood group collected trash beside the river. We filled twelve bags and learned why plastic waste is dangerous for local birds.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.1",
+      "levelRationale": "A concrete community event adds a simple environmental explanation.",
+      "topic": "science-environment",
+      "focusTags": [
+        "final-consonants",
+        "word-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "On Sunday, our neighborhood group collected trash beside the river."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We filled twelve bags and learned why plastic waste is dangerous for local birds."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b12-project-details", "version": 1, "title": "Checking the Project", "text": "I finished the first part of the project yesterday, but I still need to check a few details. Could we meet after lunch to discuss the next steps?",
-      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "A workplace update combines completed work, remaining tasks, and a polite request.", "topic": "work-technology", "focusTags": ["thought-groups", "request-intonation"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "I finished the first part of the project yesterday, but I still need to check a few details."}, {"id": "sentence-2", "text": "Could we meet after lunch to discuss the next steps?"}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b12-project-details",
+      "version": 1,
+      "title": "Checking the Project",
+      "text": "I finished the first part of the project yesterday, but I still need to check a few details. Could we meet after lunch to discuss the next steps?",
+      "cefrLevel": "B1",
+      "sublevel": "B1.2",
+      "levelRationale": "A workplace update combines completed work, remaining tasks, and a polite request.",
+      "topic": "work-technology",
+      "focusTags": [
+        "thought-groups",
+        "request-intonation"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I finished the first part of the project yesterday, but I still need to check a few details."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Could we meet after lunch to discuss the next steps?"
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b12-login-problem", "version": 1, "title": "A Login Problem", "text": "The new website works well on my phone, but I cannot sign in from my laptop. Could you check whether my account has the correct access?",
-      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "The speaker explains a technical problem and requests a specific check.", "topic": "work-technology", "focusTags": ["consonant-clusters", "request-intonation"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "The new website works well on my phone, but I cannot sign in from my laptop."}, {"id": "sentence-2", "text": "Could you check whether my account has the correct access?"}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b12-login-problem",
+      "version": 1,
+      "title": "A Login Problem",
+      "text": "The new website works well on my phone, but I cannot sign in from my laptop. Could you check whether my account has the correct access?",
+      "cefrLevel": "B1",
+      "sublevel": "B1.2",
+      "levelRationale": "The speaker explains a technical problem and requests a specific check.",
+      "topic": "work-technology",
+      "focusTags": [
+        "consonant-clusters",
+        "request-intonation"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "The new website works well on my phone, but I cannot sign in from my laptop."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Could you check whether my account has the correct access?"
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b12-later-flight", "version": 1, "title": "Changing a Flight", "text": "My meeting ends later than I expected, so I may miss the evening flight. I would like to move my booking to tomorrow morning, if possible.",
-      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "The passage gives a reason, predicts a consequence, and makes a polite request.", "topic": "travel", "focusTags": ["thought-groups", "sentence-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "My meeting ends later than I expected, so I may miss the evening flight."}, {"id": "sentence-2", "text": "I would like to move my booking to tomorrow morning, if possible."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b12-later-flight",
+      "version": 1,
+      "title": "Changing a Flight",
+      "text": "My meeting ends later than I expected, so I may miss the evening flight. I would like to move my booking to tomorrow morning, if possible.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.2",
+      "levelRationale": "The passage gives a reason, predicts a consequence, and makes a polite request.",
+      "topic": "travel",
+      "focusTags": [
+        "thought-groups",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "My meeting ends later than I expected, so I may miss the evening flight."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I would like to move my booking to tomorrow morning, if possible."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b12-quiet-mornings", "version": 1, "title": "Quiet Mornings", "text": "I prefer to exercise early because the streets are quiet and the air feels cooler. Starting this way also helps me concentrate during the morning.",
-      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "A personal preference is supported with two clear reasons.", "topic": "health-habits", "focusTags": ["linking", "sentence-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "I prefer to exercise early because the streets are quiet and the air feels cooler."}, {"id": "sentence-2", "text": "Starting this way also helps me concentrate during the morning."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b12-quiet-mornings",
+      "version": 1,
+      "title": "Quiet Mornings",
+      "text": "I prefer to exercise early because the streets are quiet and the air feels cooler. Starting this way also helps me concentrate during the morning.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.2",
+      "levelRationale": "A personal preference is supported with two clear reasons.",
+      "topic": "health-habits",
+      "focusTags": [
+        "linking",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I prefer to exercise early because the streets are quiet and the air feels cooler."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Starting this way also helps me concentrate during the morning."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b12-neighbor-package", "version": 1, "title": "A Package for My Neighbor", "text": "A package arrived while my neighbor was away, so I kept it safely inside. I sent her a message and asked when she wanted to collect it.",
-      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "A short narrative explains actions, sequence, and a practical question.", "topic": "relationships", "focusTags": ["past-endings", "linking"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "A package arrived while my neighbor was away, so I kept it safely inside."}, {"id": "sentence-2", "text": "I sent her a message and asked when she wanted to collect it."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b12-neighbor-package",
+      "version": 1,
+      "title": "A Package for My Neighbor",
+      "text": "A package arrived while my neighbor was away, so I kept it safely inside. I sent her a message and asked when she wanted to collect it.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.2",
+      "levelRationale": "A short narrative explains actions, sequence, and a practical question.",
+      "topic": "relationships",
+      "focusTags": [
+        "past-endings",
+        "linking"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "A package arrived while my neighbor was away, so I kept it safely inside."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I sent her a message and asked when she wanted to collect it."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b12-reusable-bottle", "version": 1, "title": "Remembering My Bottle", "text": "I started carrying a reusable bottle to reduce plastic waste. At first I often forgot it, but now I leave it beside my keys every night.",
-      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "A changed habit is described across time with contrast and purpose.", "topic": "science-environment", "focusTags": ["consonant-clusters", "thought-groups"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "I started carrying a reusable bottle to reduce plastic waste."}, {"id": "sentence-2", "text": "At first I often forgot it, but now I leave it beside my keys every night."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b12-reusable-bottle",
+      "version": 1,
+      "title": "Remembering My Bottle",
+      "text": "I started carrying a reusable bottle to reduce plastic waste. At first I often forgot it, but now I leave it beside my keys every night.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.2",
+      "levelRationale": "A changed habit is described across time with contrast and purpose.",
+      "topic": "science-environment",
+      "focusTags": [
+        "consonant-clusters",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I started carrying a reusable bottle to reduce plastic waste."
+        },
+        {
+          "id": "sentence-2",
+          "text": "At first I often forgot it, but now I leave it beside my keys every night."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b12-clearer-instructions", "version": 1, "title": "Asking for Clarification", "text": "I understand the first two steps, but the final instruction is unclear. Could you show me an example before I update the rest of the files?",
-      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "The speaker identifies a precise gap and politely asks for clarification.", "topic": "work-technology", "focusTags": ["final-consonants", "request-intonation"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "I understand the first two steps, but the final instruction is unclear."}, {"id": "sentence-2", "text": "Could you show me an example before I update the rest of the files?"}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b12-clearer-instructions",
+      "version": 1,
+      "title": "Asking for Clarification",
+      "text": "I understand the first two steps, but the final instruction is unclear. Could you show me an example before I update the rest of the files?",
+      "cefrLevel": "B1",
+      "sublevel": "B1.2",
+      "levelRationale": "The speaker identifies a precise gap and politely asks for clarification.",
+      "topic": "work-technology",
+      "focusTags": [
+        "final-consonants",
+        "request-intonation"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I understand the first two steps, but the final instruction is unclear."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Could you show me an example before I update the rest of the files?"
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b12-weekend-market", "version": 1, "title": "The Weekend Market", "text": "The outdoor market is usually crowded, but I enjoy meeting local farmers there. Their produce is fresh, and they often explain how each item was grown.",
-      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "An opinion is supported by details and a relative clause in a familiar setting.", "topic": "daily-life", "focusTags": ["word-stress", "thought-groups"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "The outdoor market is usually crowded, but I enjoy meeting local farmers there."}, {"id": "sentence-2", "text": "Their produce is fresh, and they often explain how each item was grown."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b12-weekend-market",
+      "version": 1,
+      "title": "The Weekend Market",
+      "text": "The outdoor market is usually crowded, but I enjoy meeting local farmers there. Their produce is fresh, and they often explain how each item was grown.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.2",
+      "levelRationale": "An opinion is supported by details and a relative clause in a familiar setting.",
+      "topic": "daily-life",
+      "focusTags": [
+        "word-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "The outdoor market is usually crowded, but I enjoy meeting local farmers there."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Their produce is fresh, and they often explain how each item was grown."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b12-video-call", "version": 1, "title": "A Better Video Call", "text": "During yesterday's call, several people could not hear the speaker clearly. For our next meeting, I suggest testing the microphone and joining five minutes early.",
-      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "A past problem leads to two practical recommendations for future work.", "topic": "work-technology", "focusTags": ["consonant-clusters", "sentence-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "During yesterday's call, several people could not hear the speaker clearly."}, {"id": "sentence-2", "text": "For our next meeting, I suggest testing the microphone and joining five minutes early."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b12-video-call",
+      "version": 1,
+      "title": "A Better Video Call",
+      "text": "During yesterday's call, several people could not hear the speaker clearly. For our next meeting, I suggest testing the microphone and joining five minutes early.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.2",
+      "levelRationale": "A past problem leads to two practical recommendations for future work.",
+      "topic": "work-technology",
+      "focusTags": [
+        "consonant-clusters",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "During yesterday's call, several people could not hear the speaker clearly."
+        },
+        {
+          "id": "sentence-2",
+          "text": "For our next meeting, I suggest testing the microphone and joining five minutes early."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b12-lunch-choice", "version": 1, "title": "Choosing a Lunch Place", "text": "The cafe near our office is convenient, although it becomes noisy at noon. I prefer the smaller restaurant because we can talk without raising our voices.",
-      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "The speaker compares two options and gives a reasoned preference.", "topic": "relationships", "focusTags": ["contrastive-stress", "thought-groups"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "The cafe near our office is convenient, although it becomes noisy at noon."}, {"id": "sentence-2", "text": "I prefer the smaller restaurant because we can talk without raising our voices."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b12-lunch-choice",
+      "version": 1,
+      "title": "Choosing a Lunch Place",
+      "text": "The cafe near our office is convenient, although it becomes noisy at noon. I prefer the smaller restaurant because we can talk without raising our voices.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.2",
+      "levelRationale": "The speaker compares two options and gives a reasoned preference.",
+      "topic": "relationships",
+      "focusTags": [
+        "contrastive-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "The cafe near our office is convenient, although it becomes noisy at noon."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I prefer the smaller restaurant because we can talk without raising our voices."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b11-lost-wallet", "version": 1, "title": "Finding a Lost Wallet", "text": "I noticed a wallet under my table at the cafe. The server checked inside, found a phone number, and contacted the owner.",
-      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "A resolved past event uses a clear sequence of actions in a familiar setting.", "topic": "daily-life", "focusTags": ["past-endings", "consonant-clusters"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "I noticed a wallet under my table at the cafe."}, {"id": "sentence-2", "text": "The server checked inside, found a phone number, and contacted the owner."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b11-lost-wallet",
+      "version": 1,
+      "title": "Finding a Lost Wallet",
+      "text": "I noticed a wallet under my table at the cafe. The server checked inside, found a phone number, and contacted the owner.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.1",
+      "levelRationale": "A resolved past event uses a clear sequence of actions in a familiar setting.",
+      "topic": "daily-life",
+      "focusTags": [
+        "past-endings",
+        "consonant-clusters"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I noticed a wallet under my table at the cafe."
+        },
+        {
+          "id": "sentence-2",
+          "text": "The server checked inside, found a phone number, and contacted the owner."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b11-balcony-garden", "version": 1, "title": "A Balcony Garden", "text": "This spring, we planted tomatoes and herbs on our small balcony. The plants need regular water, but they already make the space feel brighter.",
-      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "A practical project connects a past action with present results and a simple contrast.", "topic": "science-environment", "focusTags": ["consonant-clusters", "sentence-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "This spring, we planted tomatoes and herbs on our small balcony."}, {"id": "sentence-2", "text": "The plants need regular water, but they already make the space feel brighter."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b11-balcony-garden",
+      "version": 1,
+      "title": "A Balcony Garden",
+      "text": "This spring, we planted tomatoes and herbs on our small balcony. The plants need regular water, but they already make the space feel brighter.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.1",
+      "levelRationale": "A practical project connects a past action with present results and a simple contrast.",
+      "topic": "science-environment",
+      "focusTags": [
+        "consonant-clusters",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "This spring, we planted tomatoes and herbs on our small balcony."
+        },
+        {
+          "id": "sentence-2",
+          "text": "The plants need regular water, but they already make the space feel brighter."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b12-battery-update", "version": 1, "title": "A Battery Update", "text": "Since the latest update, my phone battery runs out by late afternoon. Could you help me check which applications are using the most power?",
-      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "The speaker identifies a recent technical problem and makes a focused request for help.", "topic": "work-technology", "focusTags": ["thought-groups", "request-intonation"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Since the latest update, my phone battery runs out by late afternoon."}, {"id": "sentence-2", "text": "Could you help me check which applications are using the most power?"}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b12-battery-update",
+      "version": 1,
+      "title": "A Battery Update",
+      "text": "Since the latest update, my phone battery runs out by late afternoon. Could you help me check which applications are using the most power?",
+      "cefrLevel": "B1",
+      "sublevel": "B1.2",
+      "levelRationale": "The speaker identifies a recent technical problem and makes a focused request for help.",
+      "topic": "work-technology",
+      "focusTags": [
+        "thought-groups",
+        "request-intonation"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Since the latest update, my phone battery runs out by late afternoon."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Could you help me check which applications are using the most power?"
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b12-dinner-invitation", "version": 1, "title": "A Dinner Invitation", "text": "We are having dinner at our apartment on Friday, and I hope you can join us. Please tell me if you have any food allergies.",
-      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "A social invitation includes a polite hope and a practical request for information.", "topic": "relationships", "focusTags": ["linking", "sentence-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "We are having dinner at our apartment on Friday, and I hope you can join us."}, {"id": "sentence-2", "text": "Please tell me if you have any food allergies."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b12-dinner-invitation",
+      "version": 1,
+      "title": "A Dinner Invitation",
+      "text": "We are having dinner at our apartment on Friday, and I hope you can join us. Please tell me if you have any food allergies.",
+      "cefrLevel": "B1",
+      "sublevel": "B1.2",
+      "levelRationale": "A social invitation includes a polite hope and a practical request for information.",
+      "topic": "relationships",
+      "focusTags": [
+        "linking",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We are having dinner at our apartment on Friday, and I hope you can join us."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Please tell me if you have any food allergies."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I missed the morning bus yesterday, so I walked fast to the office."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I planned to leave earlier today to catch the first ride."
+        }
+      ],
+      "id": "b11-morning-bus",
+      "levelRationale": "Past events plus a simple future plan; provisional estimate at B1.1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "consonant-clusters"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "I missed the morning bus yesterday, so I walked fast to the office. I planned to leave earlier today to catch the first ride.",
+      "title": "The Morning Bus",
+      "topic": "travel",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We visited the market last Sunday and bought fresh fruit for the week."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I want to cook a simple soup tonight with carrots and potatoes."
+        }
+      ],
+      "id": "b11-market-day",
+      "levelRationale": "Past verbs with a simple cooking plan; estimated B1.1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "word-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "We visited the market last Sunday and bought fresh fruit for the week. I want to cook a simple soup tonight with carrots and potatoes.",
+      "title": "Market Day",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "My sister mailed me a birthday card with a kind note inside."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I called her last night to thank her for the sweet surprise."
+        }
+      ],
+      "id": "b11-birthday-card",
+      "levelRationale": "Past actions with familiar vocabulary; provisional estimate at B1.1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "final-consonants"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "My sister mailed me a birthday card with a kind note inside. I called her last night to thank her for the sweet surprise.",
+      "title": "The Birthday Card",
+      "topic": "relationships",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "They moved to a small apartment near the park last month."
+        },
+        {
+          "id": "sentence-2",
+          "text": "They painted the front door green and fixed the old kitchen light."
+        }
+      ],
+      "id": "b11-new-apartment",
+      "levelRationale": "Past move with simple home vocabulary; estimated B1.1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "consonant-clusters"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "They moved to a small apartment near the park last month. They painted the front door green and fixed the old kitchen light.",
+      "title": "The New Apartment",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Sam joined the soccer team last spring and practiced twice a week."
+        },
+        {
+          "id": "sentence-2",
+          "text": "He wants to play better this season and help his friends win."
+        }
+      ],
+      "id": "b11-soccer-practice",
+      "levelRationale": "Past joining with future sports goals; provisional estimate at B1.1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "consonant-clusters"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "Sam joined the soccer team last spring and practiced twice a week. He wants to play better this season and help his friends win.",
+      "title": "Soccer Practice",
+      "topic": "health-habits",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I borrowed three books from the public library yesterday afternoon."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I finished the first story last night and started the second today."
+        }
+      ],
+      "id": "b11-library-visit",
+      "levelRationale": "Past borrowing with simple sequencing; estimated B1.1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "consonant-clusters"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "I borrowed three books from the public library yesterday afternoon. I finished the first story last night and started the second today.",
+      "title": "The Library Visit",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We stopped at the small coffee stand beside the train station."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We ordered two hot drinks and waited until the rain stopped."
+        }
+      ],
+      "id": "b11-coffee-stand",
+      "levelRationale": "Past travel actions with consonant clusters; provisional estimate at B1.1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "consonant-clusters"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "We stopped at the small coffee stand beside the train station. We ordered two hot drinks and waited until the rain stopped.",
+      "title": "The Coffee Stand",
+      "topic": "travel",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Our class cleaned the local park last Saturday morning."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We picked up plastic bags and planted six young trees near the path."
+        }
+      ],
+      "id": "b11-park-cleanup",
+      "levelRationale": "Past group actions with nature vocabulary; estimated B1.1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "consonant-clusters"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "Our class cleaned the local park last Saturday morning. We picked up plastic bags and planted six young trees near the path.",
+      "title": "Park Cleanup",
+      "topic": "science-environment",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Dad fixed my old bicycle last weekend with new brakes."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I rode it to school today and parked it beside the front gate."
+        }
+      ],
+      "id": "b11-old-bicycle",
+      "levelRationale": "Past repairs with daily travel; provisional estimate at B1.1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "final-consonants"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "Dad fixed my old bicycle last weekend with new brakes. I rode it to school today and parked it beside the front gate.",
+      "title": "The Old Bicycle",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I lost my winter jacket during the school trip last Friday."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Mom helped me search the bus and ask the driver about it."
+        }
+      ],
+      "id": "b11-winter-jacket",
+      "levelRationale": "Past problem with simple search actions; estimated B1.1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "word-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "I lost my winter jacket during the school trip last Friday. Mom helped me search the bus and ask the driver about it.",
+      "title": "The Winter Jacket",
+      "topic": "travel",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We cooked dinner together last night for our grandparents."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We baked soft bread and served warm soup with fresh salad."
+        }
+      ],
+      "id": "b11-family-dinner",
+      "levelRationale": "Past family actions with food vocabulary; provisional estimate at B1.1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "word-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "We cooked dinner together last night for our grandparents. We baked soft bread and served warm soup with fresh salad.",
+      "title": "Family Dinner",
+      "topic": "relationships",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Lisa phoned her cousin last evening to plan the summer visit."
+        },
+        {
+          "id": "sentence-2",
+          "text": "They talked about flights, hotels, and fun things to do."
+        }
+      ],
+      "id": "b11-phone-call",
+      "levelRationale": "Past calls with future travel plans; estimated B1.1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "word-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "Lisa phoned her cousin last evening to plan the summer visit. They talked about flights, hotels, and fun things to do.",
+      "title": "The Phone Call",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I studied math with my friends after class yesterday."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We solved ten hard problems and checked all the answers together."
+        }
+      ],
+      "id": "b11-study-group",
+      "levelRationale": "Past study actions with school vocabulary; provisional estimate at B1.1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "past-endings",
+        "consonant-clusters"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.1",
+      "text": "I studied math with my friends after class yesterday. We solved ten hard problems and checked all the answers together.",
+      "title": "The Study Group",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Our team app crashed this morning because the login page kept freezing."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We restarted the server twice, but the error still appears."
+        }
+      ],
+      "id": "b12-server-issue",
+      "levelRationale": "Explains a work problem with reasons; provisional estimate at B1.2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "thought-groups",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "Our team app crashed this morning because the login page kept freezing. We restarted the server twice, but the error still appears.",
+      "title": "The Server Issue",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Yesterday I finished the sales report and sent it to my manager."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I also cleaned my inbox and fixed three small errors in the file."
+        }
+      ],
+      "id": "b12-yesterday-report",
+      "levelRationale": "Describes yesterday's work with linked details; estimated B1.2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "thought-groups",
+        "linking"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "Yesterday I finished the sales report and sent it to my manager. I also cleaned my inbox and fixed three small errors in the file.",
+      "title": "Yesterday's Report",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Could you explain the last step again more slowly, please?"
+        },
+        {
+          "id": "sentence-2",
+          "text": "I want to finish the form correctly before I send it today."
+        }
+      ],
+      "id": "b12-clarify-instructions",
+      "levelRationale": "Requests clarification with polite intonation; provisional estimate at B1.2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "request-intonation",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "Could you explain the last step again more slowly, please? I want to finish the form correctly before I send it today.",
+      "title": "Clarifying Instructions",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I think working from home is better because I can focus longer."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I finish more tasks without noise from the busy office."
+        }
+      ],
+      "id": "b12-opinion-remote",
+      "levelRationale": "Gives an opinion with a clear reason; estimated B1.2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "sentence-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "I think working from home is better because I can focus longer. I finish more tasks without noise from the busy office.",
+      "title": "An Opinion on Remote Work",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I missed the morning meeting, so could you share your notes with me?"
+        },
+        {
+          "id": "sentence-2",
+          "text": "I need to update my tasks before lunch today."
+        }
+      ],
+      "id": "b12-meeting-notes",
+      "levelRationale": "Polite work request with explanation; provisional estimate at B1.2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "request-intonation",
+        "linking"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "I missed the morning meeting, so could you share your notes with me? I need to update my tasks before lunch today.",
+      "title": "Sharing Meeting Notes",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We plan to leave early on Friday to avoid heavy traffic."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We booked a small hotel near the beach for two nights."
+        }
+      ],
+      "id": "b12-travel-plan",
+      "levelRationale": "Travel plan with reasons; estimated B1.2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "thought-groups",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "We plan to leave early on Friday to avoid heavy traffic. We booked a small hotel near the beach for two nights.",
+      "title": "Our Travel Plan",
+      "topic": "travel",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I started bringing lunch to work because it saves money."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I usually pack rice, vegetables, and some fresh fruit every day."
+        }
+      ],
+      "id": "b12-healthy-lunch",
+      "levelRationale": "Habit with a clear reason; provisional estimate at B1.2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "linking",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "I started bringing lunch to work because it saves money. I usually pack rice, vegetables, and some fresh fruit every day.",
+      "title": "A Healthy Lunch",
+      "topic": "health-habits",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I try to walk for thirty minutes after dinner each evening."
+        },
+        {
+          "id": "sentence-2",
+          "text": "It helps me sleep better and feel more active at work."
+        }
+      ],
+      "id": "b12-evening-walk",
+      "levelRationale": "Health habit with results; estimated B1.2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "thought-groups",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "I try to walk for thirty minutes after dinner each evening. It helps me sleep better and feel more active at work.",
+      "title": "The Evening Walk",
+      "topic": "health-habits",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "The weather changed fast today, so we stayed inside after lunch."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We watched a short film about forests and clean rivers."
+        }
+      ],
+      "id": "b12-weather-change",
+      "levelRationale": "Explanations with linked events; provisional estimate at B1.2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "thought-groups",
+        "linking"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "The weather changed fast today, so we stayed inside after lunch. We watched a short film about forests and clean rivers.",
+      "title": "A Change in Weather",
+      "topic": "science-environment",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Could you speak a little slower during our call tomorrow?"
+        },
+        {
+          "id": "sentence-2",
+          "text": "I want to write down each detail without missing anything important."
+        }
+      ],
+      "id": "b12-client-call",
+      "levelRationale": "Requests clarification with polite intonation; estimated B1.2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "request-intonation",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "Could you speak a little slower during our call tomorrow? I want to write down each detail without missing anything important.",
+      "title": "The Client Call",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "My old laptop is slow, so I need to replace it soon."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Could you suggest a light model that works well for video calls?"
+        }
+      ],
+      "id": "b12-new-laptop",
+      "levelRationale": "Explains a problem and asks for help; provisional estimate at B1.2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "request-intonation",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "My old laptop is slow, so I need to replace it soon. Could you suggest a light model that works well for video calls?",
+      "title": "A New Laptop",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We are planning a small party for Mom next Saturday evening."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Could you bring some drinks and help us set up the room?"
+        }
+      ],
+      "id": "b12-birthday-plan",
+      "levelRationale": "Plan with a friendly request; estimated B1.2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "request-intonation",
+        "linking"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "We are planning a small party for Mom next Saturday evening. Could you bring some drinks and help us set up the room?",
+      "title": "The Birthday Plan",
+      "topic": "relationships",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I have a job interview tomorrow morning at nine."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I prepared my answers and printed two copies of my resume."
+        }
+      ],
+      "id": "b12-job-interview",
+      "levelRationale": "Work preparation with linked actions; provisional estimate at B1.2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "thought-groups",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "I have a job interview tomorrow morning at nine. I prepared my answers and printed two copies of my resume.",
+      "title": "The Job Interview",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I think this book is useful because the examples are very clear."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I learned three new study methods from the first chapter."
+        }
+      ],
+      "id": "b12-book-opinion",
+      "levelRationale": "Opinion with a supporting reason; estimated B1.2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "sentence-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "I think this book is useful because the examples are very clear. I learned three new study methods from the first chapter.",
+      "title": "An Opinion on a Book",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Yesterday our team tested the new checkout page for errors."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We found two broken links and fixed them before the evening release."
+        }
+      ],
+      "id": "b12-team-update",
+      "levelRationale": "Describes yesterday's teamwork with details; provisional estimate at B1.2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "thought-groups",
+        "linking"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "Yesterday our team tested the new checkout page for errors. We found two broken links and fixed them before the evening release.",
+      "title": "A Team Update",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I bought these shoes last week, but they feel too tight."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Could I return them tomorrow and get a larger size instead?"
+        }
+      ],
+      "id": "b12-store-return",
+      "levelRationale": "Explains a problem with a polite request; estimated B1.2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "request-intonation",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "I bought these shoes last week, but they feel too tight. Could I return them tomorrow and get a larger size instead?",
+      "title": "Returning Shoes",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Could you tell me which chapter we should read for Thursday?"
+        },
+        {
+          "id": "sentence-2",
+          "text": "I missed the last class and want to catch up tonight."
+        }
+      ],
+      "id": "b12-language-class",
+      "levelRationale": "Requests clarification about classwork; provisional estimate at B1.2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "request-intonation",
+        "linking"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "Could you tell me which chapter we should read for Thursday? I missed the last class and want to catch up tonight.",
+      "title": "The Language Class",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Our city opened a new park with tall trees and wide paths."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I think it is great because families can relax there together."
+        }
+      ],
+      "id": "b12-city-park",
+      "levelRationale": "Opinion with a community reason; estimated B1.2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B1",
+      "focusTags": [
+        "sentence-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "sublevel": "B1.2",
+      "text": "Our city opened a new park with tall trees and wide paths. I think it is great because families can relax there together.",
+      "title": "The New City Park",
+      "topic": "science-environment",
+      "version": 1
     }
   ]
 }

@@ -92,13 +92,13 @@ export const DEFAULT_PASSAGE_FILTERS: PassageFilterState = {
 };
 
 export const LIBRARY_BAND_COUNTS: Record<PracticeBand, number> = {
-  A1: 5,
-  A2: 6,
-  "B1.1": 7,
-  "B1.2": 12,
-  B2: 6,
-  C1: 4,
-  C2: 4,
+  A1: 12,
+  A2: 18,
+  "B1.1": 20,
+  "B1.2": 30,
+  B2: 20,
+  C1: 12,
+  C2: 8,
 };
 
 const TARGET_WORD_RANGES: Record<PracticeBand, readonly [number, number]> = {

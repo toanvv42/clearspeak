@@ -2,40 +2,764 @@
   "schemaVersion": 1,
   "passages": [
     {
-      "id": "b2-remote-balance", "version": 1, "title": "Balancing Remote Work", "text": "Working from home saves travel time, although it can make teamwork harder. A flexible schedule may offer a better balance, provided everyone agrees on how to stay in touch.",
-      "cefrLevel": "B2", "levelRationale": "The passage weighs competing effects and adds a condition to its recommendation.", "topic": "work-technology", "focusTags": ["contrastive-stress", "thought-groups"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Working from home saves travel time, although it can make teamwork harder."}, {"id": "sentence-2", "text": "A flexible schedule may offer a better balance, provided everyone agrees on how to stay in touch."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b2-remote-balance",
+      "version": 1,
+      "title": "Balancing Remote Work",
+      "text": "Working from home saves travel time, although it can make teamwork harder. A flexible schedule may offer a better balance, provided everyone agrees on how to stay in touch.",
+      "cefrLevel": "B2",
+      "levelRationale": "The passage weighs competing effects and adds a condition to its recommendation.",
+      "topic": "work-technology",
+      "focusTags": [
+        "contrastive-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Working from home saves travel time, although it can make teamwork harder."
+        },
+        {
+          "id": "sentence-2",
+          "text": "A flexible schedule may offer a better balance, provided everyone agrees on how to stay in touch."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b2-tourism-limits", "version": 1, "title": "Managing Popular Places", "text": "Tourism supports local businesses, yet large crowds can damage the places visitors came to enjoy. Limiting daily entry might protect the area while preserving most of its economic benefits.",
-      "cefrLevel": "B2", "levelRationale": "A public issue is evaluated through contrast, consequences, and a qualified solution.", "topic": "travel", "focusTags": ["contrastive-stress", "word-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Tourism supports local businesses, yet large crowds can damage the places visitors came to enjoy."}, {"id": "sentence-2", "text": "Limiting daily entry might protect the area while preserving most of its economic benefits."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b2-tourism-limits",
+      "version": 1,
+      "title": "Managing Popular Places",
+      "text": "Tourism supports local businesses, yet large crowds can damage the places visitors came to enjoy. Limiting daily entry might protect the area while preserving most of its economic benefits.",
+      "cefrLevel": "B2",
+      "levelRationale": "A public issue is evaluated through contrast, consequences, and a qualified solution.",
+      "topic": "travel",
+      "focusTags": [
+        "contrastive-stress",
+        "word-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Tourism supports local businesses, yet large crowds can damage the places visitors came to enjoy."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Limiting daily entry might protect the area while preserving most of its economic benefits."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b2-sleeping-habits", "version": 1, "title": "Changing Sleep Habits", "text": "People often blame a busy schedule for poor sleep, but evening habits may be equally important. Reducing bright screens before bed is a modest change that can make rest more consistent.",
-      "cefrLevel": "B2", "levelRationale": "The text challenges a common explanation and advances a measured alternative claim.", "topic": "health-habits", "focusTags": ["sentence-stress", "linking"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "People often blame a busy schedule for poor sleep, but evening habits may be equally important."}, {"id": "sentence-2", "text": "Reducing bright screens before bed is a modest change that can make rest more consistent."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b2-sleeping-habits",
+      "version": 1,
+      "title": "Changing Sleep Habits",
+      "text": "People often blame a busy schedule for poor sleep, but evening habits may be equally important. Reducing bright screens before bed is a modest change that can make rest more consistent.",
+      "cefrLevel": "B2",
+      "levelRationale": "The text challenges a common explanation and advances a measured alternative claim.",
+      "topic": "health-habits",
+      "focusTags": [
+        "sentence-stress",
+        "linking"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "People often blame a busy schedule for poor sleep, but evening habits may be equally important."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Reducing bright screens before bed is a modest change that can make rest more consistent."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b2-city-trees", "version": 1, "title": "Trees in Growing Cities", "text": "Planting trees can cool crowded neighborhoods and improve air quality, but young trees require years of care. Cities should therefore fund maintenance as seriously as they fund the initial planting.",
-      "cefrLevel": "B2", "levelRationale": "A policy recommendation follows from balanced environmental benefits and practical constraints.", "topic": "science-environment", "focusTags": ["thought-groups", "contrastive-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Planting trees can cool crowded neighborhoods and improve air quality, but young trees require years of care."}, {"id": "sentence-2", "text": "Cities should therefore fund maintenance as seriously as they fund the initial planting."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b2-city-trees",
+      "version": 1,
+      "title": "Trees in Growing Cities",
+      "text": "Planting trees can cool crowded neighborhoods and improve air quality, but young trees require years of care. Cities should therefore fund maintenance as seriously as they fund the initial planting.",
+      "cefrLevel": "B2",
+      "levelRationale": "A policy recommendation follows from balanced environmental benefits and practical constraints.",
+      "topic": "science-environment",
+      "focusTags": [
+        "thought-groups",
+        "contrastive-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Planting trees can cool crowded neighborhoods and improve air quality, but young trees require years of care."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Cities should therefore fund maintenance as seriously as they fund the initial planting."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b2-digital-tickets", "version": 1, "title": "Keeping Paper Tickets", "text": "Digital tickets are convenient for most travelers, but a phone can fail at the worst moment. Transport companies should retain a simple paper option for passengers who need it.",
-      "cefrLevel": "B2", "levelRationale": "The passage balances convenience against reliability and makes a qualified service recommendation.", "topic": "travel", "focusTags": ["contrastive-stress", "thought-groups"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Digital tickets are convenient for most travelers, but a phone can fail at the worst moment."}, {"id": "sentence-2", "text": "Transport companies should retain a simple paper option for passengers who need it."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b2-digital-tickets",
+      "version": 1,
+      "title": "Keeping Paper Tickets",
+      "text": "Digital tickets are convenient for most travelers, but a phone can fail at the worst moment. Transport companies should retain a simple paper option for passengers who need it.",
+      "cefrLevel": "B2",
+      "levelRationale": "The passage balances convenience against reliability and makes a qualified service recommendation.",
+      "topic": "travel",
+      "focusTags": [
+        "contrastive-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Digital tickets are convenient for most travelers, but a phone can fail at the worst moment."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Transport companies should retain a simple paper option for passengers who need it."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "b2-shared-meals", "version": 1, "title": "The Value of Shared Meals", "text": "Shared meals do not automatically create close relationships, yet they offer people regular time to listen. Even one unhurried dinner each week can strengthen a family's sense of connection.",
-      "cefrLevel": "B2", "levelRationale": "A measured claim acknowledges a limitation before supporting a broader social benefit.", "topic": "relationships", "focusTags": ["sentence-stress", "linking"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Shared meals do not automatically create close relationships, yet they offer people regular time to listen."}, {"id": "sentence-2", "text": "Even one unhurried dinner each week can strengthen a family's sense of connection."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "id": "b2-shared-meals",
+      "version": 1,
+      "title": "The Value of Shared Meals",
+      "text": "Shared meals do not automatically create close relationships, yet they offer people regular time to listen. Even one unhurried dinner each week can strengthen a family's sense of connection.",
+      "cefrLevel": "B2",
+      "levelRationale": "A measured claim acknowledges a limitation before supporting a broader social benefit.",
+      "topic": "relationships",
+      "focusTags": [
+        "sentence-stress",
+        "linking"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Shared meals do not automatically create close relationships, yet they offer people regular time to listen."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Even one unhurried dinner each week can strengthen a family's sense of connection."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Morning exercise sounds difficult for night owls, yet a short walk can feel easier than an intense gym session."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Starting with ten minutes may build consistency better than waiting for real motivation."
+        }
+      ],
+      "id": "b2-morning-exercise",
+      "levelRationale": "Contrastive comparison with a qualified recommendation; provisional estimate for B2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "contrastive-stress",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Morning exercise sounds difficult for night owls, yet a short walk can feel easier than an intense gym session. Starting with ten minutes may build consistency better than waiting for real motivation.",
+      "title": "Morning Exercise Habits",
+      "topic": "health-habits",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Cooking at home is usually cheaper than eating out, although busy evenings make delivery tempting."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Planning three simple meals each week can reduce waste while still leaving room for spontaneity."
+        }
+      ],
+      "id": "b2-grocery-budgets",
+      "levelRationale": "Everyday argumentation with concession and practical advice; estimated B2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "contrastive-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Cooking at home is usually cheaper than eating out, although busy evenings make delivery tempting. Planning three simple meals each week can reduce waste while still leaving room for spontaneity.",
+      "title": "Planning Grocery Budgets",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Online courses offer flexibility that evening classes often cannot match, but they demand stronger self discipline."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Joining a small study group can provide structure without losing the freedom to learn at home."
+        }
+      ],
+      "id": "b2-online-learning",
+      "levelRationale": "Comparison of options with a balanced solution; provisional estimate for B2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "contrastive-stress",
+        "linking"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Online courses offer flexibility that evening classes often cannot match, but they demand stronger self discipline. Joining a small study group can provide structure without losing the freedom to learn at home.",
+      "title": "Learning Online Together",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "A short weekend trip can refresh you more than a long holiday spent mostly traveling."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Choosing nearby places reduces stress, while still offering the contrast that makes time away feel valuable."
+        }
+      ],
+      "id": "b2-weekend-trips",
+      "levelRationale": "Comparative evaluation with reasoned travel advice; estimated B2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "sentence-stress",
+        "contrastive-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "A short weekend trip can refresh you more than a long holiday spent mostly traveling. Choosing nearby places reduces stress, while still offering the contrast that makes time away feel valuable.",
+      "title": "Short Weekend Trips",
+      "topic": "travel",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "A separate workspace improves focus more than a faster laptop usually does."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Even a small corner with clear boundaries can signal to others that work has truly begun."
+        }
+      ],
+      "id": "b2-home-office",
+      "levelRationale": "Direct comparison supporting a practical claim; provisional estimate for B2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "contrastive-stress",
+        "word-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "A separate workspace improves focus more than a faster laptop usually does. Even a small corner with clear boundaries can signal to others that work has truly begun.",
+      "title": "A Quiet Home Office",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Public libraries offer far more than books, yet many people still see them as quiet storage rooms."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Borrowing tools, joining workshops, or studying there can reveal their broader community value."
+        }
+      ],
+      "id": "b2-public-libraries",
+      "levelRationale": "Contrast between perception and wider evidence; estimated B2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "contrastive-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Public libraries offer far more than books, yet many people still see them as quiet storage rooms. Borrowing tools, joining workshops, or studying there can reveal their broader community value.",
+      "title": "Libraries Beyond Books",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Electric bikes make hills feel flat, although some riders worry they remove all effort."
+        },
+        {
+          "id": "sentence-2",
+          "text": "In practice they encourage longer trips, which can mean more exercise rather than less overall."
+        }
+      ],
+      "id": "b2-electric-bikes",
+      "levelRationale": "Conceded objection followed by counterevidence; provisional estimate for B2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "contrastive-stress",
+        "linking"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Electric bikes make hills feel flat, although some riders worry they remove all effort. In practice they encourage longer trips, which can mean more exercise rather than less overall.",
+      "title": "Electric Bikes and Effort",
+      "topic": "health-habits",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Team chats respond faster than email, but constant messages can fragment attention throughout the day."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Setting two daily check times keeps collaboration smooth without sacrificing deep individual work."
+        }
+      ],
+      "id": "b2-team-chats",
+      "levelRationale": "Tradeoff analysis with a workplace recommendation; estimated B2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "sentence-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Team chats respond faster than email, but constant messages can fragment attention throughout the day. Setting two daily check times keeps collaboration smooth without sacrificing deep individual work.",
+      "title": "Managing Team Chats",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Community gardens produce fresh food, yet their social benefits may matter even more."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Neighbors who plant together often share advice, recipes, and support that extend well beyond the growing season."
+        }
+      ],
+      "id": "b2-urban-gardens",
+      "levelRationale": "Comparison of material and social benefits; provisional estimate for B2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "contrastive-stress",
+        "final-consonants"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Community gardens produce fresh food, yet their social benefits may matter even more. Neighbors who plant together often share advice, recipes, and support that extend well beyond the growing season.",
+      "title": "Gardens Between Neighbors",
+      "topic": "relationships",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Streaming services promise endless choice, but browsing menus can consume the whole evening."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Choosing one film before dinner saves time and makes the viewing feel more deliberate."
+        }
+      ],
+      "id": "b2-streaming-choices",
+      "levelRationale": "Problem contrasted with a behavioral solution; estimated B2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "contrastive-stress",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Streaming services promise endless choice, but browsing menus can consume the whole evening. Choosing one film before dinner saves time and makes the viewing feel more deliberate.",
+      "title": "Too Many Streaming Choices",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Flexible hours help parents more than free snacks or stylish offices ever will."
+        },
+        {
+          "id": "sentence-2",
+          "text": "When people control their start time, they can manage school runs without feeling guilty about work."
+        }
+      ],
+      "id": "b2-flexible-hours",
+      "levelRationale": "Argued preference with a concrete consequence; provisional estimate for B2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "contrastive-stress",
+        "linking"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Flexible hours help parents more than free snacks or stylish offices ever will. When people control their start time, they can manage school runs without feeling guilty about work.",
+      "title": "Flexible Hours for Parents",
+      "topic": "work-technology",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Neighborhood shops cannot match large supermarkets on price, yet they offer faster service and familiar advice."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Spending even a little locally can keep streets lively and jobs close to home."
+        }
+      ],
+      "id": "b2-neighborhood-shops",
+      "levelRationale": "Economic comparison with community reasoning; estimated B2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "thought-groups",
+        "contrastive-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Neighborhood shops cannot match large supermarkets on price, yet they offer faster service and familiar advice. Spending even a little locally can keep streets lively and jobs close to home.",
+      "title": "Supporting Neighborhood Shops",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Recycling correctly matters more than recycling everything in a careless rush."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Rinsing containers and sorting paper properly can prevent whole batches from being rejected at the facility."
+        }
+      ],
+      "id": "b2-recycling-habits",
+      "levelRationale": "Contrasted claim about quality versus quantity; provisional estimate for B2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "contrastive-stress",
+        "consonant-clusters"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Recycling correctly matters more than recycling everything in a careless rush. Rinsing containers and sorting paper properly can prevent whole batches from being rejected at the facility.",
+      "title": "Recycling With Care",
+      "topic": "science-environment",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Maintaining friendships after a move takes more planning than many people expect."
+        },
+        {
+          "id": "sentence-2",
+          "text": "A brief monthly video call often preserves closeness better than occasional long messages sent under pressure."
+        }
+      ],
+      "id": "b2-friendship-distance",
+      "levelRationale": "Relational comparison with practical advice; estimated B2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "B2",
+      "focusTags": [
+        "sentence-stress",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "Maintaining friendships after a move takes more planning than many people expect. A brief monthly video call often preserves closeness better than occasional long messages sent under pressure.",
+      "title": "Friendship Across Distance",
+      "topic": "relationships",
+      "version": 1
     }
   ]
 }

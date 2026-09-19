@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "notice": "Link-only recommendations. No transcript, adaptation, or audio is copied from these publishers. Browsing built-in passages never requires network access.",
+  "resources": [
+    {
+      "id": "bbc-learning-english",
+      "title": "BBC Learning English — pronunciation and topic lessons",
+      "url": "https://www.bbc.co.uk/learningenglish",
+      "publisher": "BBC",
+      "accentLabel": "Primarily British English; labelled here as non-US reference",
+      "suggestedBands": ["A2", "B1.1", "B1.2", "B2"],
+      "rightsNote": "Link only. Reuse rights unverified for this app; confirm BBC permissions before copying transcripts or hosting audio."
+    },
+    {
+      "id": "british-council-b1-listening",
+      "title": "British Council LearnEnglish — B1 listening library",
+      "url": "https://learnenglish.britishcouncil.org/free-resources/listening/b1",
+      "publisher": "British Council",
+      "accentLabel": "Mostly British English; labelled here as non-US reference",
+      "suggestedBands": ["A2", "B1.1", "B1.2"],
+      "rightsNote": "Link only. Publisher terms restrict republication and modification without approval; do not republish lessons as app content."
+    },
+    {
+      "id": "voa-learning-english",
+      "title": "VOA Learning English — slower American English programs",
+      "url": "https://learningenglish.voanews.com/",
+      "publisher": "VOA Learning English",
+      "accentLabel": "American English",
+      "suggestedBands": ["A1", "A2", "B1.1", "B1.2", "B2"],
+      "rightsNote": "Link only. Exclusively VOA-produced material is public domain with credit requested; third-party material is excluded. Verify each text/audio asset individually before bundling."
+    },
+    {
+      "id": "tatoeba-corpus",
+      "title": "Tatoeba — community sentence corpus",
+      "url": "https://tatoeba.org/",
+      "publisher": "Tatoeba",
+      "accentLabel": "Varies by recording; check each audio licence independently",
+      "suggestedBands": ["A1", "A2", "B1.1"],
+      "rightsNote": "Link only. Keep sentence IDs, creator attribution, and licences; never assume a text licence covers its recording."
+    }
+  ]
+}

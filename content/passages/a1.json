@@ -2,54 +2,460 @@
   "schemaVersion": 1,
   "passages": [
     {
-      "id": "a1-park-walk", "version": 1, "title": "A Walk in the Park",
+      "id": "a1-park-walk",
+      "version": 1,
+      "title": "A Walk in the Park",
       "text": "My name is Sam. I live near a park. I walk there with my friend.",
-      "cefrLevel": "A1", "levelRationale": "Short present-tense sentences use familiar places and actions.",
-      "topic": "daily-life", "focusTags": ["final-consonants"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "My name is Sam."}, {"id": "sentence-2", "text": "I live near a park."}, {"id": "sentence-3", "text": "I walk there with my friend."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
-      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
-      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "cefrLevel": "A1",
+      "levelRationale": "Short present-tense sentences use familiar places and actions.",
+      "topic": "daily-life",
+      "focusTags": [
+        "final-consonants"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "My name is Sam."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I live near a park."
+        },
+        {
+          "id": "sentence-3",
+          "text": "I walk there with my friend."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "a1-breakfast", "version": 1, "title": "Morning Breakfast",
+      "id": "a1-breakfast",
+      "version": 1,
+      "title": "Morning Breakfast",
       "text": "I make eggs and toast. My coffee is hot. Then I start my day.",
-      "cefrLevel": "A1", "levelRationale": "Common food words and simple present-tense clauses support beginner practice.",
-      "topic": "health-habits", "focusTags": ["final-consonants"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "I make eggs and toast."}, {"id": "sentence-2", "text": "My coffee is hot."}, {"id": "sentence-3", "text": "Then I start my day."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
-      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
-      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "cefrLevel": "A1",
+      "levelRationale": "Common food words and simple present-tense clauses support beginner practice.",
+      "topic": "health-habits",
+      "focusTags": [
+        "final-consonants"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I make eggs and toast."
+        },
+        {
+          "id": "sentence-2",
+          "text": "My coffee is hot."
+        },
+        {
+          "id": "sentence-3",
+          "text": "Then I start my day."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "a1-blue-bag", "version": 1, "title": "My Blue Bag",
+      "id": "a1-blue-bag",
+      "version": 1,
+      "title": "My Blue Bag",
       "text": "This is my blue bag. It has two books, a pen, and my lunch.",
-      "cefrLevel": "A1", "levelRationale": "A familiar object is described with basic nouns and the verb have.",
-      "topic": "daily-life", "focusTags": ["sentence-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "This is my blue bag."}, {"id": "sentence-2", "text": "It has two books, a pen, and my lunch."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
-      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
-      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "cefrLevel": "A1",
+      "levelRationale": "A familiar object is described with basic nouns and the verb have.",
+      "topic": "daily-life",
+      "focusTags": [
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "This is my blue bag."
+        },
+        {
+          "id": "sentence-2",
+          "text": "It has two books, a pen, and my lunch."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "a1-library-book", "version": 1, "title": "A Library Book",
+      "id": "a1-library-book",
+      "version": 1,
+      "title": "A Library Book",
       "text": "I have a new library book. It has bright pictures and a funny story.",
-      "cefrLevel": "A1", "levelRationale": "Basic possession and description use familiar nouns and short present-tense sentences.",
-      "topic": "daily-life", "focusTags": ["word-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "I have a new library book."}, {"id": "sentence-2", "text": "It has bright pictures and a funny story."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
-      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
-      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "cefrLevel": "A1",
+      "levelRationale": "Basic possession and description use familiar nouns and short present-tense sentences.",
+      "topic": "daily-life",
+      "focusTags": [
+        "word-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I have a new library book."
+        },
+        {
+          "id": "sentence-2",
+          "text": "It has bright pictures and a funny story."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "a1-bus-stop", "version": 1, "title": "The Bus Stop",
+      "id": "a1-bus-stop",
+      "version": 1,
+      "title": "The Bus Stop",
       "text": "The bus stop is near my home. I wait there with my sister.",
-      "cefrLevel": "A1", "levelRationale": "A familiar travel routine uses common place words and simple present tense.",
-      "topic": "travel", "focusTags": ["final-consonants"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "The bus stop is near my home."}, {"id": "sentence-2", "text": "I wait there with my sister."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
-      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
-      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "cefrLevel": "A1",
+      "levelRationale": "A familiar travel routine uses common place words and simple present tense.",
+      "topic": "travel",
+      "focusTags": [
+        "final-consonants"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "The bus stop is near my home."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I wait there with my sister."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I walk to the park."
+        },
+        {
+          "id": "sentence-2",
+          "text": "The sun is warm."
+        },
+        {
+          "id": "sentence-3",
+          "text": "Birds sing."
+        }
+      ],
+      "id": "a1-morning-stroll",
+      "levelRationale": "Short present-tense sentences about a familiar outing; provisional estimate for A1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A1",
+      "focusTags": [
+        "word-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "I walk to the park. The sun is warm. Birds sing.",
+      "title": "Morning Stroll",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I see a red door."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I knock and wait."
+        }
+      ],
+      "id": "a1-red-door",
+      "levelRationale": "Short present-tense sentences about a familiar object; estimated A1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A1",
+      "focusTags": [
+        "final-consonants"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "I see a red door. I knock and wait.",
+      "title": "The Red Door",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We need fresh milk."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We go to the small shop."
+        }
+      ],
+      "id": "a1-milk-shop",
+      "levelRationale": "Basic shopping request with simple present verbs; provisional estimate for A1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A1",
+      "focusTags": [
+        "consonant-clusters"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "We need fresh milk. We go to the small shop.",
+      "title": "The Milk Shop",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "My room is bright and clean."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I open the window."
+        }
+      ],
+      "id": "a1-sunny-room",
+      "levelRationale": "Familiar home words in short simple sentences; estimated A1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A1",
+      "focusTags": [
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "My room is bright and clean. I open the window.",
+      "title": "My Sunny Room",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I have a new pen."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I write my name."
+        }
+      ],
+      "id": "a1-new-pen",
+      "levelRationale": "Very short present-tense statements about a familiar object; provisional estimate for A1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A1",
+      "focusTags": [
+        "final-consonants"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "I have a new pen. I write my name.",
+      "title": "My New Pen",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "The cat sleeps on the mat."
+        },
+        {
+          "id": "sentence-2",
+          "text": "It is quiet and soft."
+        }
+      ],
+      "id": "a1-cat-nap",
+      "levelRationale": "Simple present description with common adjectives; estimated A1 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A1",
+      "focusTags": [
+        "linking"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "The cat sleeps on the mat. It is quiet and soft.",
+      "title": "Cat Nap",
+      "topic": "science-environment",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I take my blue card."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I wait for the bus at six."
+        }
+      ],
+      "id": "a1-bus-card",
+      "levelRationale": "Everyday travel routine with simple present tense; provisional estimate for A1.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A1",
+      "focusTags": [
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "I take my blue card. I wait for the bus at six.",
+      "title": "My Bus Card",
+      "topic": "travel",
+      "version": 1
     }
   ]
 }

@@ -162,7 +162,7 @@ describe("ClearSpeakApp", () => {
     const { rerender } = render(<ClearSpeakApp accessRequired={false} />);
     await user.click(screen.getByRole("button", { name: /browse practice texts/i }));
     expect(screen.getByLabelText(/practice level/i)).toHaveValue("B1.2");
-    expect(screen.getByText("12 texts")).toBeInTheDocument();
+    expect(screen.getByText("30 texts")).toBeInTheDocument();
 
     await user.click(screen.getAllByRole("button", { name: /use this text/i })[0]);
     const box = screen.getByLabelText(/your practice text/i);
@@ -181,12 +181,12 @@ describe("ClearSpeakApp", () => {
     const { rerender } = render(<ClearSpeakApp accessRequired={false} />);
     await user.click(screen.getByRole("button", { name: /browse practice texts/i }));
     await user.selectOptions(screen.getByLabelText(/practice level/i), "A2");
-    expect(screen.getByText("6 texts")).toBeInTheDocument();
+    expect(screen.getByText("18 texts")).toBeInTheDocument();
 
     await user.click(screen.getAllByRole("button", { name: /use this text/i })[0]);
     await user.click(screen.getByRole("button", { name: /browse practice texts/i }));
     expect(screen.getByLabelText(/practice level/i)).toHaveValue("A2");
-    expect(screen.getByText("6 texts")).toBeInTheDocument();
+    expect(screen.getByText("18 texts")).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: /close library/i }));
     await user.click(screen.getByRole("button", { name: /start recording/i }));
@@ -196,7 +196,7 @@ describe("ClearSpeakApp", () => {
 
     await user.click(screen.getByRole("button", { name: /browse practice texts/i }));
     expect(screen.getByLabelText(/practice level/i)).toHaveValue("A2");
-    expect(screen.getByText("6 texts")).toBeInTheDocument();
+    expect(screen.getByText("18 texts")).toBeInTheDocument();
   });
 
   it("records, analyzes, and shows accessible results with replay", async () => {

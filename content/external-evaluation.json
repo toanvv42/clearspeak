@@ -1,0 +1,410 @@
+{
+  "schemaVersion": 1,
+  "evaluatedAt": "2026-09-19",
+  "policy": "Original reviewed writing first. External candidates are identifiable source items, and text and audio rights are assessed separately. Excluded items are never bundled.",
+  "publishedCount": 0,
+  "voaCandidates": [
+    {
+      "slot": "voa-01",
+      "publisher": "VOA Learning English",
+      "sourceId": "5963942",
+      "title": "Grammar, Planning, and Summer Trips",
+      "url": "https://learningenglish.voanews.com/a/grammar-planning-and-summer-trips-/5963942.html",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "passage-with-audio",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "not-cleared",
+        "textLicense": "Public domain only if produced exclusively by VOA",
+        "textEvidenceUrl": "https://learningenglish.voanews.com/p/6021.html",
+        "attribution": "John Russell for VOA Learning English; edited by Bryan Lynn",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Exclusive VOA production not independently established",
+        "audioEvidenceUrl": "https://learningenglish.voanews.com/a/grammar-planning-and-summer-trips-/5963942.html"
+      },
+      "reason": "The lesson is far above the passage limit; an excerpt or adaptation would not match the full recording, and the recording's exclusive-production status was not independently documented."
+    },
+    {
+      "slot": "voa-02",
+      "publisher": "VOA Learning English",
+      "sourceId": "7155122",
+      "title": "Grammar and Recommendations",
+      "url": "https://learningenglish.voanews.com/a/grammar-and-recommendations-/7155122.html",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "passage-with-audio",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "not-cleared",
+        "textLicense": "Public domain only if produced exclusively by VOA",
+        "textEvidenceUrl": "https://learningenglish.voanews.com/p/6021.html",
+        "attribution": "John Russell for VOA Learning English",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Exclusive VOA production not independently established",
+        "audioEvidenceUrl": "https://learningenglish.voanews.com/a/grammar-and-recommendations-/7155122.html"
+      },
+      "reason": "The lesson is too long for a built-in passage; no short excerpt with independently cleared matching audio was identified."
+    },
+    {
+      "slot": "voa-03",
+      "publisher": "VOA Learning English",
+      "sourceId": "2722827",
+      "title": "Everyday Grammar: Gerunds and Infinitives",
+      "url": "https://learningenglish.voanews.com/a/everyday-grammar-gerunds-infinitives/2722827.html",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "passage-with-audio",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "not-cleared",
+        "textLicense": "Public domain only if produced exclusively by VOA",
+        "textEvidenceUrl": "https://learningenglish.voanews.com/p/6021.html",
+        "attribution": "Adam Brock for VOA Learning English; edited by Dr. Jill Robbins",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Exclusive VOA production not independently established",
+        "audioEvidenceUrl": "https://learningenglish.voanews.com/a/everyday-grammar-gerunds-infinitives/2722827.html"
+      },
+      "reason": "The complete lesson exceeds the length limit, while adapting its examples would lose recording alignment and requires further asset-level review."
+    },
+    {
+      "slot": "voa-04",
+      "publisher": "VOA Learning English",
+      "sourceId": "2732061",
+      "title": "Everyday Grammar: In, On, and At",
+      "url": "https://learningenglish.voanews.com/a/prepositions-time-place-everyday-grammar-in-on-at/2732061.html",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "passage-with-audio",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "not-cleared",
+        "textLicense": "Public domain only if produced exclusively by VOA",
+        "textEvidenceUrl": "https://learningenglish.voanews.com/p/6021.html",
+        "attribution": "Dr. Jill Robbins for VOA Learning English; edited by Ashley Thompson",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Exclusive VOA production not independently established",
+        "audioEvidenceUrl": "https://learningenglish.voanews.com/a/prepositions-time-place-everyday-grammar-in-on-at/2732061.html"
+      },
+      "reason": "The source is a full lesson rather than a short passage; excerpt-level text and audio provenance was not established."
+    },
+    {
+      "slot": "voa-05",
+      "publisher": "VOA Learning English",
+      "sourceId": "7465461",
+      "title": "A Trip Around the World",
+      "url": "https://learningenglish.voanews.com/a/a-trip-around-the-world-/7465461.html",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "passage-with-audio",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "not-cleared",
+        "textLicense": "Public domain only if produced exclusively by VOA",
+        "textEvidenceUrl": "https://learningenglish.voanews.com/p/6021.html",
+        "attribution": "John Russell for VOA Learning English",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Exclusive VOA production not independently established",
+        "audioEvidenceUrl": "https://learningenglish.voanews.com/a/a-trip-around-the-world-/7465461.html"
+      },
+      "reason": "The lesson uses contributed messages and is longer than the app limit; third-party text and matching-audio rights would need individual confirmation."
+    },
+    {
+      "slot": "voa-06",
+      "publisher": "VOA Learning English",
+      "sourceId": "5637443",
+      "title": "Make a Habit of Learning English",
+      "url": "https://learningenglish.voanews.com/a/make-a-habit-of-learning-english/5637443.html",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "passage-with-audio",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "not-cleared",
+        "textLicense": "Public domain only if produced exclusively by VOA",
+        "textEvidenceUrl": "https://learningenglish.voanews.com/p/6021.html",
+        "attribution": "John Russell for VOA Learning English; edited by Bryan Lynn",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Exclusive VOA production not independently established",
+        "audioEvidenceUrl": "https://learningenglish.voanews.com/a/make-a-habit-of-learning-english/5637443.html"
+      },
+      "reason": "The article quotes third-party books and exceeds the passage limit, so exclusively VOA-produced text and audio cannot be isolated safely."
+    },
+    {
+      "slot": "voa-07",
+      "publisher": "VOA Learning English",
+      "sourceId": "5326540",
+      "title": "What Are the Best Ways to Study at Home?",
+      "url": "https://learningenglish.voanews.com/a/what-are-the-best-ways-to-study-at-home-/5326540.html",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "passage-with-audio",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "not-cleared",
+        "textLicense": "Public domain only if produced exclusively by VOA",
+        "textEvidenceUrl": "https://learningenglish.voanews.com/p/6021.html",
+        "attribution": "Anne Ball for VOA Learning English; edited by Ashley Thompson",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Exclusive VOA production not independently established",
+        "audioEvidenceUrl": "https://learningenglish.voanews.com/a/what-are-the-best-ways-to-study-at-home-/5326540.html"
+      },
+      "reason": "The source is longer than 60 words, and no independently verified short recording matching a permissible excerpt was found."
+    },
+    {
+      "slot": "voa-08",
+      "publisher": "VOA Learning English",
+      "sourceId": "5945798",
+      "title": "Grammar for Summer: Rest, Relaxation",
+      "url": "https://learningenglish.voanews.com/a/grammar-for-summer-rest-relaxation/5945798.html",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "passage-with-audio",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "not-cleared",
+        "textLicense": "Public domain only if produced exclusively by VOA",
+        "textEvidenceUrl": "https://learningenglish.voanews.com/p/6021.html",
+        "attribution": "John Russell for VOA Learning English; edited by Bryan Lynn",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Exclusive VOA production not independently established",
+        "audioEvidenceUrl": "https://learningenglish.voanews.com/a/grammar-for-summer-rest-relaxation/5945798.html"
+      },
+      "reason": "The full lesson exceeds app limits; adapting the dialogue would invalidate its alignment with the original recording."
+    },
+    {
+      "slot": "voa-09",
+      "publisher": "VOA Learning English",
+      "sourceId": "7176364",
+      "title": "Recommendations, Part Two",
+      "url": "https://learningenglish.voanews.com/a/recommendations-part-two-/7176364.html",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "passage-with-audio",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "not-cleared",
+        "textLicense": "Public domain only if produced exclusively by VOA",
+        "textEvidenceUrl": "https://learningenglish.voanews.com/p/6021.html",
+        "attribution": "John Russell for VOA Learning English",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Exclusive VOA production not independently established",
+        "audioEvidenceUrl": "https://learningenglish.voanews.com/a/recommendations-part-two-/7176364.html"
+      },
+      "reason": "The item is a long lesson; no rights-cleared, audio-matched excerpt within the app's word targets was documented."
+    },
+    {
+      "slot": "voa-10",
+      "publisher": "VOA Learning English",
+      "sourceId": "4605975",
+      "title": "How to Talk About Preferences",
+      "url": "https://learningenglish.voanews.com/a/how-to-talk-about-preferences/4605975.html",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "passage-with-audio",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "not-cleared",
+        "textLicense": "Public domain only if produced exclusively by VOA",
+        "textEvidenceUrl": "https://learningenglish.voanews.com/p/6021.html",
+        "attribution": "Alice Bryant for VOA Learning English",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Exclusive VOA production not independently established",
+        "audioEvidenceUrl": "https://learningenglish.voanews.com/a/how-to-talk-about-preferences/4605975.html"
+      },
+      "reason": "The complete lesson is too long, and selecting or adapting its dialogue would require a new matching recording."
+    }
+  ],
+  "tatoebaCandidates": [
+    {
+      "slot": "tatoeba-01",
+      "publisher": "Tatoeba",
+      "sourceId": "313334",
+      "title": "She works in a bank.",
+      "url": "https://tatoeba.org/en/sentences/show/313334",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "sentence-drill",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "cleared",
+        "textLicense": "CC BY 2.0 FR",
+        "textEvidenceUrl": "https://tatoeba.org/en/sentences/show/313334",
+        "attribution": "Tatoeba sentence 313334; contributor shown as unknown",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Audio author and licence were not exposed reliably",
+        "audioEvidenceUrl": "https://tatoeba.org/en/sentences/show/313334"
+      },
+      "reason": "The sentence is below the A1 passage target and lacks usable creator attribution; its audio licence could not be verified independently."
+    },
+    {
+      "slot": "tatoeba-02",
+      "publisher": "Tatoeba",
+      "sourceId": "398941",
+      "title": "Sometimes I go, sometimes I don't.",
+      "url": "https://tatoeba.org/en/sentences/show/398941",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "sentence-drill",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "cleared",
+        "textLicense": "CC BY 2.0 FR",
+        "textEvidenceUrl": "https://tatoeba.org/en/sentences/show/398941",
+        "attribution": "Tatoeba sentence 398941; FeuDRenais",
+        "audioStatus": "not-cleared",
+        "audioLicense": "No independently verified reusable audio licence",
+        "audioEvidenceUrl": "https://tatoeba.org/en/sentences/show/398941"
+      },
+      "reason": "At six words it is below the A1 passage target, and no independently licensed matching audio was confirmed."
+    },
+    {
+      "slot": "tatoeba-03",
+      "publisher": "Tatoeba",
+      "sourceId": "36963",
+      "title": "I go to a driving school.",
+      "url": "https://tatoeba.org/en/sentences/show/36963",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "sentence-drill",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "cleared",
+        "textLicense": "CC BY 2.0 FR",
+        "textEvidenceUrl": "https://tatoeba.org/en/sentences/show/36963",
+        "attribution": "Tatoeba sentence 36963; contributor shown as unknown",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Audio author and licence were not exposed reliably",
+        "audioEvidenceUrl": "https://tatoeba.org/en/sentences/show/36963"
+      },
+      "reason": "The sentence is shorter than the A1 target and lacks sufficient creator and audio attribution for publication."
+    },
+    {
+      "slot": "tatoeba-04",
+      "publisher": "Tatoeba",
+      "sourceId": "879630",
+      "title": "I go into the store.",
+      "url": "https://tatoeba.org/en/sentences/show/879630",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "sentence-drill",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "cleared",
+        "textLicense": "CC BY 2.0 FR",
+        "textEvidenceUrl": "https://tatoeba.org/en/sentences/show/879630",
+        "attribution": "Tatoeba sentence 879630; alexmarcelo",
+        "audioStatus": "not-cleared",
+        "audioLicense": "No independently verified reusable audio licence",
+        "audioEvidenceUrl": "https://tatoeba.org/en/sentences/show/879630"
+      },
+      "reason": "At five words it is below the A1 target, and a separately licensed recording was not verified."
+    },
+    {
+      "slot": "tatoeba-05",
+      "publisher": "Tatoeba",
+      "sourceId": "19682",
+      "title": "Hurry up, and you can catch the bus.",
+      "url": "https://tatoeba.org/en/sentences/show/19682",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "sentence-drill",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "cleared",
+        "textLicense": "CC BY 2.0 FR",
+        "textEvidenceUrl": "https://tatoeba.org/en/sentences/show/19682",
+        "attribution": "Tatoeba sentence 19682; contributor shown as unknown",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Audio author and licence were not exposed reliably",
+        "audioEvidenceUrl": "https://tatoeba.org/en/sentences/show/19682"
+      },
+      "reason": "Although the length could fit A1, unknown creator attribution and unverified audio rights prevent publication."
+    },
+    {
+      "slot": "tatoeba-06",
+      "publisher": "Tatoeba",
+      "sourceId": "7925282",
+      "title": "I have been waiting for the bus for an hour.",
+      "url": "https://tatoeba.org/en/sentences/show/7925282",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "sentence-drill",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "cleared",
+        "textLicense": "CC BY 2.0 FR",
+        "textEvidenceUrl": "https://tatoeba.org/en/sentences/show/7925282",
+        "attribution": "Tatoeba sentence 7925282; adiante19",
+        "audioStatus": "not-cleared",
+        "audioLicense": "No independently verified reusable audio licence",
+        "audioEvidenceUrl": "https://tatoeba.org/en/sentences/show/7925282"
+      },
+      "reason": "Its grammar suggests a level whose passage minimum is longer than this sentence, and no separately licensed recording was verified."
+    },
+    {
+      "slot": "tatoeba-07",
+      "publisher": "Tatoeba",
+      "sourceId": "35308",
+      "title": "The bus has already gone.",
+      "url": "https://tatoeba.org/en/sentences/show/35308",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "sentence-drill",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "cleared",
+        "textLicense": "CC BY 2.0 FR",
+        "textEvidenceUrl": "https://tatoeba.org/en/sentences/show/35308",
+        "attribution": "Tatoeba sentence 35308; contributor shown as unknown",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Audio author and licence were not exposed reliably",
+        "audioEvidenceUrl": "https://tatoeba.org/en/sentences/show/35308"
+      },
+      "reason": "The sentence is too short for the relevant level and lacks adequate creator and audio attribution."
+    },
+    {
+      "slot": "tatoeba-08",
+      "publisher": "Tatoeba",
+      "sourceId": "2264364",
+      "title": "She works here, but her office is actually on the second floor.",
+      "url": "https://tatoeba.org/en/sentences/show/2264364",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "sentence-drill",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "cleared",
+        "textLicense": "CC BY 2.0 FR",
+        "textEvidenceUrl": "https://tatoeba.org/en/sentences/show/2264364",
+        "attribution": "Tatoeba sentence 2264364; CK",
+        "audioStatus": "not-cleared",
+        "audioLicense": "No independently verified reusable audio licence",
+        "audioEvidenceUrl": "https://tatoeba.org/en/sentences/show/2264364"
+      },
+      "reason": "The sentence is shorter than the A2 target and no independently licensed matching audio was confirmed."
+    },
+    {
+      "slot": "tatoeba-09",
+      "publisher": "Tatoeba",
+      "sourceId": "255068",
+      "title": "I ran as fast as I could, but I missed the bus.",
+      "url": "https://tatoeba.org/en/sentences/show/255068",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "sentence-drill",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "cleared",
+        "textLicense": "CC BY 2.0 FR",
+        "textEvidenceUrl": "https://tatoeba.org/en/sentences/show/255068",
+        "attribution": "Tatoeba sentence 255068; contributor shown as unknown",
+        "audioStatus": "not-cleared",
+        "audioLicense": "Audio author and licence were not exposed reliably",
+        "audioEvidenceUrl": "https://tatoeba.org/en/sentences/show/255068"
+      },
+      "reason": "The sentence is below the target length for its likely level and lacks adequate creator and audio attribution."
+    },
+    {
+      "slot": "tatoeba-10",
+      "publisher": "Tatoeba",
+      "sourceId": "12720134",
+      "title": "There's the bus.",
+      "url": "https://tatoeba.org/en/sentences/show/12720134",
+      "checkedAt": "2026-09-19",
+      "intendedUse": "sentence-drill",
+      "decision": "excluded",
+      "rights": {
+        "textStatus": "cleared",
+        "textLicense": "CC BY 2.0 FR",
+        "textEvidenceUrl": "https://tatoeba.org/en/sentences/show/12720134",
+        "attribution": "Tatoeba sentence 12720134; rul",
+        "audioStatus": "not-cleared",
+        "audioLicense": "No independently verified reusable audio licence",
+        "audioEvidenceUrl": "https://tatoeba.org/en/sentences/show/12720134"
+      },
+      "reason": "At three words it is too short for the library, and no independently licensed matching audio was confirmed."
+    }
+  ]
+}

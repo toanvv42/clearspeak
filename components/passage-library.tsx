@@ -17,6 +17,10 @@ import {
   fetchFavourites,
   removeFavouriteRequest,
 } from "@/lib/history/client";
+import {
+  EXTERNAL_RESOURCES,
+  EXTERNAL_RESOURCES_NOTICE,
+} from "@/lib/external-resources";
 import { reviewTargetKey } from "@/lib/review-schedule";
 
 const TOPIC_LABELS: Record<PassageTopic, string> = {
@@ -236,6 +240,34 @@ export default function PassageLibrary({
           })}
         </ul>
       )}
+
+      <details className="mt-4 rounded-xl border border-stone-200 bg-white p-3 dark:border-white/10 dark:bg-white/[0.04]">
+        <summary className="cursor-pointer text-sm font-bold">More listening practice</summary>
+        <p className="mt-2 text-xs leading-5 text-stone-500 dark:text-stone-400">
+          {EXTERNAL_RESOURCES_NOTICE}
+        </p>
+        <ul className="mt-3 space-y-2">
+          {EXTERNAL_RESOURCES.map((resource) => (
+            <li key={resource.id} className="rounded-lg bg-stone-50 p-3 dark:bg-black/20">
+              <a
+                href={resource.url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-sm font-bold text-[#2563eb] underline decoration-[#2563eb]/30 underline-offset-2 hover:decoration-[#2563eb]"
+              >
+                {resource.title}
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+              <p className="mt-1 text-xs text-stone-600 dark:text-stone-300">
+                {resource.accentLabel} · Suggested for {resource.suggestedBands.join(", ")}
+              </p>
+              <p className="mt-1 text-xs leading-5 text-stone-500 dark:text-stone-400">
+                {resource.rightsNote}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </details>
     </section>
   );
 }

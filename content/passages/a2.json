@@ -2,64 +2,683 @@
   "schemaVersion": 1,
   "passages": [
     {
-      "id": "a2-missed-bus", "version": 1, "title": "The Missed Bus",
+      "id": "a2-missed-bus",
+      "version": 1,
+      "title": "The Missed Bus",
       "text": "Yesterday, I missed the bus, so I walked to the station. I bought a ticket and called my friend.",
-      "cefrLevel": "A2", "levelRationale": "A short sequence uses frequent past-tense verbs and a familiar travel situation.",
-      "topic": "travel", "focusTags": ["past-endings", "thought-groups"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "Yesterday, I missed the bus, so I walked to the station."}, {"id": "sentence-2", "text": "I bought a ticket and called my friend."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
-      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
-      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "cefrLevel": "A2",
+      "levelRationale": "A short sequence uses frequent past-tense verbs and a familiar travel situation.",
+      "topic": "travel",
+      "focusTags": [
+        "past-endings",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "Yesterday, I missed the bus, so I walked to the station."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I bought a ticket and called my friend."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "a2-grocery-list", "version": 1, "title": "At the Grocery Store",
+      "id": "a2-grocery-list",
+      "version": 1,
+      "title": "At the Grocery Store",
       "text": "I need rice, tomatoes, and fresh bread. After work, I will stop at the store and carry everything home.",
-      "cefrLevel": "A2", "levelRationale": "A concrete shopping task combines a simple list with a future plan.",
-      "topic": "daily-life", "focusTags": ["final-consonants", "sentence-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "I need rice, tomatoes, and fresh bread."}, {"id": "sentence-2", "text": "After work, I will stop at the store and carry everything home."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
-      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
-      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "cefrLevel": "A2",
+      "levelRationale": "A concrete shopping task combines a simple list with a future plan.",
+      "topic": "daily-life",
+      "focusTags": [
+        "final-consonants",
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I need rice, tomatoes, and fresh bread."
+        },
+        {
+          "id": "sentence-2",
+          "text": "After work, I will stop at the store and carry everything home."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "a2-evening-call", "version": 1, "title": "An Evening Call",
+      "id": "a2-evening-call",
+      "version": 1,
+      "title": "An Evening Call",
       "text": "My sister called me after dinner. We talked about her new job, and we planned to meet on Saturday.",
-      "cefrLevel": "A2", "levelRationale": "Familiar family and work vocabulary appears in two linked past events.",
-      "topic": "relationships", "focusTags": ["past-endings", "linking"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "My sister called me after dinner."}, {"id": "sentence-2", "text": "We talked about her new job, and we planned to meet on Saturday."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
-      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
-      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "cefrLevel": "A2",
+      "levelRationale": "Familiar family and work vocabulary appears in two linked past events.",
+      "topic": "relationships",
+      "focusTags": [
+        "past-endings",
+        "linking"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "My sister called me after dinner."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We talked about her new job, and we planned to meet on Saturday."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "a2-water-break", "version": 1, "title": "A Healthy Break",
+      "id": "a2-water-break",
+      "version": 1,
+      "title": "A Healthy Break",
       "text": "I sit at a computer all morning. Every hour, I stand up, drink some water, and stretch my legs.",
-      "cefrLevel": "A2", "levelRationale": "A familiar routine uses present-tense actions and a simple time expression.",
-      "topic": "health-habits", "focusTags": ["consonant-clusters", "thought-groups"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "I sit at a computer all morning."}, {"id": "sentence-2", "text": "Every hour, I stand up, drink some water, and stretch my legs."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
-      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
-      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "cefrLevel": "A2",
+      "levelRationale": "A familiar routine uses present-tense actions and a simple time expression.",
+      "topic": "health-habits",
+      "focusTags": [
+        "consonant-clusters",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I sit at a computer all morning."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Every hour, I stand up, drink some water, and stretch my legs."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "a2-weekend-picnic", "version": 1, "title": "A Weekend Picnic",
+      "id": "a2-weekend-picnic",
+      "version": 1,
+      "title": "A Weekend Picnic",
       "text": "We packed fruit and sandwiches for the picnic. The sun was warm, and the children played beside the lake.",
-      "cefrLevel": "A2", "levelRationale": "A familiar outing is described with frequent past-tense verbs and concrete details.",
-      "topic": "relationships", "focusTags": ["past-endings", "word-stress"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "We packed fruit and sandwiches for the picnic."}, {"id": "sentence-2", "text": "The sun was warm, and the children played beside the lake."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
-      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
-      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "cefrLevel": "A2",
+      "levelRationale": "A familiar outing is described with frequent past-tense verbs and concrete details.",
+      "topic": "relationships",
+      "focusTags": [
+        "past-endings",
+        "word-stress"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We packed fruit and sandwiches for the picnic."
+        },
+        {
+          "id": "sentence-2",
+          "text": "The sun was warm, and the children played beside the lake."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
     },
     {
-      "id": "a2-rainy-commute", "version": 1, "title": "A Rainy Commute",
+      "id": "a2-rainy-commute",
+      "version": 1,
+      "title": "A Rainy Commute",
       "text": "It started raining before I left home. I wore my blue coat and carried an umbrella to the office.",
-      "cefrLevel": "A2", "levelRationale": "A simple past event combines familiar weather, clothing, and travel vocabulary.",
-      "topic": "travel", "focusTags": ["past-endings", "linking"], "locale": "en-US",
-      "chunks": [{"id": "sentence-1", "text": "It started raining before I left home."}, {"id": "sentence-2", "text": "I wore my blue coat and carried an umbrella to the office."}],
-      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
-      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
-      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+      "cefrLevel": "A2",
+      "levelRationale": "A simple past event combines familiar weather, clothing, and travel vocabulary.",
+      "topic": "travel",
+      "focusTags": [
+        "past-endings",
+        "linking"
+      ],
+      "locale": "en-US",
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "It started raining before I left home."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I wore my blue coat and carried an umbrella to the office."
+        }
+      ],
+      "source": {
+        "kind": "original",
+        "author": "ClearSpeak",
+        "attribution": "Original ClearSpeak practice text"
+      },
+      "rights": {
+        "status": "cleared",
+        "license": "ClearSpeak original content",
+        "checkedAt": "2026-09-19"
+      },
+      "review": {
+        "status": "reviewed",
+        "reviewedAt": "2026-09-19"
+      }
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I waited at the station for ten minutes."
+        },
+        {
+          "id": "sentence-2",
+          "text": "The train arrived late and I called my friend."
+        }
+      ],
+      "id": "a2-late-train",
+      "levelRationale": "Past-tense travel routine with connected phrases; provisional estimate for A2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A2",
+      "focusTags": [
+        "past-endings",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "I waited at the station for ten minutes. The train arrived late and I called my friend.",
+      "title": "The Late Train",
+      "topic": "travel",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We walked to the market and bought fresh bread."
+        },
+        {
+          "id": "sentence-2",
+          "text": "Then we shared it with our kind neighbors."
+        }
+      ],
+      "id": "a2-fresh-bread",
+      "levelRationale": "Simple past shopping routine with phrase rhythm; estimated A2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A2",
+      "focusTags": [
+        "past-endings"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "We walked to the market and bought fresh bread. Then we shared it with our kind neighbors.",
+      "title": "Fresh Bread",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "She finished work at five and phoned her mom."
+        },
+        {
+          "id": "sentence-2",
+          "text": "They talked about dinner and weekend plans."
+        }
+      ],
+      "id": "a2-evening-phone-call",
+      "levelRationale": "Daily routine with past endings and natural linking; provisional estimate for A2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A2",
+      "focusTags": [
+        "past-endings",
+        "linking"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "She finished work at five and phoned her mom. They talked about dinner and weekend plans.",
+      "title": "An Evening Phone Call",
+      "topic": "relationships",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We crossed the busy street and entered the old park."
+        },
+        {
+          "id": "sentence-2",
+          "text": "The lights looked soft in the light rain."
+        }
+      ],
+      "id": "a2-city-walk",
+      "levelRationale": "Past-tense travel description with consonant clusters; estimated A2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A2",
+      "focusTags": [
+        "consonant-clusters",
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "We crossed the busy street and entered the old park. The lights looked soft in the light rain.",
+      "title": "A City Walk",
+      "topic": "travel",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I needed eggs and milk for breakfast."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I walked to the corner store and saved some coins."
+        }
+      ],
+      "id": "a2-market-trip",
+      "levelRationale": "Everyday shopping routine with regular past verbs; provisional estimate for A2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A2",
+      "focusTags": [
+        "past-endings"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "I needed eggs and milk for breakfast. I walked to the corner store and saved some coins.",
+      "title": "A Market Trip",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "He stopped at a small cafe after lunch."
+        },
+        {
+          "id": "sentence-2",
+          "text": "He ordered black coffee and rested for ten minutes."
+        }
+      ],
+      "id": "a2-coffee-break",
+      "levelRationale": "Daily habit with past endings and phrase stress; estimated A2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A2",
+      "focusTags": [
+        "sentence-stress",
+        "past-endings"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "He stopped at a small cafe after lunch. He ordered black coffee and rested for ten minutes.",
+      "title": "A Coffee Break",
+      "topic": "health-habits",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We booked a taxi to the city museum."
+        },
+        {
+          "id": "sentence-2",
+          "text": "The driver helped with our bags and drove fast."
+        }
+      ],
+      "id": "a2-taxi-ride",
+      "levelRationale": "Travel routine with mixed past verbs and thought groups; provisional estimate for A2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A2",
+      "focusTags": [
+        "thought-groups"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "We booked a taxi to the city museum. The driver helped with our bags and drove fast.",
+      "title": "A Taxi Ride",
+      "topic": "travel",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "I packed rice and fruit in my lunch box."
+        },
+        {
+          "id": "sentence-2",
+          "text": "I ate with friends in the clean school yard."
+        }
+      ],
+      "id": "a2-lunch-box",
+      "levelRationale": "School routine with past actions and linking; estimated A2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A2",
+      "focusTags": [
+        "linking",
+        "past-endings"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "I packed rice and fruit in my lunch box. I ate with friends in the clean school yard.",
+      "title": "My Lunch Box",
+      "topic": "health-habits",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "They missed the last bus and waited in the cold."
+        },
+        {
+          "id": "sentence-2",
+          "text": "A kind driver stopped and opened the door."
+        }
+      ],
+      "id": "a2-night-bus",
+      "levelRationale": "Travel story with past endings and clear contrast; provisional estimate for A2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A2",
+      "focusTags": [
+        "past-endings"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "They missed the last bus and waited in the cold. A kind driver stopped and opened the door.",
+      "title": "The Night Bus",
+      "topic": "travel",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "She visited the new book shop near the station."
+        },
+        {
+          "id": "sentence-2",
+          "text": "She picked a short story and paid by card."
+        }
+      ],
+      "id": "a2-book-shop",
+      "levelRationale": "Shopping routine with regular past verbs and word stress; estimated A2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A2",
+      "focusTags": [
+        "word-stress",
+        "past-endings"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "She visited the new book shop near the station. She picked a short story and paid by card.",
+      "title": "The Book Shop",
+      "topic": "daily-life",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "We cleaned our small garden on Sunday morning."
+        },
+        {
+          "id": "sentence-2",
+          "text": "We planted green beans and watered the soil."
+        }
+      ],
+      "id": "a2-small-garden",
+      "levelRationale": "Weekend habit with past endings and natural rhythm; provisional estimate for A2.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A2",
+      "focusTags": [
+        "past-endings",
+        "intonation"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "We cleaned our small garden on Sunday morning. We planted green beans and watered the soil.",
+      "title": "Our Small Garden",
+      "topic": "science-environment",
+      "version": 1
+    },
+    {
+      "chunks": [
+        {
+          "id": "sentence-1",
+          "text": "He carried two heavy bags from the Sunday market."
+        },
+        {
+          "id": "sentence-2",
+          "text": "He cooked hot soup for his tired family."
+        }
+      ],
+      "id": "a2-sunday-market",
+      "levelRationale": "Family shopping routine with phrase rhythm and stress; estimated A2 level.",
+      "rights": {
+        "checkedAt": "2026-09-19",
+        "license": "ClearSpeak original content",
+        "status": "cleared"
+      },
+      "source": {
+        "attribution": "Original ClearSpeak practice text",
+        "author": "ClearSpeak",
+        "kind": "original"
+      },
+      "cefrLevel": "A2",
+      "focusTags": [
+        "sentence-stress"
+      ],
+      "locale": "en-US",
+      "review": {
+        "reviewedAt": "2026-09-19",
+        "status": "reviewed"
+      },
+      "text": "He carried two heavy bags from the Sunday market. He cooked hot soup for his tired family.",
+      "title": "The Sunday Market",
+      "topic": "relationships",
+      "version": 1
     }
   ]
 }
