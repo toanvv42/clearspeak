@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { setAccessCode } from "@/lib/access-code";
 
-export default function AccessGate({ onUnlock }: { onUnlock: (code: string) => void }) {
+export default function AccessGate({ onUnlock }: { onUnlock?: (code: string) => void }) {
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [checking, setChecking] = useState(false);
@@ -23,7 +23,7 @@ export default function AccessGate({ onUnlock }: { onUnlock: (code: string) => v
       });
       if (res.ok) {
         setAccessCode(trimmed);
-        onUnlock(trimmed);
+        onUnlock?.(trimmed);
         return;
       }
       const body = (await res.json().catch(() => null)) as { error?: string } | null;

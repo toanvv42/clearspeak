@@ -9,13 +9,15 @@ import AttemptAudio from "@/components/attempt-audio";
 import ComparisonView from "@/components/comparison-view";
 import LastRecordingPlayer from "@/components/last-recording-player";
 import ResultsView from "@/components/results-view";
+import { useStoredAccessCode } from "@/hooks/use-access-code";
 import { deleteAttemptRequest, fetchAttemptAudioBlob, fetchAttemptDetail } from "@/lib/history/client";
-import { clearAccessCode, hasAccessCode } from "@/lib/access-code";
+import { clearAccessCode } from "@/lib/access-code";
 import type { AttemptDetail } from "@/lib/history/types";
 
 export default function HistoryDetailApp({ id, accessRequired }: { id: string; accessRequired: boolean }) {
   const router = useRouter();
-  const [unlocked, setUnlocked] = useState(() => !accessRequired || hasAccessCode());
+  const accessCode = useStoredAccessCode();
+  const unlocked = !accessRequired || accessCode !== undefined;
   const [detail, setDetail] = useState<AttemptDetail | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [audioError, setAudioError] = useState<string | null>(null);
@@ -34,7 +36,6 @@ export default function HistoryDetailApp({ id, accessRequired }: { id: string; a
       const status = (err as { status?: number }).status;
       if (status === 401 && accessRequired) {
         clearAccessCode();
-        setUnlocked(false);
         return;
       }
       setError(status === 404 ? "not-found" : "Could not load this recording.");
@@ -79,7 +80,7 @@ export default function HistoryDetailApp({ id, accessRequired }: { id: string; a
     return (
       <div className="min-h-screen bg-[#f8f7f4] dark:bg-stone-950">
         <AppHeader />
-        <AccessGate onUnlock={() => setUnlocked(true)} />
+        <AccessGate />
       </div>
     );
   }

@@ -5,8 +5,9 @@ import Link from "next/link";
 import AccessGate from "@/components/access-gate";
 import AppHeader from "@/components/app-header";
 import { ScoreDelta } from "@/components/attempt-audio";
+import { useStoredAccessCode } from "@/hooks/use-access-code";
 import { fetchProgress, type ProgressOverview } from "@/lib/history/client";
-import { clearAccessCode, hasAccessCode } from "@/lib/access-code";
+import { clearAccessCode } from "@/lib/access-code";
 import type { TargetStats } from "@/lib/review-schedule";
 
 function statLine(label: string, entry: { score: number | null; at: string } | null): string {
@@ -35,7 +36,8 @@ function TargetCard({ stat }: { stat: TargetStats }) {
 }
 
 export default function ProgressApp({ accessRequired }: { accessRequired: boolean }) {
-  const [unlocked, setUnlocked] = useState(() => !accessRequired || hasAccessCode());
+  const accessCode = useStoredAccessCode();
+  const unlocked = !accessRequired || accessCode !== undefined;
   const [data, setData] = useState<ProgressOverview | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -46,7 +48,6 @@ export default function ProgressApp({ accessRequired }: { accessRequired: boolea
     } catch (err) {
       if ((err as { status?: number }).status === 401 && accessRequired) {
         clearAccessCode();
-        setUnlocked(false);
         return;
       }
       setError("Could not load progress. Check your connection and try again.");
@@ -63,7 +64,7 @@ export default function ProgressApp({ accessRequired }: { accessRequired: boolea
     return (
       <div className="min-h-screen bg-[#f8f7f4] dark:bg-stone-950">
         <AppHeader />
-        <AccessGate onUnlock={() => { setUnlocked(true); void load(); }} />
+        <AccessGate />
       </div>
     );
   }
