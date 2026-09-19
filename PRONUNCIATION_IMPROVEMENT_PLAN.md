@@ -2,6 +2,11 @@
 
 Prepared: 19 September 2026. Scope: product and implementation planning; no app features or sample imports are implemented by this document.
 
+> **Status note:** This document preserves the original product and content rationale. Its library,
+> retry-comparison, and server-history foundations have since been implemented, so sections that
+> describe the repository state or original delivery milestones are historical. Use
+> [`LEARNING_ANALYTICS_PLAN.md`](./LEARNING_ANALYTICS_PLAN.md) as the current implementation plan.
+
 ## 1. Recommended direction
 
 Turn ClearSpeak into a daily pronunciation practice tool with a simple learning loop:
@@ -13,7 +18,7 @@ The focused-drill, progress, DuckDB analytics plugin, and database evolution des
 transactional source of truth, uses DuckDB only as an optional read-only analytics plugin, and
 defers PostgreSQL and Docker Compose until explicit scaling triggers are met.
 
-Start with your self-estimated B1.2 level, American English, and a 10–15 minute session. Keep the existing Next.js app and Azure pronunciation assessment. The first release should add a graded sample library, better listening controls, and useful retry feedback. Add local progress tracking next.
+Start with your self-estimated B1.2 level, American English, and a 10–15 minute session. Keep the existing Next.js app and Azure pronunciation assessment. The graded library, reference-voice controls, saved history, and compatible retry comparison now provide the foundation. Focused drills, reviewed coaching, and useful progress analytics are next.
 
 Treat B1.2 as an app sublevel within B1, not a verified placement result. Reading difficulty and pronunciation difficulty are different: a learner may understand B1 vocabulary while needing an A2 sentence to practise one sound. Allow independent choices for text level and pronunciation focus.
 
@@ -25,13 +30,13 @@ Repository inspection found:
 
 | Area | Existing implementation | Improvement opportunity |
 |---|---|---|
-| Practice text | One `SAMPLE_TEXT` in `lib/text.ts`; paste or load through `components/practice-editor.tsx` | Add a searchable, graded library with stable passage IDs |
-| Recording | Browser recording, 30-second cap, 1–60 words and 600 characters | Author shorter passages and support sentence-sized practice |
-| Model listening | Browser speech synthesis with an `en-US` voice preference | Add voice selection, slow/normal playback, sentence replay, and playback status |
+| Practice text | 44 reviewed passages with stable IDs, filters, metadata, and authored chunks, plus custom text | Add unpractised/due recommendations and focused chunk practice |
+| Recording | Browser recording, 30-second cap, 1–60 words and 600 characters | Support sentence-sized drill scope and drill-to-passage sessions |
+| Model listening | Selectable browser voice with playback state and errors; iPhone playback remains unreliable | Keep optional; focused drills and analytics must not depend on it |
 | Assessment | Azure phoneme assessment, IPA, word/syllable results, optional prosody | Keep this foundation and turn feedback into a next exercise |
 | Feedback | Weak sounds, ending alerts, weakest-metric advice | Explain one actionable target in plain English; retain details behind expansion |
-| Retry | “Try again” resets the result | Preserve the previous result for comparison |
-| Progress | No persisted results or history | Save compact practice summaries locally, with deletion/export |
+| Retry | Exact-text repeat and compatible previous-attempt score/audio comparison | Add focused retries and place both audio players together |
+| Progress | Server-backed SQLite history, replay, downloads, deletion, and offline save recovery | Add evidence-backed progress and recurring-target analytics |
 | Accent | Assessment fixed to `en-US` | Start with matching US reference audio; evaluate other locales separately |
 
 The existing tests cover recording, alignment, parsing, guidance, access checks, and assessment cancellation. Extend these tests as features change. This planning review did not run the app or assess your speech.
@@ -60,7 +65,11 @@ Repeat one fixed passage under similar conditions and try one unseen passage wit
 
 Suggest harder text when several different passages feel comfortable, fewer repetitions are needed, and the learner wants a challenge. Never automatically claim “you are B2” from a read-aloud score.
 
-## 4. Feature priorities
+## 4. Original feature priorities (historical)
+
+The library, persistence, and much of the retry foundation below are implemented. Retain this
+section as product rationale; use `LEARNING_ANALYTICS_PLAN.md` for current sequencing and acceptance
+criteria.
 
 ### P0 — Graded library and a useful practice loop
 

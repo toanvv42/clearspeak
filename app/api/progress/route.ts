@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { checkAccess } from "@/lib/server/access";
 import {
+  getAllTargetStats,
   getDueReviews,
-  getTargetStats,
   getWeeklyCounts,
   listFavourites,
 } from "@/lib/server/history-repository";
@@ -31,13 +31,7 @@ export async function GET(req: Request) {
     const due = getDueReviews();
     const weekly = getWeeklyCounts(7);
     const favourites = listFavourites();
-    const targetKeys = Array.from(
-      new Set([
-        ...due.map((d) => d.targetKey),
-        ...favourites.map((f) => f.targetKey),
-      ]),
-    );
-    const stats = targetKeys.map((targetKey) => getTargetStats(targetKey));
+    const stats = getAllTargetStats();
     return noStore(
       NextResponse.json({
         totals: { attempts: Number(total), practiceDays: Number(days) },

@@ -7,6 +7,7 @@ import { closeDb, getDb } from "@/lib/server/history-db";
 import {
   addFavourite,
   createAttempt,
+  deleteAttempt,
   exportHistory,
   getDueReviews,
   getTargetStats,
@@ -114,15 +115,20 @@ describe("progress repository", () => {
          sha256 TEXT NOT NULL, channels INTEGER NOT NULL, sample_rate INTEGER NOT NULL, bits INTEGER NOT NULL);
        CREATE TABLE tombstones (id TEXT PRIMARY KEY, deleted_at TEXT NOT NULL);
        INSERT INTO schema_migrations (version, applied_at) VALUES (1, '2026-09-01T00:00:00.000Z');
-       INSERT INTO attempts (id, schema_version, recorded_at, created_at, duration_ms, stop_reason, reference_text, title, level, source_kind, source_hash, scope, locale, evaluation_state, revision)
-         VALUES ('11111111-1111-4111-8111-111111111111', 1, '2026-09-10T10:00:00.000Z', '2026-09-10T10:00:01.000Z', 1000, 'manual', 'She worked hard.', 'Legacy', 'B1.2', 'custom', 'abc', 'passage', 'en-US', 'pending', 0);`,
+       INSERT INTO attempts (id, schema_version, recorded_at, created_at, duration_ms, stop_reason, reference_text, title, level, source_kind, source_hash, scope, locale, evaluation_state, revision, evaluated_at, pronunciation_score)
+         VALUES ('11111111-1111-4111-8111-111111111111', 1, '2026-09-10T10:00:00.000Z', '2026-09-10T10:00:01.000Z', 1000, 'manual', 'She worked hard.', 'Legacy', 'B1.2', 'custom', 'abc', 'passage', 'en-US', 'success', 1, '2026-09-10T10:05:00.000Z', 74);`,
     );
     legacy.close();
 
     // Opening through the app must apply migration 2 and keep the old row.
     getDb();
     expect(listFavourites()).toEqual([]);
-    expect(getDueReviews("2026-09-20T00:00:00.000Z")).toEqual([]);
+    expect(getDueReviews("2026-09-20T00:00:00.000Z")[0]).toMatchObject({
+      targetKey: "custom:abc",
+      latestAttemptId: "11111111-1111-4111-8111-111111111111",
+      practiceCount: 1,
+      lastScore: 74,
+    });
     const id = "22222222-2222-4222-8222-222222222222";
     expect(createAttempt({ id, ...meta(), wav }).created).toBe(true);
     expect(addFavourite("b12-01", 1, "Work update").targetKey).toBe("library:b12-01:1");
@@ -188,6 +194,44 @@ describe("progress repository", () => {
     expect(stats.latest).toMatchObject({ score: 80 });
     expect(stats.best).toMatchObject({ score: 90 });
     expect(getTargetStats("custom:missing")).toMatchObject({ attempts: 0, first: null });
+  });
+
+  it("rebuilds or removes review state when attempts are deleted", () => {
+    const firstId = "12121212-1212-4212-8212-121212121212";
+    const latestId = "13131313-1313-4313-8313-131313131313";
+    createAttempt({ id: firstId, ...meta({ recordedAt: "2026-09-10T10:00:00.000Z" }), wav });
+    saveEvaluation(firstId, evalPayload("14141414-1414-4414-8414-141414141414", "2026-09-10T11:00:00.000Z", 70));
+    createAttempt({ id: latestId, ...meta({ recordedAt: "2026-09-11T10:00:00.000Z" }), wav });
+    saveEvaluation(latestId, evalPayload("15151515-1515-4515-8515-151515151515", "2026-09-11T11:00:00.000Z", 85));
+
+    deleteAttempt(latestId);
+    expect(getDueReviews("2026-09-20T00:00:00.000Z")[0]).toMatchObject({
+      latestAttemptId: firstId,
+      intervalStep: 0,
+      practiceCount: 1,
+      lastScore: 70,
+    });
+
+    deleteAttempt(firstId);
+    expect(getDueReviews("2026-09-20T00:00:00.000Z")).toEqual([]);
+    expect(exportHistory().review).toEqual([]);
+  });
+
+  it("returns the full due queue instead of truncating it to three targets", () => {
+    for (let i = 0; i < 4; i += 1) {
+      const digit = String(i + 2);
+      const id = `${digit.repeat(8)}-${digit.repeat(4)}-4${digit.repeat(3)}-8${digit.repeat(3)}-${digit.repeat(12)}`;
+      createAttempt({
+        id,
+        ...meta({ source: { kind: "custom", hash: `due-${i}` } }),
+        wav,
+      });
+      saveEvaluation(
+        id,
+        evalPayload(`${digit.repeat(8)}-${digit.repeat(4)}-4${digit.repeat(3)}-a${digit.repeat(3)}-${digit.repeat(12)}`, "2026-09-10T11:00:00.000Z", 70 + i),
+      );
+    }
+    expect(getDueReviews("2026-09-20T00:00:00.000Z")).toHaveLength(4);
   });
 
   it("counts takes per day and manages favourites", () => {

@@ -13,6 +13,7 @@ import {
 import type { AssessmentResult } from "@/lib/types";
 import ScoreCard from "@/components/score-card";
 import WordFeedback from "@/components/word-feedback";
+import ExtraCoachingNote from "@/components/extra-coaching-note";
 import LastRecordingPlayer from "@/components/last-recording-player";
 
 export default function ResultsView({
@@ -170,6 +171,8 @@ export default function ResultsView({
           App guidance derived from your scores — not an AI diagnosis.
         </p>
       </div>
+
+      <ExtraCoachingNote result={result} />
 
       <div className="rounded-3xl border border-stone-200 bg-white p-5 shadow-[var(--shadow-card)] sm:p-6 dark:border-white/10 dark:bg-white/[0.04]">
         <h3 className="text-lg font-extrabold tracking-tight">Word and sound feedback</h3>

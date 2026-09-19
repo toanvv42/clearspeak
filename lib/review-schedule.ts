@@ -67,6 +67,7 @@ export type DueReviewItem = {
 
 export type TargetStats = {
   targetKey: string;
+  title: string;
   attempts: number;
   first: { score: number | null; at: string } | null;
   latest: { score: number | null; at: string } | null;

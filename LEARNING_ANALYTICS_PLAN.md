@@ -14,7 +14,7 @@ plan; none of these features are implemented by this document.
    separate process and return a versioned report; it will never own attempts, evaluations, or
    recordings.
 4. Keep saved Azure evaluation JSON as the canonical assessment result. Derived analytics facts
-   and DuckDB reports must be reproducible from it.
+   and current analytics reports must be reproducible from surviving canonical history.
 5. Defer PostgreSQL until accounts, multiple application instances, managed high availability,
    or demonstrated SQLite write contention make it necessary.
 6. Do not add Docker Compose merely to anticipate PostgreSQL. If PostgreSQL is later adopted,
@@ -150,6 +150,12 @@ Extend the attempt model with:
 Preserve the existing library/custom source identity. A library chunk keeps the parent passage ID
 and version while its `reference_text` stores the exact assessed chunk.
 
+`practice_session_id` is initially a nullable immutable UUID, not a foreign key to a new session
+table. Starting a full-passage recording creates it; sentence retries and the final full-passage
+retry reuse it. Opening an old attempt through **Record again** starts a new session. Legacy
+attempts remain null. Add a first-class session table only when sessions need their own mutable
+metadata.
+
 ### 6.2 Word observations
 
 Add a derived `word_observations` table:
@@ -185,14 +191,36 @@ store coaching prose in this table.
 
 Add:
 
-- `assessment_feedback(attempt_id, target_key, verdict, created_at)` where `verdict` initially
-  supports `seems-wrong`.
-- `analytics_reports(id, dataset_revision, engine, engine_version, rules_version, generated_at,
-  window_start, window_end, report_json)`.
-- A small analytics state record containing the latest attempt/evaluation revision included in a
-  successful report.
+- `assessment_feedback(attempt_id, observation_key, observation_kind, metric_key, word_index,
+  phoneme_index, verdict, created_at, updated_at)` where `observation_key` is a validated stable
+  locator such as `metric:accuracy`, `word:3`, or `phoneme:3:1`. Use
+  `(attempt_id, observation_key)` as the primary key so saving feedback is an idempotent upsert.
+  The server must verify that the locator exists in the canonical saved evaluation. A grouped sound
+  card saves feedback for its exact contributing observations; rejecting one `/t/` must not reject
+  every `/t/` in the attempt.
+- `analytics_reports(id, input_change_seq, dataset_digest, engine, engine_version, sql_version,
+  rules_version, tips_version, content_catalog_version, generated_at, window_start, window_end,
+  coverage_json, report_json)`.
+- One `analytics_control` row, enforced by a singleton primary key/check, containing `change_seq`,
+  `minimum_valid_seq`, `requested_seq`, `completed_seq`, `requested_at`, `job_status`,
+  `lease_token`, `lease_expires_at`, `attempt_count`, and `last_error`. `job_status` is one of
+  `idle`, `pending`, `running`, or `failed`.
 
-The report is a cache. Deleting it must not remove source history.
+`change_seq` is a global monotonic integer, separate from each attempt's optimistic-lock revision.
+Increment it in the same transaction that creates analytics facts, changes learner feedback, or
+deletes an attempt. An export reads `change_seq` and all selected facts inside one consistent read
+transaction and uses that value as `input_change_seq`.
+
+New attempts may leave the previous report visible with an explicit stale label. Feedback changes
+and deletions set `minimum_valid_seq` to the new `change_seq`; reports below that sequence must not
+be served. Attempt deletion also deletes cached report payloads in the same transaction because a
+report may contain words copied from the deleted attempt. A report produced by work that started
+before that deletion is rejected when `input_change_seq < minimum_valid_seq`.
+
+When storing a completed report, never replace a report with a higher `input_change_seq`. Update
+`completed_seq` monotonically. If `requested_seq` advanced during the run, leave the job pending so
+the worker runs again. Retain the latest ten valid reports for diagnostics and delete older payloads.
+Reports are rebuildable caches; deleting them must not remove source history.
 
 ### 6.5 Backfill
 
@@ -204,26 +232,54 @@ Create an idempotent command that:
 4. Records its derivation version and progress.
 5. Can resume after interruption and produces counts for verification.
 
+The migration creates `analytics_control` at sequence zero. After the initial fact backfill commits,
+advance `change_seq`, `minimum_valid_seq`, and `requested_seq` together once and mark the first
+analytics refresh pending; do not increment the global sequence once per historical observation.
+
 ## 7. Analytics plugin contract
 
 Create an internal server-only interface similar to:
 
 ```ts
-type AnalyticsDataset = {
+type AnalyticsDatasetManifest = {
   version: 1;
+  inputChangeSeq: number;
+  datasetDigest: string;
   generatedAt: string;
-  attempts: AnalyticsAttempt[];
-  words: AnalyticsWordObservation[];
-  phonemes: AnalyticsPhonemeObservation[];
-  feedback: AnalyticsFeedback[];
+  timeZone: string;
+  truncated: boolean;
+  versions: {
+    evaluationSchema: number;
+    derivation: number;
+    sql: number;
+    rules: number;
+    tips: number;
+    contentCatalog: string;
+  };
+  rowCounts: {
+    attempts: number;
+    words: number;
+    phonemes: number;
+    feedback: number;
+  };
+  files: {
+    attempts: string;
+    words: string;
+    phonemes: string;
+    feedback: string;
+  };
 };
 
 type AnalyticsReport = {
   version: 1;
-  datasetRevision: string;
+  inputChangeSeq: number;
+  datasetDigest: string;
   engine: "duckdb";
   engineVersion: string;
+  sqlVersion: number;
   rulesVersion: number;
+  tipsVersion: number;
+  contentCatalogVersion: string;
   generatedAt: string;
   coverage: AnalyticsCoverage;
   overview: AnalyticsOverview;
@@ -234,12 +290,13 @@ type AnalyticsReport = {
 
 interface LearningAnalyticsPlugin {
   readonly id: "duckdb";
-  analyze(dataset: AnalyticsDataset): Promise<AnalyticsReport>;
+  analyze(manifest: AnalyticsDatasetManifest): Promise<AnalyticsReport>;
 }
 ```
 
-The contract must contain no database connection, SQLite row, DuckDB value object, or UI-specific
-class. This keeps it testable and portable to PostgreSQL later.
+The manifest paths are generated internally beneath one private temporary work directory and are
+never accepted from an HTTP request. The contract must contain no database connection, SQLite row,
+DuckDB value object, or UI-specific class. This keeps it testable and portable to PostgreSQL later.
 
 ## 8. Evidence and recommendation rules
 
@@ -262,12 +319,17 @@ while retaining them in history.
 Do not label a recurring weakness until there are at least:
 
 - Three eligible observations,
-- Across two attempts,
-- Preferably across two distinct words or passages.
+- Across two distinct practice sessions,
+- Across two distinct words for a phoneme target.
 
-Report the median score, low-score count, observation count, distinct-attempt count, representative
-words, and last-practised date. Use careful language such as “often scored lower” rather than
-“you cannot pronounce.”
+Aggregate repeated instances into at most one contribution per symbol per attempt before ranking,
+so a passage that happens to contain many copies of one sound cannot dominate the evidence. Chunk
+retries from one practice session may strengthen comparison within that session, but cannot by
+themselves establish a cross-session recurring weakness.
+
+Report the median score, low-score count, observation count, distinct-attempt and distinct-session
+counts, representative words, and last-practised date. Use careful language such as “often scored
+lower” rather than “you cannot pronounce.”
 
 Use a documented deterministic rank, for example:
 
@@ -275,7 +337,7 @@ Use a documented deterministic rank, for example:
 priority = severity × evidence × recency
 
 severity = clamp((60 - median_score) / 60, 0, 1)
-evidence = min(1, distinct_attempts / 5)
+evidence = min(1, distinct_sessions / 5)
 recency = 1 for recent evidence, decaying to a documented floor
 ```
 
@@ -309,14 +371,22 @@ content. No generative model is required.
 
 - Use the current `@duckdb/node-api` (Node Neo) client, pinned to an exact tested version.
 - Run the plugin in a separate Node process with bounded memory, threads, runtime, and output size.
-- Build the versioned dataset from selected SQLite metadata/fact tables inside one short read
-  transaction. Transfer it to the child through stdin while small; switch to an atomically written,
-  mode-`0600` temporary NDJSON file under the analytics work directory when the bounded
-  payload limit is exceeded. The path is generated by the server, never supplied by a user.
+- Build the versioned dataset from selected SQLite metadata/fact tables inside one bounded,
+  consistent read transaction. Stream rows in batches to atomically written, mode-`0600` NDJSON
+  files beneath a server-created temporary directory. Do not construct one all-history JavaScript
+  object or transfer the complete dataset through stdin.
+- Initial hard limits are 10,000 attempts, 500,000 word observations, 2,000,000 phoneme
+  observations, and 512 MiB of total export files. If history exceeds a limit, select the newest
+  complete practice sessions that fit, set `truncated: true`, and expose the covered date range.
+  Revisit these limits using measured runtime and memory rather than silently raising them.
+- Compute SHA-256 over a canonical logical metadata block plus the dataset files in a documented
+  order. Omit `datasetDigest`, `generatedAt`, and physical temporary paths from the hash; use fixed
+  logical file names so identical data and versions produce the same digest on separate runs.
+  Store the resulting digest in both manifest and report.
 - Start with an in-memory DuckDB database rebuilt per analysis run; the dataset is small and the
   output report is persisted separately.
-- Bulk-load only the normalized analytics dataset using the DuckDB appender or equivalent
-  parameterized API.
+- Parse the NDJSON incrementally and bulk-load normalized rows using the DuckDB appender or an
+  equivalent parameterized API.
 - Run fixed, source-controlled SQL. Never expose an arbitrary SQL endpoint or interpolate user
   input into SQL.
 - Do not load community extensions. No DuckDB extension is required for the initial design.
@@ -329,11 +399,18 @@ manual analysis of an isolated snapshot, but it is not part of the application p
 
 Initial policy:
 
-- Mark analytics stale after a successful evaluation or relevant feedback change.
+- Every relevant transaction advances `change_seq`, advances `requested_seq`, and durably marks a
+  refresh pending. If a job is already running, it finishes against its captured sequence and the
+  newer request remains pending.
 - Refresh at most once every 15 minutes through a systemd timer or explicit maintenance command.
-- Allow an authenticated **Refresh insights** action that schedules work but does not hold the HTTP
-  request open for the entire analysis.
+- The worker claims the singleton job transactionally with a random lease token and expiry. A
+  second worker cannot claim a live lease; an expired lease is recoverable after a crash.
+- Allow an authenticated **Refresh insights** action that sets the durable requested sequence to
+  the current `change_seq` and updates its timestamp. It never spawns an untracked process and does
+  not hold the HTTP request open for analysis.
 - Continue showing the last successful report with its generation time while a refresh is pending.
+- Serve a report only when `input_change_seq >= minimum_valid_seq`. Additions may display an older
+  report as stale; feedback changes and deletions hide invalid reports until a replacement exists.
 - Fall back to basic SQLite summaries when no DuckDB report exists.
 
 Do not rely on an in-process fire-and-forget promise surviving a deployment or restart.
@@ -343,7 +420,9 @@ Do not rely on an in-process fire-and-forget promise surviving a deployment or r
 - Time out and terminate a stuck analytics process.
 - Validate the returned report against a strict schema before saving it.
 - Delete temporary dataset files after success, failure, timeout, or startup recovery.
-- Retain the last valid report after failures.
+- Reject a result whose input sequence, digest, engine version, or declared row counts do not match
+  its job manifest.
+- Retain the last valid report after failures only when it still satisfies `minimum_valid_seq`.
 - Show “Insights last updated …” and a non-blocking error if refresh fails.
 - Log run metadata and sanitized errors, never assessment text or access credentials by default.
 
@@ -367,6 +446,10 @@ Proposed pages/components:
 - Home continuation card: recommended next practice with an explanation and manual alternatives.
 
 All charts must have a text/table equivalent and must not rely on color alone.
+
+Use a configured IANA timezone, `CLEARSPEAK_TIME_ZONE`, for practice-day groupings and review due
+dates; default to `UTC` and display the active timezone. A future account system can replace this
+with a per-user setting without changing stored UTC timestamps.
 
 ## 11. PostgreSQL and Docker evolution
 
@@ -396,6 +479,9 @@ All charts must have a text/table equivalent and must not rely on color alone.
 - Do not introduce an ORM or maintain SQLite and PostgreSQL implementations simultaneously before
   the migration is approved.
 
+The analytics manifest, fact schema, and report schema remain stable during a PostgreSQL migration;
+only the extractor/repository implementation changes.
+
 When PostgreSQL is selected, provide Docker Compose for local development and CI only. Pin the
 major version, use a named volume, add health checks, and test dump/restore and major-version
 upgrade procedures. Prefer a managed PostgreSQL service in production; Compose on one host does
@@ -419,6 +505,7 @@ sentence attempts, compare them, and return to the original passage.
 - Add word and phoneme observation tables.
 - Populate them transactionally for new evaluations.
 - Add resumable backfill and rebuild commands.
+- Add the global analytics sequence, invalidation rules, and durable refresh-control row.
 - Add **This feedback seems wrong**.
 
 Completion: derived facts exactly match the canonical evaluation fixtures and can be fully rebuilt.
@@ -478,6 +565,8 @@ Completion: recommendations are evidence-backed, reproducible, and useful in rea
 - Empty, tiny, malformed, and large bounded datasets are handled safely.
 - No recording bytes or secrets appear in the exported dataset or report.
 - Timeout, crash, invalid JSON, excessive output, and stale revision preserve the last valid report.
+- Deletion during an analytics run rejects the older report and exposes no deleted text.
+- Concurrent refresh requests coalesce durably and lease expiry recovers a crashed worker.
 - SQLite-only progress works with the package disabled.
 
 ### Component and end-to-end tests
@@ -530,7 +619,11 @@ not a prerequisite for focused drills or analytics.
 - [ ] The app provides basic progress with DuckDB disabled.
 - [ ] DuckDB reads only the exported analytics dataset and never receives audio or secrets.
 - [ ] DuckDB failure cannot block recording, assessment, saving, history, or basic progress.
-- [ ] Reports are versioned, validated, freshness-labelled, and reproducible.
+- [ ] A global analytics sequence prevents stale jobs from replacing newer reports.
+- [ ] Deleting an attempt immediately prevents cached insights from exposing its text.
+- [ ] Refresh requests and worker leases survive process and host restarts.
+- [ ] Reports are versioned, validated, digest-checked, freshness-labelled, and reproducible from
+      surviving canonical history.
 - [ ] Existing SQLite backups and restores continue to work after migrations.
 - [ ] PostgreSQL and Docker Compose remain deferred until an explicit migration trigger is met.
 
