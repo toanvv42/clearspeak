@@ -73,7 +73,60 @@ const MIGRATIONS = [
     last_score REAL,
     updated_at TEXT NOT NULL
   );
-  CREATE INDEX IF NOT EXISTS idx_review_state_due ON review_state(next_due_at);`,
+  CREATE INDEX IF NOT EXISTS idx_review_state_due ON review_state(next_due_at);
+  WITH successful AS (
+    SELECT
+      id,
+      source_kind,
+      source_id,
+      source_version,
+      source_hash,
+      COALESCE(NULLIF(title, ''), substr(reference_text, 1, 60)) AS review_title,
+      COALESCE(evaluated_at, recorded_at) AS practiced_at,
+      pronunciation_score,
+      CASE
+        WHEN source_kind = 'library' THEN 'library:' || source_id || ':' || source_version
+        ELSE 'custom:' || COALESCE(source_hash, '')
+      END AS target_key
+    FROM attempts
+    WHERE evaluation_state = 'success'
+  ), ranked AS (
+    SELECT
+      *,
+      COUNT(*) OVER (PARTITION BY target_key) AS practice_count,
+      ROW_NUMBER() OVER (
+        PARTITION BY target_key
+        ORDER BY practiced_at DESC, id DESC
+      ) AS recency
+    FROM successful
+  )
+  INSERT OR REPLACE INTO review_state (
+    target_key, kind, passage_id, passage_version, title, latest_attempt_id,
+    last_practiced_at, next_due_at, interval_step, practice_count, last_score, updated_at
+  )
+  SELECT
+    target_key,
+    source_kind,
+    source_id,
+    source_version,
+    review_title,
+    id,
+    practiced_at,
+    strftime(
+      '%Y-%m-%dT%H:%M:%fZ',
+      practiced_at,
+      CASE
+        WHEN practice_count = 1 THEN '+1 day'
+        WHEN practice_count = 2 THEN '+3 days'
+        ELSE '+7 days'
+      END
+    ),
+    MIN(practice_count - 1, 2),
+    practice_count,
+    pronunciation_score,
+    strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
+  FROM ranked
+  WHERE recency = 1;`,
 ];
 
 export function resolveDataDir(): string {

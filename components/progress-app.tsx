@@ -5,8 +5,9 @@ import Link from "next/link";
 import AccessGate from "@/components/access-gate";
 import AppHeader from "@/components/app-header";
 import { ScoreDelta } from "@/components/attempt-audio";
+import { useStoredAccessCode } from "@/hooks/use-access-code";
 import { fetchProgress, type ProgressOverview } from "@/lib/history/client";
-import { clearAccessCode, hasAccessCode } from "@/lib/access-code";
+import { clearAccessCode } from "@/lib/access-code";
 import type { TargetStats } from "@/lib/review-schedule";
 
 function statLine(label: string, entry: { score: number | null; at: string } | null): string {
@@ -15,10 +16,10 @@ function statLine(label: string, entry: { score: number | null; at: string } | n
   return `${label}: ${score} (${new Date(entry.at).toLocaleDateString()})`;
 }
 
-function TargetCard({ stat, title }: { stat: TargetStats; title: string }) {
+function TargetCard({ stat }: { stat: TargetStats }) {
   return (
     <article className="rounded-2xl border border-stone-200 bg-white p-4 dark:border-white/10 dark:bg-white/[0.04]">
-      <h3 className="truncate text-[15px] font-bold tracking-tight">{title}</h3>
+      <h3 className="truncate text-[15px] font-bold tracking-tight">{stat.title}</h3>
       <p className="mt-0.5 text-[13px] text-stone-500 tabular-nums">
         {stat.attempts} {stat.attempts === 1 ? "attempt" : "attempts"} · comparable text only
       </p>
@@ -35,7 +36,8 @@ function TargetCard({ stat, title }: { stat: TargetStats; title: string }) {
 }
 
 export default function ProgressApp({ accessRequired }: { accessRequired: boolean }) {
-  const [unlocked, setUnlocked] = useState(() => !accessRequired || hasAccessCode());
+  const accessCode = useStoredAccessCode();
+  const unlocked = !accessRequired || accessCode !== undefined;
   const [data, setData] = useState<ProgressOverview | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -46,7 +48,6 @@ export default function ProgressApp({ accessRequired }: { accessRequired: boolea
     } catch (err) {
       if ((err as { status?: number }).status === 401 && accessRequired) {
         clearAccessCode();
-        setUnlocked(false);
         return;
       }
       setError("Could not load progress. Check your connection and try again.");
@@ -63,17 +64,10 @@ export default function ProgressApp({ accessRequired }: { accessRequired: boolea
     return (
       <div className="min-h-screen bg-[#f8f7f4] dark:bg-stone-950">
         <AppHeader />
-        <AccessGate onUnlock={() => { setUnlocked(true); void load(); }} />
+        <AccessGate />
       </div>
     );
   }
-
-  const titleFor = (targetKey: string): string => {
-    const due = data?.due.find((d) => d.targetKey === targetKey);
-    if (due) return due.title;
-    const fav = data?.favourites.find((f) => f.targetKey === targetKey);
-    return fav?.title ?? targetKey;
-  };
 
   return (
     <div className="min-h-screen bg-[#f8f7f4] text-stone-900 dark:bg-stone-950 dark:text-stone-100">
@@ -169,7 +163,7 @@ export default function ProgressApp({ accessRequired }: { accessRequired: boolea
               ) : (
                 <div className="mt-3 grid gap-2 sm:grid-cols-2">
                   {data.stats.map((stat) => (
-                    <TargetCard key={stat.targetKey} stat={stat} title={titleFor(stat.targetKey)} />
+                    <TargetCard key={stat.targetKey} stat={stat} />
                   ))}
                 </div>
               )}
