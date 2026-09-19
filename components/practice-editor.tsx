@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import PassageLibrary, { formatFocus } from "@/components/passage-library";
 import type { PassageFilterState, PracticePassage } from "@/lib/practice-content";
 import {
@@ -37,6 +37,9 @@ export default function PracticeEditor({
   const [showLibrary, setShowLibrary] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVoiceId, setSelectedVoiceId] = useState("");
+  const [playbackStatus, setPlaybackStatus] = useState<"idle" | "starting" | "playing">("idle");
+  const [playbackError, setPlaybackError] = useState<string | null>(null);
+  const currentUtterance = useRef<SpeechSynthesisUtterance | null>(null);
   const validation = validatePassage(draft);
   const selectedVoice = useMemo(
     () => voices.find((voice) => voiceId(voice) === selectedVoiceId),
@@ -44,6 +47,7 @@ export default function PracticeEditor({
   );
   const wordPct = Math.min(100, (validation.wordCount / MAX_WORDS) * 100);
   const overWord = validation.wordCount > MAX_WORDS;
+  const playbackActive = playbackStatus !== "idle";
 
   useEffect(() => {
     if (!("speechSynthesis" in window)) return;
@@ -70,17 +74,52 @@ export default function PracticeEditor({
 
   const listenToSample = () => {
     try {
-      if (!("speechSynthesis" in window)) return;
-      window.speechSynthesis.cancel();
+      if (!("speechSynthesis" in window)) {
+        setPlaybackError("Sample playback is not supported by this browser.");
+        return;
+      }
+      const synth = window.speechSynthesis;
+      if (playbackActive || synth.speaking || synth.pending) {
+        currentUtterance.current = null;
+        setPlaybackStatus("idle");
+        setPlaybackError(null);
+        synth.cancel();
+        return;
+      }
+
       const text = validation.normalized || draft;
       if (!text.trim()) return;
       const utter = new SpeechSynthesisUtterance(validation.normalized || draft.trim());
       utter.lang = "en-US";
-      const voice = selectedVoice ?? preferredEnglishVoice(window.speechSynthesis.getVoices());
+      const voice = selectedVoice ?? preferredEnglishVoice(synth.getVoices());
       if (voice) utter.voice = voice;
-      window.speechSynthesis.speak(utter);
+      utter.onstart = () => {
+        if (currentUtterance.current === utter) setPlaybackStatus("playing");
+      };
+      utter.onend = () => {
+        if (currentUtterance.current !== utter) return;
+        currentUtterance.current = null;
+        setPlaybackStatus("idle");
+      };
+      utter.onerror = () => {
+        if (currentUtterance.current !== utter) return;
+        currentUtterance.current = null;
+        setPlaybackStatus("idle");
+        setPlaybackError(
+          "The sample could not be played. Try another reference voice or check your device audio settings.",
+        );
+      };
+
+      currentUtterance.current = utter;
+      setPlaybackError(null);
+      setPlaybackStatus("starting");
+      synth.speak(utter);
     } catch {
-      /* ignore */
+      currentUtterance.current = null;
+      setPlaybackStatus("idle");
+      setPlaybackError(
+        "The sample could not be played. Try another reference voice or check your device audio settings.",
+      );
     }
   };
 
@@ -240,14 +279,24 @@ export default function PracticeEditor({
           </button>
           <button
             type="button"
-            disabled={disabled || !draft.trim()}
+            disabled={disabled || (!draft.trim() && !playbackActive)}
             onClick={listenToSample}
-            aria-label="Listen to sample using your browser voice"
+            aria-label={playbackActive ? "Stop sample playback" : "Listen to sample using your browser voice"}
+            aria-pressed={playbackActive}
             className="flex items-center justify-center gap-2 rounded-2xl border border-stone-300 bg-white px-5 py-3.5 text-[15px] font-semibold transition hover:bg-stone-50 active:scale-[0.99] disabled:opacity-50 dark:border-white/15 dark:bg-transparent dark:hover:bg-white/10"
           >
-            <span aria-hidden="true">▶</span>
-            Listen to sample
+            <span aria-hidden="true">{playbackActive ? "■" : "▶"}</span>
+            {playbackActive ? "Stop sample" : "Listen to sample"}
           </button>
+        </div>
+        <div aria-live="polite" className="mt-3 text-center text-xs leading-5 sm:text-left">
+          {playbackStatus === "starting" && (
+            <p className="text-stone-500 dark:text-stone-400">Starting sample playback…</p>
+          )}
+          {playbackStatus === "playing" && (
+            <p className="text-stone-500 dark:text-stone-400">Playing sample…</p>
+          )}
+          {playbackError && <p className="font-medium text-red-700 dark:text-red-300">{playbackError}</p>}
         </div>
         <p className="mt-3 text-center text-xs leading-5 text-stone-500 sm:text-left dark:text-stone-400">
           Max {MAX_WORDS} words and {MAX_CHARS} characters. Sample playback uses your browser voice and
