@@ -292,8 +292,6 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   }
 
   const analyzingStep = phase === "requesting-token" ? 1 : phase === "assessing" ? 2 : 0;
-  const stepIndex =
-    phase === "success" ? 3 : phase === "recording" || phase === "preparing-audio" || phase === "requesting-token" || phase === "assessing" ? 2 : 1;
   const isEditing = phase === "editing" || phase === "recoverable-error";
   const showSidebar = isEditing && isDesktop;
 
@@ -317,23 +315,6 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
     <div className="min-h-screen bg-[#f8f7f4] text-stone-900 dark:bg-stone-950 dark:text-stone-100">
       <Header />
       <main className="mx-auto w-full max-w-6xl px-4 pb-20 sm:px-6">
-        <div className="rise-in mx-auto max-w-3xl pt-8 text-center sm:pt-12">
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#2563eb]">
-            Private pronunciation practice
-          </p>
-          <h1
-            className="mx-auto mt-3 max-w-xl text-balance text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Read it. Hear yourself. Improve.
-          </h1>
-          <p className="mx-auto mt-3 max-w-xl text-pretty text-sm leading-6 text-stone-600 sm:text-base dark:text-stone-400">
-            Paste a short passage, read it aloud, and get sound-by-sound feedback on your English
-            pronunciation.
-          </p>
-          <Stepper current={stepIndex} />
-        </div>
-
         {notice && (
           <div role="status" className="rise-in mx-auto mt-6 flex max-w-3xl items-start gap-3 rounded-2xl border border-[#2563eb]/25 bg-blue-50/80 px-4 py-3 text-sm leading-6 shadow-[var(--shadow-card)] dark:bg-blue-950/50">
             <span aria-hidden="true" className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#2563eb] text-[11px] font-bold text-white">i</span>
@@ -471,44 +452,6 @@ function Header() {
         </span>
       </div>
     </header>
-  );
-}
-
-function Stepper({ current }: { current: number }) {
-  const steps = ["Practice", "Record", "Review"];
-  return (
-    <ol aria-label="Practice progress" className="mx-auto mt-6 flex max-w-md items-center justify-center gap-2">
-      {steps.map((label, i) => {
-        const n = i + 1;
-        const done = n < current;
-        const active = n === current;
-        return (
-          <li key={label} className="flex items-center gap-2">
-            <span className="flex items-center gap-2">
-              <span
-                aria-hidden="true"
-                className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold tabular-nums transition-colors ${
-                  done
-                    ? "bg-emerald-700 text-white"
-                    : active
-                      ? "bg-stone-900 text-white dark:bg-white dark:text-stone-900"
-                      : "bg-stone-200 text-stone-500 dark:bg-white/10 dark:text-stone-400"
-                }`}
-              >
-                {done ? "✓" : n}
-              </span>
-              <span className={`text-xs font-semibold ${active ? "" : "text-stone-500 dark:text-stone-400"}`}>
-                {label}
-                {active && <span className="sr-only"> (current step)</span>}
-              </span>
-            </span>
-            {n < steps.length && (
-              <span aria-hidden="true" className={`mx-1 h-px w-6 sm:w-10 ${n < current ? "bg-emerald-700" : "bg-stone-300 dark:bg-white/15"}`} />
-            )}
-          </li>
-        );
-      })}
-    </ol>
   );
 }
 
