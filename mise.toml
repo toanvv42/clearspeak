@@ -1,0 +1,36 @@
+# Mise configuration: installs Node (which bundles npm) and manages env keys + tasks.
+# Docs: https://mise.jdx.dev
+
+[tools]
+# Pinned to an exact tested patch of the Node 24 LTS line for reproducible
+# builds (npm ships bundled with it; no separate install needed).
+node = "24.20.0"
+
+[env]
+# Load local secrets for `mise run` / `mise exec` from Next.js-style dotenv files.
+# Primary store is `.env.local` (also read automatically by `next dev`).
+_.file = [".env.local"]
+
+[tasks.dev]
+description = "Start the Next.js dev server"
+run = "npm run dev"
+
+[tasks.lint]
+description = "Run ESLint"
+run = "npm run lint"
+
+[tasks.typecheck]
+description = "Run TypeScript type checking"
+run = "npm run typecheck"
+
+[tasks.test]
+description = "Run the Vitest suite once"
+run = "npm test -- --run"
+
+[tasks.build]
+description = "Production build"
+run = "npm run build"
+
+[tasks.setup]
+description = "Install dependencies with the mise-managed npm"
+run = "npm install"

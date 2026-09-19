@@ -1,0 +1,286 @@
+import { act, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import ClearSpeakApp from "@/components/clearspeak-app";
+import type { AssessmentResult } from "@/lib/types";
+
+type MockRecorder = {
+  status: string;
+  elapsedMs: number;
+  level: number;
+  error: string | null;
+  finished: { blob: Blob; url: string; durationMs: number } | null;
+  autoStopped: boolean;
+  finishing: boolean;
+  start: () => Promise<{ ok: true } | { ok: false; unsupported: boolean; message: string }>;
+  finish: () => Promise<void>;
+  cancel: () => void;
+  teardown: () => void;
+};
+
+const mockRecorder: MockRecorder = {
+  status: "idle",
+  elapsedMs: 0,
+  level: 0,
+  error: null,
+  finished: null,
+  autoStopped: false,
+  finishing: false,
+  start: async () => ({ ok: true }),
+  finish: async () => {},
+  cancel: () => {},
+  teardown: () => {},
+};
+
+(globalThis as unknown as Record<string, unknown>).__mockRecorder = mockRecorder;
+
+vi.mock("@/hooks/use-pcm-recorder", () => ({
+  usePcmRecorder: (options?: { onAutoStop?: () => void }) => {
+    (globalThis as unknown as Record<string, unknown>).__hookState = { options: options ?? {} };
+    return (globalThis as unknown as Record<string, unknown>).__mockRecorder;
+  },
+}));
+
+const SYNTHETIC_RESULT: AssessmentResult = {
+  referenceText: "She worked hard.",
+  recognizedText: "She worked hard.",
+  pronunciationScore: 78,
+  accuracyScore: 55,
+  fluencyScore: 88,
+  completenessScore: 100,
+  words: [
+    {
+      text: "worked",
+      accuracyScore: 50,
+      errorType: "Mispronunciation",
+      syllables: [],
+      phonemes: [
+        { symbol: "w", accuracyScore: 90, position: "initial", alternatives: [] },
+        {
+          symbol: "t",
+          accuracyScore: 30,
+          position: "final",
+          alternatives: [{ symbol: "d", confidence: 62 }],
+        },
+      ],
+    },
+    {
+      text: "hard",
+      accuracyScore: 85,
+      errorType: "None",
+      syllables: [],
+      phonemes: [{ symbol: "h", accuracyScore: 85, position: "only", alternatives: [] }],
+    },
+  ],
+  insertedWords: [],
+};
+
+const assessWavFileMock = vi.hoisted(() => vi.fn());
+const fetchSpeechTokenMock = vi.hoisted(() => vi.fn());
+
+vi.mock("@/lib/azure/pronunciation", () => ({
+  fetchSpeechToken: fetchSpeechTokenMock,
+  assessWavFile: assessWavFileMock,
+  classifyAssessmentError: () => ({
+    kind: "generic",
+    message: "Something went wrong during assessment.",
+    nextAction: "Try again.",
+  }),
+}));
+
+function resetMock() {
+  mockRecorder.status = "idle";
+  mockRecorder.elapsedMs = 0;
+  mockRecorder.level = 0;
+  mockRecorder.error = null;
+  mockRecorder.finished = null;
+  mockRecorder.autoStopped = false;
+  mockRecorder.start = async () => {
+    mockRecorder.status = "recording";
+    return { ok: true };
+  };
+  mockRecorder.finish = async () => {
+    mockRecorder.finished = {
+      blob: new Blob(["fake-audio"], { type: "audio/wav" }),
+      url: "blob:fake-recording",
+      durationMs: 5000,
+    };
+    mockRecorder.status = "stopped";
+  };
+  mockRecorder.cancel = () => {
+    mockRecorder.status = "idle";
+    mockRecorder.finished = null;
+  };
+  assessWavFileMock.mockClear();
+  assessWavFileMock.mockImplementation(async () => SYNTHETIC_RESULT);
+  fetchSpeechTokenMock.mockClear();
+  fetchSpeechTokenMock.mockImplementation(async () => ({
+    token: "tok",
+    region: "southeastasia",
+    expiresAt: new Date(Date.now() + 9 * 60 * 1000).toISOString(),
+    enableProsody: false,
+  }));
+}
+
+describe("ClearSpeakApp", () => {
+  beforeEach(() => {
+    resetMock();
+    if (!URL.createObjectURL) {
+      (URL as unknown as Record<string, unknown>).createObjectURL = () => "blob:fake";
+    }
+    vi.spyOn(URL, "createObjectURL").mockReturnValue("blob:fake");
+    vi.spyOn(URL, "revokeObjectURL").mockImplementation(() => {});
+    window.speechSynthesis = {
+      cancel: vi.fn(),
+      speak: vi.fn(),
+      getVoices: () => [],
+    } as unknown as SpeechSynthesis;
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("validates the passage and shows word counts", async () => {
+    const user = userEvent.setup();
+    render(<ClearSpeakApp accessRequired={false} />);
+    const start = screen.getByRole("button", { name: /start recording/i });
+    expect(start).toBeDisabled();
+    const box = screen.getByLabelText(/your practice text/i);
+    await user.type(box, "She worked hard.");
+    expect(screen.getByText(/3 words/)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /start recording/i })).toBeEnabled();
+  });
+
+  it("records, analyzes, and shows accessible results with replay", async () => {
+    const user = userEvent.setup();
+    const { rerender } = render(<ClearSpeakApp accessRequired={false} />);
+    await user.type(screen.getByLabelText(/your practice text/i), "She worked hard.");
+    await user.click(screen.getByRole("button", { name: /start recording/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+
+    expect(await screen.findByRole("button", { name: /finish & analyze/i })).toBeInTheDocument();
+    expect(screen.getByText("She worked hard.")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /finish & analyze/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+
+    expect(await screen.findByText(/sounds to fix/i)).toBeInTheDocument();
+    // Weakest sound ranked first with N-best alternative and careful ending alert.
+    expect(screen.getByText(/practice the ending/i)).toBeInTheDocument();
+    expect(screen.getByText(/needs attention/)).toBeInTheDocument();
+    expect(screen.getByLabelText(/your last recording playback/i)).toHaveAttribute(
+      "src",
+      "blob:fake-recording",
+    );
+    // Word chips expose word + status in accessible names.
+    expect(screen.getByRole("button", { name: /worked, focus/i })).toBeInTheDocument();
+    expect(assessWavFileMock).toHaveBeenCalledTimes(1);
+
+    await user.click(screen.getByRole("button", { name: /^try again$/i }));
+    expect(screen.getByLabelText(/your practice text/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/your last recording playback/i)).toHaveAttribute(
+      "src",
+      "blob:fake-recording",
+    );
+  });
+
+  it("explains the 30-second auto-stop", async () => {
+    const user = userEvent.setup();
+    mockRecorder.finish = async () => {
+      mockRecorder.finished = {
+        blob: new Blob(["x"], { type: "audio/wav" }),
+        url: "blob:auto",
+        durationMs: 30000,
+      };
+      mockRecorder.status = "stopped";
+    };
+    const { rerender } = render(<ClearSpeakApp accessRequired={false} />);
+    await user.type(screen.getByLabelText(/your practice text/i), "She worked hard.");
+    await user.click(screen.getByRole("button", { name: /start recording/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    // Simulate the recorder's 30-second timer notification and completed audio.
+    await act(async () => {
+      await mockRecorder.finish();
+      const state = (globalThis as unknown as Record<string, { options: { onAutoStop?: () => void } }>).__hookState;
+      state.options.onAutoStop?.();
+    });
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    expect(await screen.findByText(/30-second limit was reached/i)).toBeInTheDocument();
+  });
+
+  it("shows a retry path after assessment failure", async () => {
+    const user = userEvent.setup();
+    assessWavFileMock.mockRejectedValueOnce(new Error("boom"));
+    const { rerender } = render(<ClearSpeakApp accessRequired={false} />);
+    await user.type(screen.getByLabelText(/your practice text/i), "She worked hard.");
+    await user.click(screen.getByRole("button", { name: /start recording/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    await user.click(await screen.findByRole("button", { name: /finish & analyze/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    expect(await screen.findByRole("alert")).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /^try again$/i }));
+    expect(screen.getByLabelText(/your practice text/i)).toBeInTheDocument();
+  });
+
+  it("stops speech synthesis on unmount", async () => {
+    const { unmount } = render(<ClearSpeakApp accessRequired={false} />);
+    await act(async () => {
+      unmount();
+    });
+    expect(window.speechSynthesis.cancel).toHaveBeenCalled();
+  });
+
+  it("gates access when required", () => {
+    render(<ClearSpeakApp accessRequired={true} />);
+    expect(screen.getByLabelText(/access code/i)).toBeInTheDocument();
+    expect(screen.queryByLabelText(/your practice text/i)).not.toBeInTheDocument();
+  });
+
+  it("rejects a wrong access code before any recording", async () => {
+    const user = userEvent.setup();
+    const fetchMock = vi.fn(async () =>
+      Response.json({ error: "That access code wasn't recognized.", code: "invalid_code" }, { status: 401 }),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    try {
+      render(<ClearSpeakApp accessRequired={true} />);
+      await user.type(screen.getByLabelText(/access code/i), "wrong-code");
+      await user.click(screen.getByRole("button", { name: /^unlock$/i }));
+      expect(await screen.findByRole("alert")).toHaveTextContent(/wasn't recognized/);
+      expect(screen.queryByLabelText(/your practice text/i)).not.toBeInTheDocument();
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it("unlocks with a server-validated code", async () => {
+    const user = userEvent.setup();
+    vi.stubGlobal("fetch", vi.fn(async () => Response.json({ ok: true }, { status: 200 })));
+    try {
+      render(<ClearSpeakApp accessRequired={true} />);
+      await user.type(screen.getByLabelText(/access code/i), "right-code");
+      await user.click(screen.getByRole("button", { name: /^unlock$/i }));
+      expect(await screen.findByLabelText(/your practice text/i)).toBeInTheDocument();
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it("submits analysis exactly once on rapid double Finish", async () => {
+    const user = userEvent.setup();
+    const { rerender } = render(<ClearSpeakApp accessRequired={false} />);
+    await user.type(screen.getByLabelText(/your practice text/i), "She worked hard.");
+    await user.click(screen.getByRole("button", { name: /start recording/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    const finish = await screen.findByRole("button", { name: /finish & analyze/i });
+    const { fireEvent } = await import("@testing-library/react");
+    fireEvent.click(finish);
+    fireEvent.click(finish);
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    expect(await screen.findByText(/sounds to fix/i)).toBeInTheDocument();
+    expect(fetchSpeechTokenMock).toHaveBeenCalledTimes(1);
+    expect(assessWavFileMock).toHaveBeenCalledTimes(1);
+  });
+});
