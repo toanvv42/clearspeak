@@ -12,7 +12,9 @@ import { MIN_RECORDING_MS } from "@/lib/audio/wav";
 import { assessWavFile, classifyAssessmentError, fetchSpeechToken } from "@/lib/azure/pronunciation";
 import {
   customTextIdentity,
+  DEFAULT_PASSAGE_FILTERS,
   passageIdentity,
+  type PassageFilterState,
   type PracticePassage,
 } from "@/lib/practice-content";
 import { normalizeText } from "@/lib/text";
@@ -40,6 +42,8 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   const [draft, setDraft] = useState("");
   const [passage, setPassage] = useState("");
   const [selectedPassage, setSelectedPassage] = useState<PracticePassage | null>(null);
+  const [libraryFilters, setLibraryFilters] =
+    useState<PassageFilterState>(DEFAULT_PASSAGE_FILTERS);
   const [activePracticeItem, setActivePracticeItem] = useState<
     | ({ kind: "library"; id: string; version: number } & { title: string })
     | { kind: "custom"; hash: string }
@@ -305,6 +309,8 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
               disabled={assessing}
               selectedPassage={selectedPassage}
               onSelectPassage={selectPassage}
+              libraryFilters={libraryFilters}
+              onLibraryFiltersChange={setLibraryFilters}
             />
           )}
 

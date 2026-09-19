@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   filterPassages,
   FOCUS_TAGS,
   PASSAGE_TOPICS,
   PRACTICE_BANDS,
   type FocusTag,
+  type PassageFilterState,
   type PassageTopic,
   type PracticeBand,
   type PracticePassage,
@@ -28,17 +29,17 @@ export function formatFocus(tag: FocusTag): string {
 export default function PassageLibrary({
   selectedId,
   onSelect,
+  filters,
+  onFiltersChange,
 }: {
   selectedId?: string;
   onSelect: (passage: PracticePassage) => void;
+  filters: PassageFilterState;
+  onFiltersChange: (filters: PassageFilterState) => void;
 }) {
-  const [band, setBand] = useState<PracticeBand | "all">("B1.2");
-  const [topic, setTopic] = useState<PassageTopic | "all">("all");
-  const [focus, setFocus] = useState<FocusTag | "all">("all");
-  const [query, setQuery] = useState("");
   const passages = useMemo(
-    () => filterPassages({ band, topic, focus, query }),
-    [band, topic, focus, query],
+    () => filterPassages(filters),
+    [filters],
   );
 
   return (
@@ -58,8 +59,8 @@ export default function PassageLibrary({
           Search
           <input
             type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
+            value={filters.query}
+            onChange={(event) => onFiltersChange({ ...filters, query: event.target.value })}
             placeholder="Title, text, or focus"
             className="mt-1 block w-full rounded-lg border border-[#d8cfb8] bg-white px-3 py-2 text-sm font-normal outline-none focus:border-[#2563eb] dark:border-white/15 dark:bg-black/30"
           />
@@ -67,8 +68,10 @@ export default function PassageLibrary({
         <label className="text-xs font-semibold">
           Practice level
           <select
-            value={band}
-            onChange={(event) => setBand(event.target.value as PracticeBand | "all")}
+            value={filters.band}
+            onChange={(event) =>
+              onFiltersChange({ ...filters, band: event.target.value as PracticeBand | "all" })
+            }
             className="mt-1 block w-full rounded-lg border border-[#d8cfb8] bg-white px-3 py-2 text-sm font-normal dark:border-white/15 dark:bg-black/30"
           >
             <option value="all">All levels</option>
@@ -78,8 +81,10 @@ export default function PassageLibrary({
         <label className="text-xs font-semibold">
           Topic
           <select
-            value={topic}
-            onChange={(event) => setTopic(event.target.value as PassageTopic | "all")}
+            value={filters.topic}
+            onChange={(event) =>
+              onFiltersChange({ ...filters, topic: event.target.value as PassageTopic | "all" })
+            }
             className="mt-1 block w-full rounded-lg border border-[#d8cfb8] bg-white px-3 py-2 text-sm font-normal dark:border-white/15 dark:bg-black/30"
           >
             <option value="all">All topics</option>
@@ -89,8 +94,10 @@ export default function PassageLibrary({
         <label className="text-xs font-semibold">
           Pronunciation focus
           <select
-            value={focus}
-            onChange={(event) => setFocus(event.target.value as FocusTag | "all")}
+            value={filters.focus}
+            onChange={(event) =>
+              onFiltersChange({ ...filters, focus: event.target.value as FocusTag | "all" })
+            }
             className="mt-1 block w-full rounded-lg border border-[#d8cfb8] bg-white px-3 py-2 text-sm font-normal dark:border-white/15 dark:bg-black/30"
           >
             <option value="all">All focuses</option>

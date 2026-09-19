@@ -47,6 +47,16 @@ describe("practice content", () => {
     expect(filterPassages({ query: "reusable bottle" }).map((passage) => passage.id)).toEqual([
       "b12-reusable-bottle",
     ]);
+    expect(
+      filterPassages({ query: "Final consonants" }).some((passage) =>
+        passage.focusTags.includes("final-consonants"),
+      ),
+    ).toBe(true);
+    expect(
+      filterPassages({ query: "Work & technology" }).some(
+        (passage) => passage.topic === "work-technology",
+      ),
+    ).toBe(true);
   });
 
   it("uses stable versioned identities and normalized custom hashes", () => {

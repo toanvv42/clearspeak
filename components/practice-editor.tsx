@@ -2,8 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import PassageLibrary, { formatFocus } from "@/components/passage-library";
-import type { PracticePassage } from "@/lib/practice-content";
+import type { PassageFilterState, PracticePassage } from "@/lib/practice-content";
 import {
+  chooseReferenceVoice,
   isGoogleUsEnglishVoice,
   preferredEnglishVoice,
   rankEnglishVoices,
@@ -19,6 +20,8 @@ export default function PracticeEditor({
   disabled,
   selectedPassage,
   onSelectPassage,
+  libraryFilters,
+  onLibraryFiltersChange,
 }: {
   draft: string;
   onDraftChange: (v: string) => void;
@@ -26,6 +29,8 @@ export default function PracticeEditor({
   disabled: boolean;
   selectedPassage: PracticePassage | null;
   onSelectPassage: (passage: PracticePassage) => void;
+  libraryFilters: PassageFilterState;
+  onLibraryFiltersChange: (filters: PassageFilterState) => void;
 }) {
   const [showLibrary, setShowLibrary] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -43,16 +48,14 @@ export default function PracticeEditor({
       const available = rankEnglishVoices(synth.getVoices());
       setVoices(available);
       setSelectedVoiceId((current) => {
-        if (current && available.some((voice) => voiceId(voice) === current)) return current;
         let saved = "";
         try {
           saved = window.localStorage.getItem(REFERENCE_VOICE_STORAGE_KEY) ?? "";
         } catch {
           /* storage may be blocked */
         }
-        if (saved && available.some((voice) => voiceId(voice) === saved)) return saved;
-        const preferred = preferredEnglishVoice(available);
-        return preferred ? voiceId(preferred) : "";
+        const chosen = chooseReferenceVoice(available, current, saved);
+        return chosen ? voiceId(chosen) : "";
       });
     };
 
@@ -97,6 +100,8 @@ export default function PracticeEditor({
       {showLibrary && (
         <PassageLibrary
           selectedId={selectedPassage?.id}
+          filters={libraryFilters}
+          onFiltersChange={onLibraryFiltersChange}
           onSelect={(passage) => {
             onSelectPassage(passage);
             setShowLibrary(false);

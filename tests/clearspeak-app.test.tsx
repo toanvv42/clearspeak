@@ -171,6 +171,29 @@ describe("ClearSpeakApp", () => {
     expect(await screen.findByText("Custom text")).toBeInTheDocument();
   });
 
+  it("keeps library filters after selection and a recording round trip", async () => {
+    const user = userEvent.setup();
+    const { rerender } = render(<ClearSpeakApp accessRequired={false} />);
+    await user.click(screen.getByRole("button", { name: /browse practice texts/i }));
+    await user.selectOptions(screen.getByLabelText(/practice level/i), "A2");
+    expect(screen.getByText("4 texts")).toBeInTheDocument();
+
+    await user.click(screen.getAllByRole("button", { name: /use this text/i })[0]);
+    await user.click(screen.getByRole("button", { name: /browse practice texts/i }));
+    expect(screen.getByLabelText(/practice level/i)).toHaveValue("A2");
+    expect(screen.getByText("4 texts")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /close library/i }));
+    await user.click(screen.getByRole("button", { name: /start recording/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    await user.click(await screen.findByRole("button", { name: /^cancel$/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+
+    await user.click(screen.getByRole("button", { name: /browse practice texts/i }));
+    expect(screen.getByLabelText(/practice level/i)).toHaveValue("A2");
+    expect(screen.getByText("4 texts")).toBeInTheDocument();
+  });
+
   it("records, analyzes, and shows accessible results with replay", async () => {
     const user = userEvent.setup();
     const { rerender } = render(<ClearSpeakApp accessRequired={false} />);

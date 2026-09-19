@@ -28,3 +28,19 @@ export function rankEnglishVoices(voices: SpeechSynthesisVoice[]): SpeechSynthes
 export function preferredEnglishVoice(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | undefined {
   return rankEnglishVoices(voices)[0];
 }
+
+export function chooseReferenceVoice(
+  voices: SpeechSynthesisVoice[],
+  currentId: string,
+  savedId: string,
+): SpeechSynthesisVoice | undefined {
+  if (savedId) {
+    const saved = voices.find((voice) => voiceId(voice) === savedId);
+    if (saved) return saved;
+  }
+  if (currentId) {
+    const current = voices.find((voice) => voiceId(voice) === currentId);
+    if (current) return current;
+  }
+  return preferredEnglishVoice(voices);
+}

@@ -77,6 +77,20 @@ export type PassageFilters = {
   query?: string;
 };
 
+export type PassageFilterState = {
+  band: PracticeBand | "all";
+  topic: PassageTopic | "all";
+  focus: FocusTag | "all";
+  query: string;
+};
+
+export const DEFAULT_PASSAGE_FILTERS: PassageFilterState = {
+  band: "B1.2",
+  topic: "all",
+  focus: "all",
+  query: "",
+};
+
 export const PILOT_BAND_COUNTS: Record<PracticeBand, number> = {
   A1: 3,
   A2: 4,
@@ -190,13 +204,17 @@ export function getPassageById(id: string, version?: number): PracticePassage | 
 }
 
 export function filterPassages(filters: PassageFilters): PracticePassage[] {
-  const query = normalizeText(filters.query ?? "").toLocaleLowerCase("en-US");
+  const normalizeSearchText = (value: string) =>
+    normalizeText(value.replace(/[-_&]+/g, " ")).toLocaleLowerCase("en-US");
+  const query = normalizeSearchText(filters.query ?? "");
   return PRACTICE_PASSAGES.filter((passage) => {
     if (filters.band && filters.band !== "all" && passage.band !== filters.band) return false;
     if (filters.topic && filters.topic !== "all" && passage.topic !== filters.topic) return false;
     if (filters.focus && filters.focus !== "all" && !passage.focusTags.includes(filters.focus)) return false;
     if (!query) return true;
-    const searchable = `${passage.title} ${passage.text} ${passage.topic} ${passage.focusTags.join(" ")}`.toLocaleLowerCase("en-US");
+    const searchable = normalizeSearchText(
+      `${passage.title} ${passage.text} ${passage.topic} ${passage.focusTags.join(" ")}`,
+    );
     return searchable.includes(query);
   });
 }
