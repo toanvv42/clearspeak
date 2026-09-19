@@ -16,6 +16,7 @@ import LastRecordingPlayer from "@/components/last-recording-player";
 import SaveStatus from "@/components/save-status";
 import { usePcmRecorder } from "@/hooks/use-pcm-recorder";
 import { useAttemptSave } from "@/hooks/use-attempt-save";
+import { useStoredAccessCode } from "@/hooks/use-access-code";
 import { MIN_RECORDING_MS } from "@/lib/audio/wav";
 import { assessWavFile, classifyAssessmentError, fetchSpeechToken } from "@/lib/azure/pronunciation";
 import {
@@ -28,7 +29,7 @@ import {
 } from "@/lib/practice-content";
 import { fetchAttemptAudioBlob, fetchAttemptDetail, fetchAttemptList, fetchProgress } from "@/lib/history/client";
 import type { DueReviewItem } from "@/lib/review-schedule";
-import { clearAccessCode, getAccessCode as readStoredCode, hasAccessCode } from "@/lib/access-code";
+import { clearAccessCode } from "@/lib/access-code";
 import { HISTORY_SCHEMA_VERSION, type AttemptDetail, type AttemptSummary } from "@/lib/history/types";
 import { normalizeText } from "@/lib/text";
 import type { AssessmentFailure, AssessmentResult, PracticePhase } from "@/lib/types";
@@ -55,12 +56,9 @@ function newAttemptId(): string {
 
 export default function ClearSpeakApp({ accessRequired }: Props) {
   const router = useRouter();
-  const [unlocked, setUnlocked] = useState(() => !accessRequired || hasAccessCode());
-  const [accessCode, setAccessCode] = useState<string | undefined>(() => readStoredCode());
-  const [phase, setPhase] = useState<PracticePhase>(() => {
-    if (!accessRequired) return "editing";
-    return hasAccessCode() ? "editing" : "locked";
-  });
+  const accessCode = useStoredAccessCode();
+  const unlocked = !accessRequired || accessCode !== undefined;
+  const [phase, setPhase] = useState<PracticePhase>("editing");
   const [draft, setDraft] = useState("");
   const [passage, setPassage] = useState("");
   const [selectedPassage, setSelectedPassage] = useState<PracticePassage | null>(null);
@@ -232,9 +230,7 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   }, [unlocked]);
 
   const unlock = useCallback(
-    (code: string) => {
-      setAccessCode(code);
-      setUnlocked(true);
+    () => {
       setPhase("editing");
       setFailure(null);
       void saver.drainAll();
@@ -382,12 +378,10 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
         await savePromise.catch(() => {});
         if ((err as { status?: number }).status === 401) {
           clearAccessCode();
-          setAccessCode(undefined);
           // The finished take is already queued on this device; unlocking
           // again syncs it automatically. Never lose the user's work here.
           setNotice("Your recording is kept on this device. Unlock again to sync it to history.");
           if (accessRequired) {
-            setUnlocked(false);
             setPhase("locked");
           } else {
             setPhase("recoverable-error");
