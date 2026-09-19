@@ -4,18 +4,22 @@ export default function LastRecordingPlayer({ audioUrl }: { audioUrl: string }) 
   return (
     <section
       aria-label="Last recording"
-      className="rounded-2xl border border-[#2563eb]/25 bg-blue-50/70 p-5 shadow-sm dark:bg-blue-950/30"
+      className="rounded-3xl border border-stone-200 bg-white p-5 shadow-[var(--shadow-card)] dark:border-white/10 dark:bg-white/[0.04]"
     >
-      <h3 className="text-base font-bold">Replay your last recording</h3>
-      <p className="mt-1 text-sm opacity-75">
-        Listen again before your next attempt. Only the latest recording is kept in this browser
-        tab, and it is replaced when you start recording again.
-      </p>
+      <div className="flex items-center gap-3">
+        <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-stone-100 text-sm dark:bg-white/10">↺</span>
+        <div>
+          <h3 className="text-[15px] font-extrabold tracking-tight">Replay your last recording</h3>
+          <p className="text-[13px] text-stone-500 dark:text-stone-400">
+            Only the latest take is kept in this tab.
+          </p>
+        </div>
+      </div>
       <audio
         controls
         preload="metadata"
         src={audioUrl}
-        className="mt-3 w-full"
+        className="mt-4 w-full"
         aria-label="Your last recording playback"
       />
     </section>

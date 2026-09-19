@@ -266,7 +266,7 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
 
   if (accessRequired && !unlocked) {
     return (
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-[#f8f7f4] dark:bg-stone-950">
         <Header />
         <AccessGate onUnlock={unlock} />
         {failure?.kind === "auth" && (
@@ -279,29 +279,40 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   }
 
   const analyzingStep = phase === "requesting-token" ? 1 : phase === "assessing" ? 2 : 0;
+  const stepIndex =
+    phase === "success" ? 3 : phase === "recording" || phase === "preparing-audio" || phase === "requesting-token" || phase === "assessing" ? 2 : 1;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#f8f7f4] text-stone-900 dark:bg-stone-950 dark:text-stone-100">
       <Header />
       <main className="mx-auto w-full max-w-3xl px-4 pb-20 sm:px-6">
-        <div className="pt-6 text-center sm:pt-10">
-          <h1 className="text-3xl font-black tracking-tight sm:text-4xl">
+        <div className="rise-in pt-8 text-center sm:pt-12">
+          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#2563eb]">
+            Private pronunciation practice
+          </p>
+          <h1
+            className="mx-auto mt-3 max-w-xl text-balance text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
             Read it. Hear yourself. Improve.
           </h1>
-          <p className="mx-auto mt-2 max-w-xl text-sm leading-6 opacity-75 sm:text-base">
+          <p className="mx-auto mt-3 max-w-xl text-pretty text-sm leading-6 text-stone-600 sm:text-base dark:text-stone-400">
             Paste a short passage, read it aloud, and get sound-by-sound feedback on your English
             pronunciation.
           </p>
+          <Stepper current={stepIndex} />
         </div>
 
         {notice && (
-          <div role="status" className="mt-4 rounded-xl border border-[#2563eb]/30 bg-blue-50 px-4 py-3 text-sm dark:bg-blue-950/60">
-            {notice}
+          <div role="status" className="rise-in mt-6 flex items-start gap-3 rounded-2xl border border-[#2563eb]/25 bg-blue-50/80 px-4 py-3 text-sm leading-6 shadow-[var(--shadow-card)] dark:bg-blue-950/50">
+            <span aria-hidden="true" className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#2563eb] text-[11px] font-bold text-white">i</span>
+            <span>{notice}</span>
           </div>
         )}
 
         <div className="mt-6 space-y-5">
           {(phase === "editing" || phase === "recoverable-error") && (
+            <div className="rise-in rise-in-1">
             <PracticeEditor
               draft={draft}
               onDraftChange={changeDraft}
@@ -312,20 +323,25 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
               libraryFilters={libraryFilters}
               onLibraryFiltersChange={setLibraryFilters}
             />
+            </div>
           )}
 
           {(phase === "editing" || phase === "recoverable-error") && recorder.finished?.url && (
-            <LastRecordingPlayer audioUrl={recorder.finished.url} />
+            <div className="rise-in rise-in-2">
+              <LastRecordingPlayer audioUrl={recorder.finished.url} />
+            </div>
           )}
 
           {phase === "requesting-microphone" && recorder.status !== "recording" && !failure && (
-            <div className="rounded-2xl border border-[#e5ddcb] bg-white p-6 text-center shadow-sm dark:border-white/10 dark:bg-white/5">
-              <p className="text-base font-medium">Requesting microphone access…</p>
-              <p className="mt-1 text-sm opacity-70">Your browser should show a permission prompt.</p>
+            <div className="rise-in rounded-2xl border border-stone-200 bg-white p-6 text-center shadow-[var(--shadow-card)] dark:border-white/10 dark:bg-white/5">
+              <span aria-hidden="true" className="mx-auto block h-8 w-8 animate-spin rounded-full border-[3px] border-[#2563eb] border-t-transparent" />
+              <p className="mt-3 text-base font-semibold">Requesting microphone access…</p>
+              <p className="mt-1 text-sm text-stone-500 dark:text-stone-400">Your browser should show a permission prompt.</p>
             </div>
           )}
 
           {phase === "recording" && (
+            <div className="rise-in">
             <RecordingSession
               passage={passage}
               practiceLabel={activePracticeItem?.kind === "library" ? activePracticeItem.title : "Custom text"}
@@ -335,40 +351,48 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
               onCancel={cancelRecording}
               busy={recorder.finishing}
             />
+            </div>
           )}
 
           {phase === "preparing-audio" && !recorder.finished && (
-            <div className="rounded-2xl border border-[#e5ddcb] bg-white p-6 text-center shadow-sm dark:border-white/10 dark:bg-white/5">
+            <div className="rounded-2xl border border-stone-200 bg-white p-6 text-center shadow-[var(--shadow-card)] dark:border-white/10 dark:bg-white/5">
               <p className="text-base font-medium">Preparing your audio…</p>
             </div>
           )}
 
           {(phase === "requesting-token" || phase === "assessing") && (
-            <AnalyzingState step={analyzingStep} />
+            <div className="rise-in">
+              <AnalyzingState step={analyzingStep} />
+            </div>
           )}
 
           {phase === "recoverable-error" && failure && (
-            <ErrorCard failure={failure} onRetry={backToEditing} onCancel={cancelRecording} />
+            <div className="rise-in">
+              <ErrorCard failure={failure} onRetry={backToEditing} onCancel={cancelRecording} />
+            </div>
           )}
 
           {phase === "success" && result && (
+            <div className="rise-in">
             <ResultsView
               result={result}
               audioUrl={recorder.finished?.url ?? null}
               onRetry={retrySame}
               onNewText={newText}
             />
+            </div>
           )}
 
           {phase === "success" && result && recorder.autoStopped && (
-            <p className="text-center text-xs opacity-60">
+            <p className="text-center text-xs text-stone-500 dark:text-stone-400">
               This attempt used the full 30 seconds.
             </p>
           )}
         </div>
 
-        <footer className="mt-10 border-t border-black/10 pt-4 text-center text-xs leading-5 opacity-70 dark:border-white/10">
-          <p>Your recording stays in this browser until you analyze it.</p>
+        <footer className="mt-12 border-t border-stone-200 pt-5 text-center text-xs leading-5 text-stone-500 dark:border-white/10 dark:text-stone-400">
+          <p className="font-semibold text-stone-600 dark:text-stone-300">Private by design</p>
+          <p className="mt-1">Your recording stays in this browser until you analyze it.</p>
           <p>When you analyze, the audio is sent directly to Azure Speech and is not stored by ClearSpeak.</p>
         </footer>
       </main>
@@ -378,19 +402,65 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
 
 function Header() {
   return (
-    <header className="border-b border-black/10 bg-white/70 backdrop-blur dark:border-white/10 dark:bg-black/30">
+    <header className="sticky top-0 z-20 border-b border-stone-200/80 bg-[#f8f7f4]/85 backdrop-blur-md dark:border-white/10 dark:bg-stone-950/80">
       <div className="mx-auto flex w-full max-w-3xl items-center gap-3 px-4 py-3 sm:px-6">
-        <p className="text-lg font-black tracking-tight">
+        <span aria-hidden="true" className="flex h-8 w-8 items-center justify-center rounded-xl bg-stone-900 text-white dark:bg-white dark:text-stone-900">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <rect x="6" y="1.5" width="4" height="8" rx="2" fill="currentColor" />
+            <path d="M3.5 7.5a4.5 4.5 0 0 0 9 0" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            <line x1="8" y1="12" x2="8" y2="14.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          </svg>
+        </span>
+        <p className="text-[17px] font-extrabold tracking-tight">
           ClearSpeak
         </p>
         <span className="rounded-full bg-[#2563eb]/10 px-2.5 py-0.5 text-xs font-semibold text-[#1d4ed8] dark:text-blue-200">
           English · US
         </span>
-        <span className="ml-auto hidden text-xs opacity-60 sm:block">
+        <span className="ml-auto hidden items-center gap-1.5 text-xs text-stone-500 sm:flex dark:text-stone-400">
+          <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
           Private practice · nothing is stored
         </span>
       </div>
     </header>
+  );
+}
+
+function Stepper({ current }: { current: number }) {
+  const steps = ["Practice", "Record", "Review"];
+  return (
+    <ol aria-label="Practice progress" className="mx-auto mt-6 flex max-w-md items-center justify-center gap-2">
+      {steps.map((label, i) => {
+        const n = i + 1;
+        const done = n < current;
+        const active = n === current;
+        return (
+          <li key={label} className="flex items-center gap-2">
+            <span className="flex items-center gap-2">
+              <span
+                aria-hidden="true"
+                className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold tabular-nums transition-colors ${
+                  done
+                    ? "bg-emerald-700 text-white"
+                    : active
+                      ? "bg-stone-900 text-white dark:bg-white dark:text-stone-900"
+                      : "bg-stone-200 text-stone-500 dark:bg-white/10 dark:text-stone-400"
+                }`}
+              >
+                {done ? "✓" : n}
+              </span>
+              <span className={`text-xs font-semibold ${active ? "" : "text-stone-500 dark:text-stone-400"}`}>
+                {label}
+                {active && <span className="sr-only"> (current step)</span>}
+              </span>
+            </span>
+            {n < steps.length && (
+              <span aria-hidden="true" className={`mx-1 h-px w-6 sm:w-10 ${n < current ? "bg-emerald-700" : "bg-stone-300 dark:bg-white/15"}`} />
+            )}
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 
@@ -418,22 +488,27 @@ function ErrorCard({
     generic: "Something went wrong",
   };
   return (
-    <div role="alert" className="rounded-2xl border border-red-700/25 bg-red-50 p-5 dark:bg-red-950/50">
-      <h3 className="text-base font-bold">{titles[failure.kind]}</h3>
-      <p className="mt-1 text-sm">{failure.message}</p>
-      <p className="mt-1 text-sm font-medium">{failure.nextAction}</p>
+    <div role="alert" className="rounded-2xl border border-red-700/20 bg-red-50/80 p-5 shadow-[var(--shadow-card)] sm:p-6 dark:border-red-400/20 dark:bg-red-950/40">
+      <div className="flex items-start gap-3">
+        <span aria-hidden="true" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-700/10 text-base">!</span>
+        <div>
+          <h3 className="text-base font-bold tracking-tight">{titles[failure.kind]}</h3>
+          <p className="mt-1 text-sm leading-6 text-stone-700 dark:text-stone-200">{failure.message}</p>
+          <p className="mt-1 text-sm font-medium">{failure.nextAction}</p>
+        </div>
+      </div>
       <div className="mt-4 flex flex-col gap-2 sm:flex-row">
         <button
           type="button"
           onClick={onRetry}
-          className="rounded-xl bg-[#2563eb] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#1d4ed8]"
+          className="rounded-xl bg-stone-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-stone-700 active:scale-[0.99] dark:bg-white dark:text-stone-900 dark:hover:bg-stone-200"
         >
           Try again
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-xl border border-black/15 px-5 py-2.5 text-sm font-medium hover:bg-black/5 dark:border-white/15 dark:hover:bg-white/10"
+          className="rounded-xl border border-stone-300 bg-white px-5 py-2.5 text-sm font-medium transition hover:bg-stone-100 active:scale-[0.99] dark:border-white/15 dark:bg-transparent dark:hover:bg-white/10"
         >
           Back to editor
         </button>
