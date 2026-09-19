@@ -11,6 +11,7 @@ WorkingDirectory=/home/ubuntu/apps/pronunciation-coach-staging
 Environment=HOME=/home/ubuntu
 Environment=NODE_ENV=production
 Environment=NEXT_TELEMETRY_DISABLED=1
+Environment=CLEARSPEAK_DATA_DIR=/home/ubuntu/data/clearspeak-staging
 Environment=PATH=/usr/local/bin:/usr/bin:/bin
 ExecStart=/usr/local/bin/mise exec -- npm run start -- --hostname 127.0.0.1 --port 3101
 Restart=on-failure

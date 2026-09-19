@@ -19,11 +19,13 @@ export default function ResultsView({
   audioUrl,
   onRetry,
   onNewText,
+  hideAudio = false,
 }: {
   result: AssessmentResult;
   audioUrl: string | null;
   onRetry: () => void;
   onNewText: () => void;
+  hideAudio?: boolean;
 }) {
   const [showRecognized, setShowRecognized] = useState(false);
   const [showDebug, setShowDebug] = useState(false);
@@ -182,7 +184,7 @@ export default function ResultsView({
         )}
       </div>
 
-      {audioUrl && <LastRecordingPlayer audioUrl={audioUrl} />}
+      {audioUrl && !hideAudio && <LastRecordingPlayer audioUrl={audioUrl} />}
 
       <div className="flex flex-col gap-2.5 sm:flex-row">
         <button

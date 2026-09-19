@@ -1,5 +1,5 @@
-import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
+import { timingSafeCompare } from "@/lib/server/access";
 import { accessCheckRateLimit } from "@/lib/server/rate-limits";
 
 export const runtime = "nodejs";
@@ -8,17 +8,6 @@ function clientIp(req: Request): string {
   const forwarded = req.headers.get("x-forwarded-for");
   if (forwarded) return forwarded.split(",")[0].trim();
   return req.headers.get("x-real-ip") ?? "unknown";
-}
-
-function timingSafeCompare(a: string, b: string): boolean {
-  const ab = Buffer.from(a, "utf8");
-  const bb = Buffer.from(b, "utf8");
-  if (ab.length !== bb.length) return false;
-  try {
-    return timingSafeEqual(ab, bb);
-  } catch {
-    return false;
-  }
 }
 
 /**

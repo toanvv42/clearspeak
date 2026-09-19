@@ -54,6 +54,12 @@ next-env.d.ts
 /test-results/
 /playwright-report/
 
+# local history database (gitignored SQLite + WAL)
+.data/
+backups/*.sqlite
+backups/*.sqlite-wal
+backups/*.sqlite-shm
+
 # ide / os
 .vscode/*
 !.vscode/extensions.json

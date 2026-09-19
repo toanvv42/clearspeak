@@ -1,5 +1,5 @@
-import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
+import { timingSafeCompare } from "@/lib/server/access";
 import { speechTokenRateLimit } from "@/lib/server/rate-limits";
 
 export const runtime = "nodejs";
@@ -13,17 +13,6 @@ function clientIp(req: Request): string {
 function noStore(res: NextResponse): NextResponse {
   res.headers.set("Cache-Control", "no-store");
   return res;
-}
-
-function timingSafeCompare(a: string, b: string): boolean {
-  const ab = Buffer.from(a, "utf8");
-  const bb = Buffer.from(b, "utf8");
-  if (ab.length !== bb.length) return false;
-  try {
-    return timingSafeEqual(ab, bb);
-  } catch {
-    return false;
-  }
 }
 
 const REGION_RE = /^[a-z0-9-]+$/;

@@ -48,8 +48,8 @@ export default function AnalyzingState({ step }: { step: number }) {
         })}
       </ol>
       <p className="mt-6 rounded-2xl bg-stone-50 px-4 py-3 text-[13px] leading-5 text-stone-500 dark:bg-black/20 dark:text-stone-400">
-        Your recording is sent directly from this browser to Azure Speech. It is not stored by
-        ClearSpeak.
+        Your recording is saved to history on the app server and sent from this browser to
+        Azure Speech for evaluation.
       </p>
     </section>
   );

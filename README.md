@@ -8,27 +8,35 @@ Pronunciation Assessment.
 
 1. Browse 44 original practice passages across A1–C2 (with B1.1/B1.2 practice bands), or
    paste your own short English passage (1–60 words, ≤ 600 characters).
-2. Read it aloud while recording locally in the browser (AudioWorklet, in-memory only).
-3. Press **Finish & analyze** (or let the 30-second limit stop automatically), optionally replay
-   the recording.
-4. The finished in-memory WAV (mono 16-bit PCM at 16 kHz) is sent **directly from the browser
-   to Azure Speech** through the official JavaScript Speech SDK.
+2. Read it aloud while recording in the browser (AudioWorklet, 30-second cap).
+3. Press **Finish & analyze** (or let the 30-second limit stop automatically).
+4. The finished WAV (mono 16-bit PCM at 16 kHz) is saved automatically to your
+   **Practice / History** journal on the app server, and sent from the browser to
+   Azure Speech through the official JavaScript Speech SDK.
 5. Overall, word-level, syllable-level, and phoneme-level feedback is rendered, with the
    weakest IPA sounds ranked first and weak ending sounds highlighted.
+6. Return later to listen again, **Record again** with the exact saved text, compare with
+   the previous compatible attempt, retry a failed evaluation, download audio/evaluation,
+   or delete a take.
 
 The built-in library is stored as versioned JSON in `content/passages`. Every item has a stable
 ID, estimated level rationale, topic, pronunciation focus, sentence chunks, provenance, rights,
 and review metadata. Level labels are practice estimates rather than proficiency results.
 
-## Privacy / data flow
+## Data flow / storage
 
-- Your recording stays in this browser until you analyze it.
-- When you analyze, the audio is sent directly to Azure Speech and is not stored by ClearSpeak.
-- The Next.js server exposes only a short-lived (~9 minute) authorization token via
-  `POST /api/speech-token`. It never receives audio.
+- Finished recordings and feedback are saved automatically to the app server's SQLite
+  database (`CLEARSPEAK_DATA_DIR/clearspeak.sqlite`, WAL mode). History is shared by
+  devices that reach the same server; a dev instance has its own history.
+- When you analyze, the audio is also sent from the browser to Azure Speech for
+  evaluation. Reading history and replaying audio never call Azure; retrying a save
+  never calls Azure either.
+- The Next.js server exposes a short-lived (~9 minute) authorization token via
+  `POST /api/speech-token`.
 - The Azure subscription key stays server-side. It is never placed in client code, HTML,
   storage, `NEXT_PUBLIC_*` variables, logs, or errors.
-- No accounts, database, or persisted recordings/results.
+- No accounts. Access is guarded by `APP_ACCESS_CODE`, sent as the `x-app-access-code`
+  header. Database backups may still contain deleted attempts.
 
 For Microsoft's data handling, see the
 [Azure Speech documentation](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/how-to-pronunciation-assessment)
@@ -108,9 +116,11 @@ mise run build
 
 ## Production
 
-- Deploy to any Node-capable Next.js host (Vercel, Azure App Service, a VM, etc.).
-- Set `AZURE_SPEECH_KEY`, `AZURE_SPEECH_REGION`, `APP_ACCESS_CODE`, and optionally
-  `AZURE_ENABLE_PROSODY=true` in the host's environment variables.
+- Requires durable disk on a single Node host (systemd templates in `deploy/`). An
+  ephemeral/serverless filesystem is not a compatible production storage target.
+- Set `AZURE_SPEECH_KEY`, `AZURE_SPEECH_REGION`, `APP_ACCESS_CODE`,
+  `CLEARSPEAK_DATA_DIR` (`/home/ubuntu/data/clearspeak`; staging uses
+  `/home/ubuntu/data/clearspeak-staging`), and optionally `AZURE_ENABLE_PROSODY=true`.
 - **HTTPS is required** for microphone access in production browsers.
 - In production the app fails closed when `APP_ACCESS_CODE` is missing; in development the
   gate can be omitted.
@@ -148,5 +158,14 @@ mise run build
 
 - Fixed `en-US` locale; no language selector.
 - One-shot assessment of a single ≤ 30 s recording (no continuous long-form mode).
-- No history, accounts, sharing, or AI-generated coaching — the focus suggestion is
+- No accounts, sharing, or AI-generated coaching — the focus suggestion is
   deterministic guidance derived from the weakest returned metric.
+
+## History backups
+
+- Consistent snapshot: `CLEARSPEAK_DATA_DIR=/home/ubuntu/data/clearspeak ./scripts/backup-history.sh`
+  (uses `VACUUM INTO`, so WAL content is included — never copy only the live `.sqlite` file).
+- Copy snapshots off the host; a backup kept only on the app disk does not cover disk loss.
+- Restore: copy a snapshot into a temp dir, point `CLEARSPEAK_DATA_DIR` there, restart, and
+  verify one attempt's metadata, feedback, and WAV playback. Deletion reuses SQLite space
+  but may not shrink the file immediately.

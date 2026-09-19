@@ -49,7 +49,7 @@ export default function AccessGate({ onUnlock }: { onUnlock: (code: string) => v
           </svg>
         </span>
         <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.18em] text-[#2563eb]">Clearspeak</p>
-        <h1 className="mt-2 text-2xl font-extrabold tracking-tight" style={{ fontFamily: "var(--font-display)" }}>This practice space is private</h1>
+        <h1 className="mt-2 text-2xl font-extrabold tracking-tight" style={{ fontFamily: "var(--font-display)" }}>Open ClearSpeak</h1>
         <p className="mt-2 text-sm leading-6 text-stone-500 dark:text-stone-400">
           Enter your personal access code to unlock pronunciation practice.
         </p>
