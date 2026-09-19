@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "passages": [
+    {
+      "id": "a1-park-walk", "version": 1, "title": "A Walk in the Park",
+      "text": "My name is Sam. I live near a park. I walk there with my friend.",
+      "cefrLevel": "A1", "levelRationale": "Short present-tense sentences use familiar places and actions.",
+      "topic": "daily-life", "focusTags": ["final-consonants"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "My name is Sam."}, {"id": "sentence-2", "text": "I live near a park."}, {"id": "sentence-3", "text": "I walk there with my friend."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
+      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
+      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "a1-breakfast", "version": 1, "title": "Morning Breakfast",
+      "text": "I make eggs and toast. My coffee is hot. Then I start my day.",
+      "cefrLevel": "A1", "levelRationale": "Common food words and simple present-tense clauses support beginner practice.",
+      "topic": "health-habits", "focusTags": ["final-consonants"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "I make eggs and toast."}, {"id": "sentence-2", "text": "My coffee is hot."}, {"id": "sentence-3", "text": "Then I start my day."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
+      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
+      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "a1-blue-bag", "version": 1, "title": "My Blue Bag",
+      "text": "This is my blue bag. It has two books, a pen, and my lunch.",
+      "cefrLevel": "A1", "levelRationale": "A familiar object is described with basic nouns and the verb have.",
+      "topic": "daily-life", "focusTags": ["sentence-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "This is my blue bag."}, {"id": "sentence-2", "text": "It has two books, a pen, and my lunch."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
+      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
+      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { __resetAccessCheckRateLimitForTests, POST } from "@/app/api/access-check/route";
+import { POST } from "@/app/api/access-check/route";
+import { accessCheckRateLimit } from "@/lib/server/rate-limits";
 
 const ENV = { ...process.env };
 let ipCounter = 100;
@@ -14,7 +15,7 @@ function req(ip: string, accessCode?: string): Request {
 describe("POST /api/access-check", () => {
   beforeEach(() => {
     process.env = { ...ENV, NODE_ENV: "test" };
-    __resetAccessCheckRateLimitForTests();
+    accessCheckRateLimit.reset();
   });
   afterEach(() => {
     process.env = { ...ENV };

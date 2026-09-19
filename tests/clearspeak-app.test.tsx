@@ -152,6 +152,25 @@ describe("ClearSpeakApp", () => {
     expect(screen.getByRole("button", { name: /start recording/i })).toBeEnabled();
   });
 
+  it("starts the library at B1.2 and treats edited selections as custom text", async () => {
+    const user = userEvent.setup();
+    const { rerender } = render(<ClearSpeakApp accessRequired={false} />);
+    await user.click(screen.getByRole("button", { name: /browse practice texts/i }));
+    expect(screen.getByLabelText(/practice level/i)).toHaveValue("B1.2");
+    expect(screen.getByText("10 texts")).toBeInTheDocument();
+
+    await user.click(screen.getAllByRole("button", { name: /use this text/i })[0]);
+    const box = screen.getByLabelText(/your practice text/i);
+    expect((box as HTMLTextAreaElement).value).toContain("project");
+    expect(screen.getByText(/checking the project · b1.2/i)).toBeInTheDocument();
+
+    await user.type(box, " One more sentence.");
+    expect(screen.queryByText(/checking the project · b1.2/i)).not.toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /start recording/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    expect(await screen.findByText("Custom text")).toBeInTheDocument();
+  });
+
   it("records, analyzes, and shows accessible results with replay", async () => {
     const user = userEvent.setup();
     const { rerender } = render(<ClearSpeakApp accessRequired={false} />);

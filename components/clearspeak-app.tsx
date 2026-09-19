@@ -10,6 +10,12 @@ import LastRecordingPlayer from "@/components/last-recording-player";
 import { usePcmRecorder } from "@/hooks/use-pcm-recorder";
 import { MIN_RECORDING_MS } from "@/lib/audio/wav";
 import { assessWavFile, classifyAssessmentError, fetchSpeechToken } from "@/lib/azure/pronunciation";
+import {
+  customTextIdentity,
+  passageIdentity,
+  type PracticePassage,
+} from "@/lib/practice-content";
+import { normalizeText } from "@/lib/text";
 import type { AssessmentFailure, AssessmentResult, PracticePhase } from "@/lib/types";
 
 type Props = {
@@ -33,6 +39,12 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   const [phase, setPhase] = useState<PracticePhase>(accessRequired ? "locked" : "editing");
   const [draft, setDraft] = useState("");
   const [passage, setPassage] = useState("");
+  const [selectedPassage, setSelectedPassage] = useState<PracticePassage | null>(null);
+  const [activePracticeItem, setActivePracticeItem] = useState<
+    | ({ kind: "library"; id: string; version: number } & { title: string })
+    | { kind: "custom"; hash: string }
+    | null
+  >(null);
   const [result, setResult] = useState<AssessmentResult | null>(null);
   const [failure, setFailure] = useState<AssessmentFailure | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -79,6 +91,11 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
       setFailure(null);
       setResult(null);
       setPassage(normalized);
+      setActivePracticeItem(
+        selectedPassage?.text === normalized
+          ? { ...passageIdentity(selectedPassage), title: selectedPassage.title }
+          : customTextIdentity(normalized),
+      );
       setPhase("requesting-microphone");
       void recorder.start().then((outcome) => {
         if (outcome.ok) {
@@ -97,8 +114,23 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
         setPhase("recoverable-error");
       });
     },
-    [recorder],
+    [recorder, selectedPassage],
   );
+
+  const changeDraft = useCallback(
+    (value: string) => {
+      setDraft(value);
+      if (selectedPassage && normalizeText(value) !== selectedPassage.text) setSelectedPassage(null);
+    },
+    [selectedPassage],
+  );
+
+  const selectPassage = useCallback((selected: PracticePassage) => {
+    setSelectedPassage(selected);
+    setDraft(selected.text);
+    setFailure(null);
+    setNotice(null);
+  }, []);
 
   const finishRecording = useCallback(() => {
     if (submitGuardRef.current) return;
@@ -217,6 +249,8 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
     submitGuardRef.current = false;
     setDraft("");
     setPassage("");
+    setSelectedPassage(null);
+    setActivePracticeItem(null);
     setPhase("editing");
   }, []);
 
@@ -266,9 +300,11 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
           {(phase === "editing" || phase === "recoverable-error") && (
             <PracticeEditor
               draft={draft}
-              onDraftChange={setDraft}
+              onDraftChange={changeDraft}
               onStart={beginRecording}
               disabled={assessing}
+              selectedPassage={selectedPassage}
+              onSelectPassage={selectPassage}
             />
           )}
 
@@ -286,6 +322,7 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
           {phase === "recording" && (
             <RecordingSession
               passage={passage}
+              practiceLabel={activePracticeItem?.kind === "library" ? activePracticeItem.title : "Custom text"}
               elapsedMs={recorder.elapsedMs}
               level={recorder.level}
               onFinish={finishRecording}

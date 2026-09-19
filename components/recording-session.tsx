@@ -4,6 +4,7 @@ import { formatElapsed, MAX_RECORDING_SECONDS } from "@/lib/audio/wav";
 
 export default function RecordingSession({
   passage,
+  practiceLabel,
   elapsedMs,
   level,
   onFinish,
@@ -11,6 +12,7 @@ export default function RecordingSession({
   busy,
 }: {
   passage: string;
+  practiceLabel: string;
   elapsedMs: number;
   level: number;
   onFinish: () => void;
@@ -30,6 +32,7 @@ export default function RecordingSession({
         </p>
         <p className="ml-auto text-sm tabular-nums opacity-70">{remaining}s left</p>
       </div>
+      <p className="mt-2 text-xs font-semibold uppercase tracking-wide opacity-60">{practiceLabel}</p>
       <div
         className="mt-3 h-2 overflow-hidden rounded-full bg-black/10 dark:bg-white/10"
         role="progressbar"

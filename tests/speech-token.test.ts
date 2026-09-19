@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { __resetRateLimitForTests, POST } from "@/app/api/speech-token/route";
+import { POST } from "@/app/api/speech-token/route";
+import { speechTokenRateLimit } from "@/lib/server/rate-limits";
 
 const ENV = { ...process.env };
 let ipCounter = 0;
@@ -25,7 +26,7 @@ function mockTokenFetch(status: number, body = "fake-token") {
 describe("POST /api/speech-token", () => {
   beforeEach(() => {
     process.env = { ...ENV, NODE_ENV: "test" };
-    __resetRateLimitForTests();
+    speechTokenRateLimit.reset();
     vi.unstubAllGlobals();
   });
   afterEach(() => {

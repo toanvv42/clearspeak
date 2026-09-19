@@ -1,30 +1,13 @@
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
+import { speechTokenRateLimit } from "@/lib/server/rate-limits";
 
 export const runtime = "nodejs";
-
-const WINDOW_MS = 60_000;
-const MAX_REQUESTS = 10;
-
-const hits = new Map<string, number[]>();
 
 function clientIp(req: Request): string {
   const forwarded = req.headers.get("x-forwarded-for");
   if (forwarded) return forwarded.split(",")[0].trim();
   return req.headers.get("x-real-ip") ?? "unknown";
-}
-
-function rateLimited(ip: string): boolean {
-  const now = Date.now();
-  const list = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
-  list.push(now);
-  hits.set(ip, list);
-  return list.length > MAX_REQUESTS;
-}
-
-/** Best-effort per-IP limiter for a personal MVP (not a durable distributed limiter). */
-export function __resetRateLimitForTests() {
-  hits.clear();
 }
 
 function noStore(res: NextResponse): NextResponse {
@@ -52,7 +35,7 @@ export async function POST(req: Request) {
   const speechRegion = process.env.AZURE_SPEECH_REGION ?? "";
   const enableProsody = process.env.AZURE_ENABLE_PROSODY === "true";
 
-  if (rateLimited(clientIp(req))) {
+  if (speechTokenRateLimit.exceeded(clientIp(req))) {
     return noStore(
       NextResponse.json(
         { error: "Too many requests. Please wait a moment and try again.", code: "rate_limited" },

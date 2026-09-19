@@ -1,21 +1,13 @@
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
+import { accessCheckRateLimit } from "@/lib/server/rate-limits";
 
 export const runtime = "nodejs";
-
-const WINDOW_MS = 60_000;
-const MAX_REQUESTS = 20;
-
-const hits = new Map<string, number[]>();
 
 function clientIp(req: Request): string {
   const forwarded = req.headers.get("x-forwarded-for");
   if (forwarded) return forwarded.split(",")[0].trim();
   return req.headers.get("x-real-ip") ?? "unknown";
-}
-
-export function __resetAccessCheckRateLimitForTests() {
-  hits.clear();
 }
 
 function timingSafeCompare(a: string, b: string): boolean {
@@ -41,12 +33,8 @@ export async function POST(req: Request) {
     return r;
   };
 
-  const now = Date.now();
   const ip = clientIp(req);
-  const list = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
-  list.push(now);
-  hits.set(ip, list);
-  if (list.length > MAX_REQUESTS) {
+  if (accessCheckRateLimit.exceeded(ip)) {
     return res(
       { error: "Too many attempts. Wait a moment and try again.", code: "rate_limited" },
       429,

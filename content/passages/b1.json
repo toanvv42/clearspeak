@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "passages": [
+    {
+      "id": "b11-rainy-evening", "version": 1, "title": "A Rainy Evening", "text": "We planned to meet after work, but the rain was heavy. Instead, we cooked dinner at home and talked about our weekend plans.",
+      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "A familiar past event includes contrast and a change of plan.", "topic": "relationships", "focusTags": ["consonant-clusters", "sentence-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "We planned to meet after work, but the rain was heavy."}, {"id": "sentence-2", "text": "Instead, we cooked dinner at home and talked about our weekend plans."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b11-train-platform", "version": 1, "title": "The Right Platform", "text": "I arrived early, but my train was not on the main board. A station worker checked my ticket and showed me the correct platform.",
+      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "The passage narrates and resolves a common travel problem.", "topic": "travel", "focusTags": ["past-endings", "consonant-clusters"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "I arrived early, but my train was not on the main board."}, {"id": "sentence-2", "text": "A station worker checked my ticket and showed me the correct platform."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b11-new-recipe", "version": 1, "title": "Trying a New Recipe", "text": "Last night, I tried a soup recipe from a friend. It took longer than expected, but the fresh vegetables and herbs tasted wonderful.",
+      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "A personal experience uses comparison and connected past-tense details.", "topic": "health-habits", "focusTags": ["past-endings", "word-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Last night, I tried a soup recipe from a friend."}, {"id": "sentence-2", "text": "It took longer than expected, but the fresh vegetables and herbs tasted wonderful."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b11-team-calendar", "version": 1, "title": "Sharing the Calendar", "text": "Our team started using a shared calendar this month. Now everyone can see important deadlines, and we spend less time asking about meeting dates.",
+      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "A workplace change is explained with a clear cause and result.", "topic": "work-technology", "focusTags": ["consonant-clusters", "linking"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Our team started using a shared calendar this month."}, {"id": "sentence-2", "text": "Now everyone can see important deadlines, and we spend less time asking about meeting dates."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b11-clean-river", "version": 1, "title": "Cleaning the Riverbank", "text": "On Sunday, our neighborhood group collected trash beside the river. We filled twelve bags and learned why plastic waste is dangerous for local birds.",
+      "cefrLevel": "B1", "sublevel": "B1.1", "levelRationale": "A concrete community event adds a simple environmental explanation.", "topic": "science-environment", "focusTags": ["final-consonants", "word-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "On Sunday, our neighborhood group collected trash beside the river."}, {"id": "sentence-2", "text": "We filled twelve bags and learned why plastic waste is dangerous for local birds."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b12-project-details", "version": 1, "title": "Checking the Project", "text": "I finished the first part of the project yesterday, but I still need to check a few details. Could we meet after lunch to discuss the next steps?",
+      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "A workplace update combines completed work, remaining tasks, and a polite request.", "topic": "work-technology", "focusTags": ["thought-groups", "request-intonation"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "I finished the first part of the project yesterday, but I still need to check a few details."}, {"id": "sentence-2", "text": "Could we meet after lunch to discuss the next steps?"}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b12-login-problem", "version": 1, "title": "A Login Problem", "text": "The new website works well on my phone, but I cannot sign in from my laptop. Could you check whether my account has the correct access?",
+      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "The speaker explains a technical problem and requests a specific check.", "topic": "work-technology", "focusTags": ["consonant-clusters", "request-intonation"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "The new website works well on my phone, but I cannot sign in from my laptop."}, {"id": "sentence-2", "text": "Could you check whether my account has the correct access?"}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b12-later-flight", "version": 1, "title": "Changing a Flight", "text": "My meeting ends later than I expected, so I may miss the evening flight. I would like to move my booking to tomorrow morning, if possible.",
+      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "The passage gives a reason, predicts a consequence, and makes a polite request.", "topic": "travel", "focusTags": ["thought-groups", "sentence-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "My meeting ends later than I expected, so I may miss the evening flight."}, {"id": "sentence-2", "text": "I would like to move my booking to tomorrow morning, if possible."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b12-quiet-mornings", "version": 1, "title": "Quiet Mornings", "text": "I prefer to exercise early because the streets are quiet and the air feels cooler. Starting this way also helps me concentrate during the morning.",
+      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "A personal preference is supported with two clear reasons.", "topic": "health-habits", "focusTags": ["linking", "sentence-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "I prefer to exercise early because the streets are quiet and the air feels cooler."}, {"id": "sentence-2", "text": "Starting this way also helps me concentrate during the morning."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b12-neighbor-package", "version": 1, "title": "A Package for My Neighbor", "text": "A package arrived while my neighbor was away, so I kept it safely inside. I sent her a message and asked when she wanted to collect it.",
+      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "A short narrative explains actions, sequence, and a practical question.", "topic": "relationships", "focusTags": ["past-endings", "linking"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "A package arrived while my neighbor was away, so I kept it safely inside."}, {"id": "sentence-2", "text": "I sent her a message and asked when she wanted to collect it."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b12-reusable-bottle", "version": 1, "title": "Remembering My Bottle", "text": "I started carrying a reusable bottle to reduce plastic waste. At first I often forgot it, but now I leave it beside my keys every night.",
+      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "A changed habit is described across time with contrast and purpose.", "topic": "science-environment", "focusTags": ["consonant-clusters", "thought-groups"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "I started carrying a reusable bottle to reduce plastic waste."}, {"id": "sentence-2", "text": "At first I often forgot it, but now I leave it beside my keys every night."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b12-clearer-instructions", "version": 1, "title": "Asking for Clarification", "text": "I understand the first two steps, but the final instruction is unclear. Could you show me an example before I update the rest of the files?",
+      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "The speaker identifies a precise gap and politely asks for clarification.", "topic": "work-technology", "focusTags": ["final-consonants", "request-intonation"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "I understand the first two steps, but the final instruction is unclear."}, {"id": "sentence-2", "text": "Could you show me an example before I update the rest of the files?"}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b12-weekend-market", "version": 1, "title": "The Weekend Market", "text": "The outdoor market is usually crowded, but I enjoy meeting local farmers there. Their produce is fresh, and they often explain how each item was grown.",
+      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "An opinion is supported by details and a relative clause in a familiar setting.", "topic": "daily-life", "focusTags": ["word-stress", "thought-groups"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "The outdoor market is usually crowded, but I enjoy meeting local farmers there."}, {"id": "sentence-2", "text": "Their produce is fresh, and they often explain how each item was grown."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b12-video-call", "version": 1, "title": "A Better Video Call", "text": "During yesterday's call, several people could not hear the speaker clearly. For our next meeting, I suggest testing the microphone and joining five minutes early.",
+      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "A past problem leads to two practical recommendations for future work.", "topic": "work-technology", "focusTags": ["consonant-clusters", "sentence-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "During yesterday's call, several people could not hear the speaker clearly."}, {"id": "sentence-2", "text": "For our next meeting, I suggest testing the microphone and joining five minutes early."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b12-lunch-choice", "version": 1, "title": "Choosing a Lunch Place", "text": "The cafe near our office is convenient, although it becomes noisy at noon. I prefer the smaller restaurant because we can talk without raising our voices.",
+      "cefrLevel": "B1", "sublevel": "B1.2", "levelRationale": "The speaker compares two options and gives a reasoned preference.", "topic": "relationships", "focusTags": ["contrastive-stress", "thought-groups"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "The cafe near our office is convenient, although it becomes noisy at noon."}, {"id": "sentence-2", "text": "I prefer the smaller restaurant because we can talk without raising our voices."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    }
+  ]
+}

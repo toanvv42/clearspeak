@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "passages": [
+    {
+      "id": "c2-elegant-proposal", "version": 1, "title": "Elegance and Feasibility", "text": "The proposal is elegant, admittedly, but elegance is hardly evidence of feasibility. What appears to be a minor concession may, in practice, undermine the very principle the policy was intended to protect.",
+      "cefrLevel": "C2", "levelRationale": "Rhetorical qualification and precise contrast carry a subtle critique across complex clauses.", "topic": "work-technology", "focusTags": ["intonation", "contrastive-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "The proposal is elegant, admittedly, but elegance is hardly evidence of feasibility."}, {"id": "sentence-2", "text": "What appears to be a minor concession may, in practice, undermine the very principle the policy was intended to protect."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "c2-convenient-memory", "version": 1, "title": "A Convenient Memory", "text": "His account was compelling less because it was complete than because its omissions were convenient. By presenting uncertainty as restraint, he transformed a fragile recollection into something that sounded remarkably like settled fact.",
+      "cefrLevel": "C2", "levelRationale": "Dense rhetorical comparison, implication, and controlled ambiguity demand nuanced delivery.", "topic": "relationships", "focusTags": ["intonation", "sentence-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "His account was compelling less because it was complete than because its omissions were convenient."}, {"id": "sentence-2", "text": "By presenting uncertainty as restraint, he transformed a fragile recollection into something that sounded remarkably like settled fact."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    }
+  ]
+}

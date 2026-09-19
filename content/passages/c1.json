@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "passages": [
+    {
+      "id": "c1-early-evidence", "version": 1, "title": "Promising Early Results", "text": "Although the proposal appears practical, its success depends on assumptions that have not yet been tested. We should therefore distinguish between promising early results and evidence of lasting improvement.",
+      "cefrLevel": "C1", "levelRationale": "The argument qualifies an initial judgment and distinguishes between related kinds of evidence.", "topic": "work-technology", "focusTags": ["word-stress", "thought-groups"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Although the proposal appears practical, its success depends on assumptions that have not yet been tested."}, {"id": "sentence-2", "text": "We should therefore distinguish between promising early results and evidence of lasting improvement."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "c1-public-data", "version": 1, "title": "Interpreting Public Data", "text": "Public data can reveal meaningful patterns, provided we remember that measurement choices shape the picture we see. A persuasive chart may clarify a trend, yet still conceal uncertainty or exclude relevant experience.",
+      "cefrLevel": "C1", "levelRationale": "The passage develops a qualified abstract claim about interpretation and hidden limitations.", "topic": "science-environment", "focusTags": ["thought-groups", "contrastive-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Public data can reveal meaningful patterns, provided we remember that measurement choices shape the picture we see."}, {"id": "sentence-2", "text": "A persuasive chart may clarify a trend, yet still conceal uncertainty or exclude relevant experience."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    }
+  ]
+}

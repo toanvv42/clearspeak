@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "passages": [
+    {
+      "id": "b2-remote-balance", "version": 1, "title": "Balancing Remote Work", "text": "Working from home saves travel time, although it can make teamwork harder. A flexible schedule may offer a better balance, provided everyone agrees on how to stay in touch.",
+      "cefrLevel": "B2", "levelRationale": "The passage weighs competing effects and adds a condition to its recommendation.", "topic": "work-technology", "focusTags": ["contrastive-stress", "thought-groups"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Working from home saves travel time, although it can make teamwork harder."}, {"id": "sentence-2", "text": "A flexible schedule may offer a better balance, provided everyone agrees on how to stay in touch."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b2-tourism-limits", "version": 1, "title": "Managing Popular Places", "text": "Tourism supports local businesses, yet large crowds can damage the places visitors came to enjoy. Limiting daily entry might protect the area while preserving most of its economic benefits.",
+      "cefrLevel": "B2", "levelRationale": "A public issue is evaluated through contrast, consequences, and a qualified solution.", "topic": "travel", "focusTags": ["contrastive-stress", "word-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Tourism supports local businesses, yet large crowds can damage the places visitors came to enjoy."}, {"id": "sentence-2", "text": "Limiting daily entry might protect the area while preserving most of its economic benefits."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b2-sleeping-habits", "version": 1, "title": "Changing Sleep Habits", "text": "People often blame a busy schedule for poor sleep, but evening habits may be equally important. Reducing bright screens before bed is a modest change that can make rest more consistent.",
+      "cefrLevel": "B2", "levelRationale": "The text challenges a common explanation and advances a measured alternative claim.", "topic": "health-habits", "focusTags": ["sentence-stress", "linking"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "People often blame a busy schedule for poor sleep, but evening habits may be equally important."}, {"id": "sentence-2", "text": "Reducing bright screens before bed is a modest change that can make rest more consistent."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "b2-city-trees", "version": 1, "title": "Trees in Growing Cities", "text": "Planting trees can cool crowded neighborhoods and improve air quality, but young trees require years of care. Cities should therefore fund maintenance as seriously as they fund the initial planting.",
+      "cefrLevel": "B2", "levelRationale": "A policy recommendation follows from balanced environmental benefits and practical constraints.", "topic": "science-environment", "focusTags": ["thought-groups", "contrastive-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Planting trees can cool crowded neighborhoods and improve air quality, but young trees require years of care."}, {"id": "sentence-2", "text": "Cities should therefore fund maintenance as seriously as they fund the initial planting."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"}, "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"}, "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    }
+  ]
+}

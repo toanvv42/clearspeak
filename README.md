@@ -6,7 +6,8 @@ Pronunciation Assessment.
 
 ## What it does
 
-1. Paste or load a short English passage (1–60 words, ≤ 600 characters).
+1. Browse 30 original practice passages across A1–C2 (with B1.1/B1.2 practice bands), or
+   paste your own short English passage (1–60 words, ≤ 600 characters).
 2. Read it aloud while recording locally in the browser (AudioWorklet, in-memory only).
 3. Press **Finish & analyze** (or let the 30-second limit stop automatically), optionally replay
    the recording.
@@ -14,6 +15,10 @@ Pronunciation Assessment.
    to Azure Speech** through the official JavaScript Speech SDK.
 5. Overall, word-level, syllable-level, and phoneme-level feedback is rendered, with the
    weakest IPA sounds ranked first and weak ending sounds highlighted.
+
+The built-in library is stored as versioned JSON in `content/passages`. Every item has a stable
+ID, estimated level rationale, topic, pronunciation focus, sentence chunks, provenance, rights,
+and review metadata. Level labels are practice estimates rather than proficiency results.
 
 ## Privacy / data flow
 

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "passages": [
+    {
+      "id": "a2-missed-bus", "version": 1, "title": "The Missed Bus",
+      "text": "Yesterday, I missed the bus, so I walked to the station. I bought a ticket and called my friend.",
+      "cefrLevel": "A2", "levelRationale": "A short sequence uses frequent past-tense verbs and a familiar travel situation.",
+      "topic": "travel", "focusTags": ["past-endings", "thought-groups"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "Yesterday, I missed the bus, so I walked to the station."}, {"id": "sentence-2", "text": "I bought a ticket and called my friend."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
+      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
+      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "a2-grocery-list", "version": 1, "title": "At the Grocery Store",
+      "text": "I need rice, tomatoes, and fresh bread. After work, I will stop at the store and carry everything home.",
+      "cefrLevel": "A2", "levelRationale": "A concrete shopping task combines a simple list with a future plan.",
+      "topic": "daily-life", "focusTags": ["final-consonants", "sentence-stress"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "I need rice, tomatoes, and fresh bread."}, {"id": "sentence-2", "text": "After work, I will stop at the store and carry everything home."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
+      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
+      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "a2-evening-call", "version": 1, "title": "An Evening Call",
+      "text": "My sister called me after dinner. We talked about her new job, and we planned to meet on Saturday.",
+      "cefrLevel": "A2", "levelRationale": "Familiar family and work vocabulary appears in two linked past events.",
+      "topic": "relationships", "focusTags": ["past-endings", "linking"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "My sister called me after dinner."}, {"id": "sentence-2", "text": "We talked about her new job, and we planned to meet on Saturday."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
+      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
+      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    },
+    {
+      "id": "a2-water-break", "version": 1, "title": "A Healthy Break",
+      "text": "I sit at a computer all morning. Every hour, I stand up, drink some water, and stretch my legs.",
+      "cefrLevel": "A2", "levelRationale": "A familiar routine uses present-tense actions and a simple time expression.",
+      "topic": "health-habits", "focusTags": ["consonant-clusters", "thought-groups"], "locale": "en-US",
+      "chunks": [{"id": "sentence-1", "text": "I sit at a computer all morning."}, {"id": "sentence-2", "text": "Every hour, I stand up, drink some water, and stretch my legs."}],
+      "source": {"kind": "original", "author": "ClearSpeak", "attribution": "Original ClearSpeak practice text"},
+      "rights": {"status": "cleared", "license": "ClearSpeak original content", "checkedAt": "2026-09-19"},
+      "review": {"status": "reviewed", "reviewedAt": "2026-09-19"}
+    }
+  ]
+}
