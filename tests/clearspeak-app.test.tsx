@@ -2,6 +2,7 @@ import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import ClearSpeakApp from "@/components/clearspeak-app";
+import { clearAccessCode, setAccessCode } from "@/lib/access-code";
 import type { AssessmentResult } from "@/lib/types";
 
 type MockRecorder = {
@@ -124,6 +125,7 @@ function resetMock() {
 
 describe("ClearSpeakApp", () => {
   beforeEach(() => {
+    clearAccessCode();
     resetMock();
     if (!URL.createObjectURL) {
       (URL as unknown as Record<string, unknown>).createObjectURL = () => "blob:fake";
@@ -277,6 +279,12 @@ describe("ClearSpeakApp", () => {
     render(<ClearSpeakApp accessRequired={true} />);
     expect(screen.getByLabelText(/access code/i)).toBeInTheDocument();
     expect(screen.queryByLabelText(/your practice text/i)).not.toBeInTheDocument();
+  });
+
+  it("restores a stored access code after the hydration-safe snapshot", async () => {
+    setAccessCode("saved-code");
+    render(<ClearSpeakApp accessRequired={true} />);
+    expect(await screen.findByLabelText(/your practice text/i)).toBeInTheDocument();
   });
 
   it("rejects a wrong access code before any recording", async () => {

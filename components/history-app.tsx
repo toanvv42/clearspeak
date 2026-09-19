@@ -4,8 +4,9 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import AccessGate from "@/components/access-gate";
 import AppHeader from "@/components/app-header";
+import { useStoredAccessCode } from "@/hooks/use-access-code";
 import { fetchAttemptList, getAccessCode, uploadAttempt, uploadEvaluation } from "@/lib/history/client";
-import { clearAccessCode, hasAccessCode } from "@/lib/access-code";
+import { clearAccessCode } from "@/lib/access-code";
 import { pendingList, pendingRemove, pendingUpdate } from "@/lib/history/pending-saves";
 import type { AttemptSummary } from "@/lib/history/types";
 
@@ -64,7 +65,8 @@ function matchesFilter(item: AttemptSummary, filter: Filter): boolean {
 }
 
 export default function HistoryApp({ accessRequired }: { accessRequired: boolean }) {
-  const [unlocked, setUnlocked] = useState(() => !accessRequired || hasAccessCode());
+  const accessCode = useStoredAccessCode();
+  const unlocked = !accessRequired || accessCode !== undefined;
   const [items, setItems] = useState<AttemptSummary[]>([]);
   const [pending, setPending] = useState<AttemptSummary[]>([]);
   const [search, setSearch] = useState("");
@@ -91,7 +93,6 @@ export default function HistoryApp({ accessRequired }: { accessRequired: boolean
         // A rejected code drops back to the gate instead of a dead list.
         if ((err as { status?: number }).status === 401 && accessRequired) {
           clearAccessCode();
-          setUnlocked(false);
           return;
         }
         setError("Could not load history. Check your connection and try again.");
@@ -181,7 +182,7 @@ export default function HistoryApp({ accessRequired }: { accessRequired: boolean
     return (
       <div className="min-h-screen bg-[#f8f7f4] dark:bg-stone-950">
         <AppHeader />
-        <AccessGate onUnlock={() => setUnlocked(true)} />
+        <AccessGate />
       </div>
     );
   }
