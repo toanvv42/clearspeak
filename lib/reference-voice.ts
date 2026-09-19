@@ -1,4 +1,5 @@
 export const REFERENCE_VOICE_STORAGE_KEY = "clearspeak-reference-voice";
+export const REFERENCE_RATE_STORAGE_KEY = "clearspeak-reference-rate";
 
 export function voiceId(voice: Pick<SpeechSynthesisVoice, "voiceURI" | "name" | "lang">): string {
   return voice.voiceURI || `${voice.name}:${voice.lang}`;

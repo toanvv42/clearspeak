@@ -8,6 +8,7 @@ import {
   isGoogleUsEnglishVoice,
   preferredEnglishVoice,
   rankEnglishVoices,
+  REFERENCE_RATE_STORAGE_KEY,
   REFERENCE_VOICE_STORAGE_KEY,
   voiceId,
 } from "@/lib/reference-voice";
@@ -36,7 +37,16 @@ export default function PracticeEditor({
 }) {
   const [showLibrary, setShowLibrary] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  const [voicesLoaded, setVoicesLoaded] = useState(false);
   const [selectedVoiceId, setSelectedVoiceId] = useState("");
+  const [playbackRate, setPlaybackRate] = useState<"normal" | "slow">(() => {
+    try {
+      return window.localStorage.getItem(REFERENCE_RATE_STORAGE_KEY) === "slow" ? "slow" : "normal";
+    } catch {
+      return "normal";
+    }
+  });
+  const [selectedSegmentId, setSelectedSegmentId] = useState("full");
   const [playbackStatus, setPlaybackStatus] = useState<"idle" | "starting" | "playing">("idle");
   const [playbackError, setPlaybackError] = useState<string | null>(null);
   const currentUtterance = useRef<SpeechSynthesisUtterance | null>(null);
@@ -48,6 +58,57 @@ export default function PracticeEditor({
   const wordPct = Math.min(100, (validation.wordCount / MAX_WORDS) * 100);
   const overWord = validation.wordCount > MAX_WORDS;
   const playbackActive = playbackStatus !== "idle";
+  const hasUsVoice = voices.some((voice) => voice.lang.toLowerCase().startsWith("en-us"));
+
+  const segments = useMemo(() => {
+    if (selectedPassage && selectedPassage.chunks.length > 1) {
+      return selectedPassage.chunks.map((chunk, index) => ({
+        id: chunk.id,
+        label: `Sentence ${index + 1}`,
+        text: chunk.text,
+      }));
+    }
+    const matches = validation.normalized.match(/[^.!?]+[.!?]+["”']?|\S[^.!?]*$/g);
+    const sentences = (matches ?? []).map((s) => s.trim()).filter(Boolean);
+    if (sentences.length <= 1) return [];
+    return sentences.map((text, index) => ({ id: `sentence-${index + 1}`, label: `Sentence ${index + 1}`, text }));
+  }, [selectedPassage, validation.normalized]);
+  const selectedSegmentText = useMemo(() => {
+    if (selectedSegmentId === "full") return validation.normalized || draft.trim();
+    return segments.find((segment) => segment.id === selectedSegmentId)?.text ?? validation.normalized;
+  }, [selectedSegmentId, segments, validation.normalized, draft]);
+  const effectiveSegmentId =
+    selectedSegmentId === "full" || segments.some((segment) => segment.id === selectedSegmentId)
+      ? selectedSegmentId
+      : "full";
+
+  const stopPlayback = () => {
+    currentUtterance.current = null;
+    setPlaybackStatus("idle");
+    setPlaybackError(null);
+    try {
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const handleSegmentChange = (id: string) => {
+    stopPlayback();
+    setSelectedSegmentId(id);
+  };
+
+  const handleDraftChange = (value: string) => {
+    stopPlayback();
+    setSelectedSegmentId("full");
+    onDraftChange(value);
+  };
+
+  const handleSelectPassage = (passage: PracticePassage) => {
+    stopPlayback();
+    setSelectedSegmentId("full");
+    onSelectPassage(passage);
+  };
 
   useEffect(() => {
     if (!("speechSynthesis" in window)) return;
@@ -55,6 +116,7 @@ export default function PracticeEditor({
     const loadVoices = () => {
       const available = rankEnglishVoices(synth.getVoices());
       setVoices(available);
+      setVoicesLoaded(true);
       setSelectedVoiceId((current) => {
         let saved = "";
         try {
@@ -72,6 +134,25 @@ export default function PracticeEditor({
     return () => synth.removeEventListener?.("voiceschanged", loadVoices);
   }, []);
 
+  useEffect(() => {
+    return () => {
+      try {
+        if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      } catch {
+        /* ignore */
+      }
+    };
+  }, []);
+
+  const changeRate = (rate: "normal" | "slow") => {
+    setPlaybackRate(rate);
+    try {
+      window.localStorage.setItem(REFERENCE_RATE_STORAGE_KEY, rate);
+    } catch {
+      /* storage may be blocked */
+    }
+  };
+
   const listenToSample = () => {
     try {
       if (!("speechSynthesis" in window)) {
@@ -80,17 +161,15 @@ export default function PracticeEditor({
       }
       const synth = window.speechSynthesis;
       if (playbackActive || synth.speaking || synth.pending) {
-        currentUtterance.current = null;
-        setPlaybackStatus("idle");
-        setPlaybackError(null);
-        synth.cancel();
+        stopPlayback();
         return;
       }
 
-      const text = validation.normalized || draft;
-      if (!text.trim()) return;
-      const utter = new SpeechSynthesisUtterance(validation.normalized || draft.trim());
+      const text = selectedSegmentText.trim();
+      if (!text) return;
+      const utter = new SpeechSynthesisUtterance(text);
       utter.lang = "en-US";
+      utter.rate = playbackRate === "slow" ? 0.7 : 1;
       const voice = selectedVoice ?? preferredEnglishVoice(synth.getVoices());
       if (voice) utter.voice = voice;
       utter.onstart = () => {
@@ -154,7 +233,7 @@ export default function PracticeEditor({
               filters={libraryFilters}
               onFiltersChange={onLibraryFiltersChange}
               onSelect={(passage) => {
-                onSelectPassage(passage);
+                handleSelectPassage(passage);
                 setShowLibrary(false);
               }}
             />
@@ -179,7 +258,7 @@ export default function PracticeEditor({
             <button
               type="button"
               disabled={disabled}
-              onClick={() => onDraftChange("")}
+              onClick={() => handleDraftChange("")}
               className="text-xs font-semibold text-stone-500 underline underline-offset-2 hover:text-stone-800 disabled:opacity-50 dark:text-stone-400 dark:hover:text-stone-200"
             >
               Clear
@@ -190,7 +269,7 @@ export default function PracticeEditor({
           id="practice-text"
           value={draft}
           disabled={disabled}
-          onChange={(e) => onDraftChange(e.target.value)}
+          onChange={(e) => handleDraftChange(e.target.value)}
           rows={5}
           maxLength={MAX_CHARS + 100}
           placeholder="Paste a short English passage (1–60 words)…"
@@ -251,17 +330,58 @@ export default function PracticeEditor({
               }}
               className="block w-full rounded-xl border border-stone-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-[#2563eb] dark:border-white/15 dark:bg-black/30"
             >
-              {voices.length === 0 && <option value="">No English browser voices found</option>}
+              {voices.length === 0 && (
+                <option value="">{voicesLoaded ? "No English browser voices found" : "Loading browser voices…"}</option>
+              )}
               {voices.map((voice) => (
                 <option key={voiceId(voice)} value={voiceId(voice)}>
                   {voice.name} ({voice.lang}){isGoogleUsEnglishVoice(voice) ? " — preferred" : ""}
                 </option>
               ))}
             </select>
+            <fieldset className="mt-3">
+              <legend className="text-xs font-bold text-stone-600 dark:text-stone-300">Playback speed</legend>
+              <div className="mt-1.5 flex gap-2" role="radiogroup" aria-label="Playback speed">
+                {(["normal", "slow"] as const).map((rate) => (
+                  <button
+                    key={rate}
+                    type="button"
+                    role="radio"
+                    aria-checked={playbackRate === rate}
+                    onClick={() => changeRate(rate)}
+                    className={`rounded-full px-3.5 py-1.5 text-[13px] font-bold transition active:scale-[0.99] ${playbackRate === rate ? "bg-stone-900 text-white dark:bg-white dark:text-stone-900" : "border border-stone-300 bg-white text-stone-600 hover:bg-stone-50 dark:border-white/15 dark:bg-transparent dark:text-stone-300 dark:hover:bg-white/10"}`}
+                  >
+                    {rate === "slow" ? "Slow" : "Normal"}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+            {segments.length > 0 && (
+              <div className="mt-3">
+                <label htmlFor="reference-segment" className="text-xs font-bold text-stone-600 dark:text-stone-300">
+                  Listen to
+                </label>
+                <select
+                  id="reference-segment"
+                  value={effectiveSegmentId}
+                  onChange={(event) => handleSegmentChange(event.target.value)}
+                  className="mt-1.5 block w-full rounded-xl border border-stone-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-[#2563eb] dark:border-white/15 dark:bg-black/30"
+                >
+                  <option value="full">Full passage</option>
+                  {segments.map((segment) => (
+                    <option key={segment.id} value={segment.id}>
+                      {segment.label}: {segment.text.slice(0, 60)}{segment.text.length > 60 ? "…" : ""}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
             <p className="mt-2 text-xs leading-5 text-stone-500 dark:text-stone-400" aria-live="polite">
               {selectedVoice && isGoogleUsEnglishVoice(selectedVoice)
                 ? "Using Google US English from Chrome."
-                : "Chrome only lets this app use voices shown in this list."}
+                : voicesLoaded && voices.length > 0 && !hasUsVoice
+                  ? "No US English voice found on this device — the closest English browser voice is used. Assessment still expects American English."
+                  : "Chrome only lets this app use voices shown in this list."}
             </p>
           </div>
         </details>
@@ -269,7 +389,10 @@ export default function PracticeEditor({
           <button
             type="button"
             disabled={disabled || !validation.valid}
-            onClick={() => onStart(validation.normalized)}
+            onClick={() => {
+              stopPlayback();
+              onStart(validation.normalized);
+            }}
             className="group flex flex-1 items-center justify-center gap-2 rounded-2xl bg-stone-900 px-5 py-3.5 text-[15px] font-bold text-white shadow-sm transition hover:bg-stone-700 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-40 dark:bg-white dark:text-stone-900 dark:hover:bg-stone-200"
           >
             <span aria-hidden="true" className="flex h-5 w-5 items-center justify-center rounded-full bg-white/20 transition group-enabled:group-hover:scale-110 dark:bg-stone-900/10">
@@ -291,10 +414,16 @@ export default function PracticeEditor({
         </div>
         <div aria-live="polite" className="mt-3 text-center text-xs leading-5 sm:text-left">
           {playbackStatus === "starting" && (
-            <p className="text-stone-500 dark:text-stone-400">Starting sample playback…</p>
+            <p className="text-stone-500 dark:text-stone-400">
+              Starting sample playback…{playbackRate === "slow" ? " Slow speed." : ""}
+              {effectiveSegmentId !== "full" ? " Selected sentence." : ""} Browser voice.
+            </p>
           )}
           {playbackStatus === "playing" && (
-            <p className="text-stone-500 dark:text-stone-400">Playing sample…</p>
+            <p className="text-stone-500 dark:text-stone-400">
+              Playing sample{playbackRate === "slow" ? " slowly" : ""}…
+              {effectiveSegmentId !== "full" ? ` ${segments.find((s) => s.id === effectiveSegmentId)?.label ?? "Selected sentence"}.` : ""} Browser voice.
+            </p>
           )}
           {playbackError && <p className="font-medium text-red-700 dark:text-red-300">{playbackError}</p>}
         </div>

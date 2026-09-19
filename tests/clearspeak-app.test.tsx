@@ -325,4 +325,24 @@ describe("ClearSpeakApp", () => {
     expect(fetchSpeechTokenMock).toHaveBeenCalledTimes(1);
     expect(assessWavFileMock).toHaveBeenCalledTimes(1);
   });
+
+  it("keeps the previous try for comparison after Try again", async () => {
+    const user = userEvent.setup();
+    const { rerender } = render(<ClearSpeakApp accessRequired={false} />);
+    await user.type(screen.getByLabelText(/your practice text/i), "She worked hard.");
+    await user.click(screen.getByRole("button", { name: /start recording/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    await user.click(await screen.findByRole("button", { name: /finish & analyze/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    expect(await screen.findByText(/sounds to fix/i)).toBeInTheDocument();
+    expect(screen.getByText(/practise the ending/i)).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /^try again$/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    await user.click(screen.getByRole("button", { name: /start recording/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    await user.click(await screen.findByRole("button", { name: /finish & analyze/i }));
+    rerender(<ClearSpeakApp accessRequired={false} />);
+    expect(await screen.findByText(/compared with your previous try/i)).toBeInTheDocument();
+  });
 });

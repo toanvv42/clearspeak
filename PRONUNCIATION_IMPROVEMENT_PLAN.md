@@ -8,6 +8,11 @@ Turn ClearSpeak into a daily pronunciation practice tool with a simple learning 
 
 **Choose a short passage → listen → record → practise one weak point → record again → review later.**
 
+The focused-drill, progress, DuckDB analytics plugin, and database evolution design is specified in
+[`LEARNING_ANALYTICS_PLAN.md`](./LEARNING_ANALYTICS_PLAN.md). That plan keeps SQLite as the
+transactional source of truth, uses DuckDB only as an optional read-only analytics plugin, and
+defers PostgreSQL and Docker Compose until explicit scaling triggers are met.
+
 Start with your self-estimated B1.2 level, American English, and a 10–15 minute session. Keep the existing Next.js app and Azure pronunciation assessment. The first release should add a graded sample library, better listening controls, and useful retry feedback. Add local progress tracking next.
 
 Treat B1.2 as an app sublevel within B1, not a verified placement result. Reading difficulty and pronunciation difficulty are different: a learner may understand B1 vocabulary while needing an A2 sentence to practise one sound. Allow independent choices for text level and pronunciation focus.

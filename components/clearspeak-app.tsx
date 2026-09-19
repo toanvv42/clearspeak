@@ -6,6 +6,7 @@ import AccessGate from "@/components/access-gate";
 import AnalyzingState from "@/components/analyzing-state";
 import AppHeader from "@/components/app-header";
 import ComparisonView from "@/components/comparison-view";
+import { ScoreDelta } from "@/components/attempt-audio";
 import PassageLibrary from "@/components/passage-library";
 import PracticeEditor from "@/components/practice-editor";
 import RecordingSession from "@/components/recording-session";
@@ -68,6 +69,11 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
     | null
   >(null);
   const [result, setResult] = useState<AssessmentResult | null>(null);
+  const [previousInSession, setPreviousInSession] = useState<{
+    result: AssessmentResult;
+    audioUrl: string | null;
+    passage: string;
+  } | null>(null);
   const [failure, setFailure] = useState<AssessmentFailure | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [assessing, setAssessing] = useState(false);
@@ -223,6 +229,11 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
 
   const beginRecording = useCallback(
     (normalized: string) => {
+      try {
+        if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      } catch {
+        /* ignore */
+      }
       setNotice(null);
       setFailure(null);
       setResult(null);
@@ -497,6 +508,13 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
   }, [phase, recorder.finished]);
 
   const recordAgain = useCallback(() => {
+    if (result) {
+      setPreviousInSession({
+        result,
+        audioUrl: recorder.finished?.url ?? null,
+        passage,
+      });
+    }
     setResult(null);
     setFailure(null);
     setNotice(null);
@@ -510,10 +528,11 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
     requestAnimationFrame(() => {
       document.getElementById("practice-text")?.focus();
     });
-  }, [passage, saver]);
+  }, [passage, saver, result, recorder.finished]);
 
   const newText = useCallback(() => {
     setResult(null);
+    setPreviousInSession(null);
     setFailure(null);
     setNotice(null);
     setSavedDetail(null);
@@ -727,6 +746,12 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
                 </div>
               </div>
               {recorder.finished?.url && <LastRecordingPlayer audioUrl={recorder.finished.url} label="Replay this take" hint="Saved automatically to history." />}
+              {previousInSession && previousInSession.passage === passage && (
+                <InSessionComparison
+                  previous={previousInSession}
+                  current={{ result, audioUrl: recorder.finished?.url ?? null }}
+                />
+              )}
               <ResultsView
                 result={result}
                 audioUrl={null}
@@ -761,6 +786,57 @@ export default function ClearSpeakApp({ accessRequired }: Props) {
         </footer>
       </main>
     </div>
+  );
+}
+
+function InSessionComparison({
+  previous,
+  current,
+}: {
+  previous: { result: AssessmentResult; audioUrl: string | null; passage: string };
+  current: { result: AssessmentResult; audioUrl: string | null };
+}) {
+  return (
+    <section
+      aria-label="Compared with your previous try in this session"
+      className="rounded-3xl border border-stone-200 bg-white p-5 shadow-[var(--shadow-card)] dark:border-white/10 dark:bg-white/[0.04]"
+    >
+      <h3 className="text-base font-extrabold tracking-tight">Compared with your previous try</h3>
+      <p className="mt-1 text-[13px] text-stone-500">Same text, same session · practice feedback, not a proficiency rating.</p>
+      <div className="mt-3 space-y-1">
+        <p className="text-xs font-bold uppercase tracking-widest text-stone-400">Overall</p>
+        <ScoreDelta previous={previous.result.pronunciationScore} current={current.result.pronunciationScore} />
+        <div className="grid grid-cols-2 gap-2 pt-2 text-sm sm:grid-cols-4">
+          {(
+            [
+              ["Accuracy", previous.result.accuracyScore, current.result.accuracyScore],
+              ["Fluency", previous.result.fluencyScore, current.result.fluencyScore],
+              ["Completeness", previous.result.completenessScore, current.result.completenessScore],
+              ["Prosody", previous.result.prosodyScore, current.result.prosodyScore],
+            ] as Array<[string, number | undefined, number | undefined]>
+          ).map(([label, p, c]) => (
+            <div key={label} className="rounded-xl bg-stone-50 px-3 py-2 dark:bg-black/20">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-stone-400">{label}</p>
+              <ScoreDelta previous={p ?? null} current={c ?? null} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        <div className="rounded-2xl border border-stone-200 bg-white p-4 dark:border-white/10 dark:bg-white/[0.04]">
+          <p className="text-sm font-bold">Previous try</p>
+          {previous.audioUrl ? (
+            <audio controls preload="metadata" src={previous.audioUrl} className="mt-3 w-full" aria-label="Previous try playback" />
+          ) : (
+            <p className="mt-2 text-[13px] text-stone-500">Previous audio is not available in this tab.</p>
+          )}
+        </div>
+        <div className="rounded-2xl border border-stone-900 bg-stone-50 p-4 dark:border-white/20 dark:bg-black/30">
+          <p className="text-sm font-bold">This try</p>
+          <p className="mt-1 text-[13px] text-stone-500">Use the player above the results to replay this take.</p>
+        </div>
+      </div>
+    </section>
   );
 }
 

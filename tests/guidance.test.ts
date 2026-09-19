@@ -4,6 +4,7 @@ import {
   endingSoundAlerts,
   formatScore,
   overallLabel,
+  primaryDrill,
   soundsToFix,
   weakestMetric,
 } from "@/lib/assessment-guidance";
@@ -130,5 +131,20 @@ describe("guidance", () => {
     expect(careful).not.toMatch(/definitely omitted|you definitely/);
     const explicit = describeFinalPhoneme("played", "d", true);
     expect(explicit).toMatch(/omitted/);
+  });
+
+  it("builds one concrete drill from the weakest sound and its sentence", () => {
+    const r = parsePronunciationJson(WEAK_FINAL_FIXTURE, "She played. He stayed.");
+    const drill = primaryDrill(r);
+    expect(drill).not.toBeNull();
+    expect(drill!.word).toBe("played");
+    expect(drill!.sentence).toContain("She played");
+    expect(drill!.exercise).toMatch(/listen slowly/i);
+    expect(drill!.exercise).toContain(drill!.phrase);
+  });
+
+  it("returns no drill when every sound clears the threshold", () => {
+    const r = makeResult({ referenceText: "She walked.", words: [] });
+    expect(primaryDrill(r)).toBeNull();
   });
 });

@@ -6,6 +6,7 @@ import {
   formatScore,
   METRIC_EXPLANATIONS,
   overallLabel,
+  primaryDrill,
   soundsToFix,
   weakestMetric,
 } from "@/lib/assessment-guidance";
@@ -31,6 +32,7 @@ export default function ResultsView({
   const [showDebug, setShowDebug] = useState(false);
   const focus = weakestMetric(result);
   const sounds = soundsToFix(result);
+  const drill = primaryDrill(result);
   const endings = endingSoundAlerts(result);
   const overall = typeof result.pronunciationScore === "number" ? Math.max(0, Math.min(100, result.pronunciationScore)) : 0;
   const ring = 2 * Math.PI * 44;
@@ -150,6 +152,19 @@ export default function ResultsView({
         <h3 className="flex items-center gap-2 text-[15px] font-extrabold tracking-tight">
           <span aria-hidden="true">✦</span> Your focus for next time
         </h3>
+        {drill ? (
+          <div className="mt-2 space-y-1.5">
+            <p className="text-sm leading-6 font-bold">{drill.exercise}</p>
+            <p className="text-[13px] leading-5 opacity-80">
+              Target /{drill.symbol}/ in “{drill.word}” · {drill.positionLabel} of word · score{" "}
+              {formatScore(drill.score)}. Sentence: “{drill.sentence}”
+            </p>
+          </div>
+        ) : (
+          <p className="mt-2 text-sm leading-6 opacity-90">
+            No single sound scored below the practice threshold — pick any sentence and record again for fluency.
+          </p>
+        )}
         <p className="mt-2 text-sm leading-6 opacity-90">{focus.suggestion}</p>
         <p className="mt-2 text-xs opacity-60">
           App guidance derived from your scores — not an AI diagnosis.

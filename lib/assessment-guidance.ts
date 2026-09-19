@@ -213,3 +213,64 @@ export function describeFinalPhoneme(word: string, symbol: string, explicitlyOmi
   if (explicitlyOmitted) return `You omitted the final /${symbol}/ in \u2018${word}\u2019.`;
   return `Final /${symbol}/ in \u2018${word}\u2019 needs attention — likely weak or missing.`;
 }
+
+export type PrimaryDrill = {
+  symbol: string;
+  word: string;
+  positionLabel: SoundToFix["positionLabel"];
+  score: number;
+  sentence: string;
+  phrase: string;
+  exercise: string;
+};
+
+function sentenceContaining(referenceText: string, word: string): string {
+  const sentences = referenceText.match(/[^.!?]+[.!?]+["”']?|\S[^.!?]*$/g) ?? [referenceText];
+  const target = word.toLowerCase().replace(/^[^a-z0-9']+|[^a-z0-9']+$/gi, "");
+  const found = sentences
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .find((s) => s.toLowerCase().includes(target));
+  return (found ?? referenceText).trim();
+}
+
+function shortPhrase(referenceText: string, word: string): string {
+  const tokens = referenceText.split(/\s+/).filter(Boolean);
+  const target = word.toLowerCase().replace(/^[^a-z0-9']+|[^a-z0-9']+$/gi, "");
+  const index = tokens.findIndex(
+    (t) => t.toLowerCase().replace(/^[^a-z0-9']+|[^a-z0-9']+$/gi, "") === target,
+  );
+  if (index < 0) return word;
+  const next = tokens[index + 1];
+  if (next) return `${tokens[index]} ${next}`.replace(/[.!?,;:"“”']+$/g, "");
+  const prev = tokens[index - 1];
+  if (prev) return `${prev} ${tokens[index]}`.replace(/^[.!?,;:"“”']+/g, "");
+  return tokens[index];
+}
+
+/**
+ * One primary, actionable drill: the weakest evidenced sound plus the exact
+ * sentence containing it and a concrete repeat exercise. Returns null when
+ * no phoneme scored below the focus threshold.
+ */
+export function primaryDrill(result: AssessmentResult): PrimaryDrill | null {
+  const [first] = soundsToFix(result, 3);
+  if (!first) return null;
+  const sentence = sentenceContaining(result.referenceText, first.word);
+  const phrase = shortPhrase(result.referenceText, first.word);
+  const action =
+    first.position === "final"
+      ? `Practise the ending in \u2018${first.word}\u2019`
+      : first.position === "initial"
+        ? `Practise the beginning in \u2018${first.word}\u2019`
+        : `Practise /${first.symbol}/ in \u2018${first.word}\u2019`;
+  return {
+    symbol: first.symbol,
+    word: first.word,
+    positionLabel: first.positionLabel,
+    score: first.score,
+    sentence,
+    phrase,
+    exercise: `${action}: listen slowly, say \u2018${phrase}\u2019, then repeat the sentence.`,
+  };
+}
