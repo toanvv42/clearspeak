@@ -68,18 +68,35 @@ function useLocationSearch(): string {
   );
   const [search, setSearch] = useState(getSearch);
   useEffect(() => {
-    const update = () => setSearch(window.location.search);
-    const origPush = window.history.pushState.bind(window.history);
-    const origReplace = window.history.replaceState.bind(window.history);
-    window.history.pushState = (...args: Parameters<typeof origPush>) => {
-      origPush(...args);
-      update();
+    const update = () => {
+      const next = window.location.search;
+      setSearch((prev) => (prev === next ? prev : next));
     };
-    window.history.replaceState = (...args: Parameters<typeof origReplace>) => {
-      origReplace(...args);
-      update();
+    // Defer: Next.js calls history.pushState/replaceState synchronously
+    // inside useInsertionEffect during client navigation, and React forbids
+    // scheduling a state update from there. Queuing a microtask moves the
+    // setState out of the insertion-effect call stack.
+    const scheduleUpdate = () => {
+      queueMicrotask(update);
     };
+    const origPush = window.history.pushState;
+    const origReplace = window.history.replaceState;
+    window.history.pushState = function (
+      this: History,
+      ...args: Parameters<typeof origPush>
+    ) {
+      origPush.apply(this, args as never);
+      scheduleUpdate();
+    } as typeof origPush;
+    window.history.replaceState = function (
+      this: History,
+      ...args: Parameters<typeof origReplace>
+    ) {
+      origReplace.apply(this, args as never);
+      scheduleUpdate();
+    } as typeof origReplace;
     window.addEventListener("popstate", update);
+    update();
     return () => {
       window.history.pushState = origPush;
       window.history.replaceState = origReplace;
